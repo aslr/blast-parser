@@ -5,6 +5,7 @@
 //  Created by João Varela on 18/11/2024.
 //
 
+import Foundation
 
 struct NCBILineage {
     let taxId:Int
@@ -22,15 +23,15 @@ struct NCBILineage {
         let fields = string.components(separatedBy: kPSDQueryResultSeparator)
         guard fields.count == kPSDQueryFieldNumber else { return nil }
         self.taxId = Int(fields[0])!
-        self.taxName = fields[1].trimmingCharacters(in: .whitespaces)
-        self.species = fields[2].trimmingCharacters(in: .whitespaces)
-        self.genus = fields[3].trimmingCharacters(in: .whitespaces)
-        self.family = fields[4].trimmingCharacters(in: .whitespaces)
-        self.order = fields[5].trimmingCharacters(in: .whitespaces)
-        self.class = fields[6].trimmingCharacters(in: .whitespaces)
-        self.phylum = fields[7].trimmingCharacters(in: .whitespaces)
-        self.kingdom = fields[8].trimmingCharacters(in: .whitespaces)
-        self.superkingdom = fields[9].trimmingCharacters(in: .whitespaces)
+        self.taxName = fields[1].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.species = fields[2].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.genus = fields[3].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.family = fields[4].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.order = fields[5].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.class = fields[6].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.phylum = fields[7].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.kingdom = fields[8].trimmingCharacters(in: CharacterSet.whitespaces)
+        self.superkingdom = fields[9].trimmingCharacters(in: CharacterSet.whitespaces)
     }
     
     init?(database:SQLDatabase, taxID:Int) {
