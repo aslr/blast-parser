@@ -5,7 +5,7 @@
 //  Created by João Varela on 21/10/2024.
 //
 
-# blast-parser
+# `blast_parser`
 
 ## Abstract
 This is an Xcode project written in Swift and C to build a CLI tool to bridge the Kraken2 taxonomic assignment of Nanopore sequences, so that these assignments can be validated by BLASTn searches. In this new version (0.3.0), it can also be used for validating Qiime 2 denoised ASVs.
