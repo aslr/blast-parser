@@ -33,7 +33,7 @@ extension BlastParser {
 	struct Import: ParsableCommand {
 		static let configuration = CommandConfiguration(
 			abstract: "Imports an NCBI ranked taxonomy dump file into a CSV file.",
-			usage: "blast_parser impoprt --inut <input> [--output <output>]",
+			usage: "blast_parser import --input <input> [--output <output>]",
 			aliases: ["imp"]
 		)
 		
