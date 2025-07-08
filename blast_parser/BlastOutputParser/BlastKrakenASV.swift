@@ -24,7 +24,7 @@ class BlastASV: CustomStringConvertible{
 	}
 }
 
-class BlastKASV: BlastASV {
+class BlastKrakenASV: BlastASV {
     let asv:KrakenASV
     
     /// Initializer to merge a parsed Kraken2 ASV and a BLASTn hit

@@ -9,7 +9,7 @@ import Foundation
 final class BlastQiimeOutputParser: BlastOutputParser{
 	let asvsParser: QiimeParser
 	let taxonomyParser: QiimeParser? = nil
-	var blastASVs = [BlastQASV]()
+	var blastASVs = [BlastQiimeASV]()
 	
 	init?(path:String, asvs: String) {
 		guard let asvsParser = QiimeParser(path: asvs)
@@ -99,7 +99,7 @@ final class BlastQiimeOutputParser: BlastOutputParser{
 				// retrieve the best hit(s)
 				guard let bestHits = bin.bestHits(hitsPerASV) else { continue }
 				for hit in bestHits {
-					let blastASV = BlastQASV(asv: asv, hit: hit)
+					let blastASV = BlastQiimeASV(asv: asv, hit: hit)
 					blastASV.setBlastTaxonomy(database: taxonomyDatabase)
 					try blastASV.merge()
 					blastASVs.append(blastASV)
@@ -108,7 +108,7 @@ final class BlastQiimeOutputParser: BlastOutputParser{
 			} else {
 				// no BLAST hit was found for this ASV, so generate and
 				// append an "Unclassified" BlastHit
-				let blastASV = BlastQASV(asv: asv, hit: BlastHit())
+				let blastASV = BlastQiimeASV(asv: asv, hit: BlastHit())
 				blastASVs.append(blastASV)
 			}
 		}

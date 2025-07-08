@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BlastQASV: BlastASV {
+class BlastQiimeASV: BlastASV {
 	let asv: QiimeASV
 	var items: [String]
 	init(asv: QiimeASV, hit: BlastHit) {
