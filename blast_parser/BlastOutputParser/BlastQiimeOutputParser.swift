@@ -31,7 +31,7 @@ final class BlastQiimeOutputParser: BlastOutputParser{
 		for blastASV in blastASVs {
 			dataWriter.write(line: blastASV.description)
 		}
-		Console.writeToStdOut("Written merged Kraken2 and BLASTn output to file at \(dataWriter.url.path)")
+		Console.writeToStdOut("Written merged Qiime 2 and BLASTn output to file at \(dataWriter.url.path)")
 	}
 	
 	private func parseBlastOutput() throws {
