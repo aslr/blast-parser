@@ -208,7 +208,7 @@ extension BlastParser {
 	struct MergeQiime: ParsableCommand {
 		static let configuration = CommandConfiguration(
 			abstract: "Merges a Qiime2 merge.tsv file with the best hits of a BLAST search.",
-			usage: "blast_parser mergeqiime --asvs <asvs> --blasthits <blasthits> [--output <output>] [--hits-per-asv <hits-per-asv>] [--sort <sort>]",
+			usage: "blast_parser merge-qiime --asvs <asvs> --blasthits <blasthits> [--output <output>] [--hits-per-asv <hits-per-asv>] [--sort <sort>]",
 			aliases: ["mrgq"] )
 		
 		@OptionGroup var options: Options
