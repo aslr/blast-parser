@@ -109,6 +109,7 @@ final class BlastQiimeOutputParser: BlastOutputParser{
 				// no BLAST hit was found for this ASV, so generate and
 				// append an "Unclassified" BlastHit
 				let blastASV = BlastQiimeASV(asv: asv, hit: BlastHit())
+                try blastASV.merge()
 				blastASVs.append(blastASV)
 			}
 		}

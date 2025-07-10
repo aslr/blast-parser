@@ -45,11 +45,26 @@ class BlastQiimeASV: BlastASV {
 			Console.writeToStdErr("Invalid taxonomy for tax_id = \(taxID)")
 		}
 	}
+    
 	func merge() throws{
 		let blastRanks = blastTaxonomy.getRanks()
-		items.insert(String(hit.eValue), at: 1)
-		items.insert(String(hit.bitscore), at: 1)
-		items.insert(blastRanks, at: 1)
+        
+        switch asv.featureID {
+        case "id":
+            // handle the header
+            items.insert("E-Value", at: 1)
+            items.insert("BitScore", at: 1)
+            items.insert("NCBI lineage", at: 1)
+        case "":
+            items.insert("no hits", at: 1)
+            items.insert("no hits", at: 1)
+            items.insert("no hits", at: 1)
+        default:
+            // merge ASV with BLAST hit
+            items.insert(String(hit.eValue), at: 1)
+            items.insert(String(hit.bitscore), at: 1)
+            items.insert(blastRanks, at: 1)
+        }
 	}
 	
 	override var description:String {
