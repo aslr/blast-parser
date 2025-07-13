@@ -7,16 +7,6 @@
 
 import Foundation
 
-class BlastOutputParser: FileParser{
-	var hits = [BlastHit]()
-	var bins = [BlastHitBin]()
-	var hitsPerASV = 1
-	let defaultReportSuffix = "blast-report.tsv"
-	var taxonomyDatabase = "taxonomy_ncbi"
-	var taxonomyTable = "taxonomy"
-	
-}
-
 final class BlastKrakenOutputParser: BlastOutputParser {
     let asvsParser:KrakenParsedASVParser
     var taxonomyParser:KrakenTaxonomyParser? = nil
