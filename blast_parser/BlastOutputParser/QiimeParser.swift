@@ -18,6 +18,7 @@ struct QiimeASV: CustomStringConvertible {
 		let samplesDescription = samples.joined(separator: "\t")
 		return "\(featureID)\t\(taxonomy)\t\(confidence)\t\(samplesDescription)"
 	}
+    
 	init(featureID: String, samples: [String], taxonomy: String, confidence: String) {
 		self.featureID = featureID
 		self.samples = samples
