@@ -6,7 +6,7 @@
 //
 import Foundation
 
-final class BlastQiimeOutputParser: BlastOutputParser{
+final class BlastQiimeOutputParser: BlastOutputParser {
 	let asvsParser: QiimeParser
 	let taxonomyParser: QiimeParser? = nil
 	var blastASVs = [BlastQiimeASV]()
