@@ -14,7 +14,7 @@ struct QiimeASV: CustomStringConvertible {
 	let taxonomy: String
 	let confidence: String
 	
-	var description: String{
+	var description: String {
 		let samplesDescription = samples.joined(separator: "\t")
 		return "\(featureID)\t\(taxonomy)\t\(confidence)\t\(samplesDescription)"
 	}
