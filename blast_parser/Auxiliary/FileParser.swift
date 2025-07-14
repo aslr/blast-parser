@@ -25,12 +25,3 @@ class FileParser {
     }
 }
 
-class FilesParser {
-    let parsers:[FileParser]
-    
-    init?(paths: String) {
-        let pathsArray = paths.components(separatedBy: " ")
-        self.parsers = pathsArray.compactMap { path in FileParser(path: path) }
-        guard parsers.count == pathsArray.count else { return nil }
-    }
-}
