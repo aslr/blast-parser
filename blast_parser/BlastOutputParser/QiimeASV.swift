@@ -30,6 +30,13 @@ struct QiimeASV: CustomStringConvertible {
         self.taxonomy.append(taxonomy)
 	}
     
+    init(components:[String]) {
+        let count = components.count
+        self.featureID = components[0]
+        self.samples = Array(components[1..<count-2])
+        let taxonomy = QiimeTaxonomy(taxonomy: components[count-2], confidence:                             components[count-1])
+    }
+    
     mutating func add(taxonomy:QiimeTaxonomy) {
         self.taxonomy.append(taxonomy)
     }
