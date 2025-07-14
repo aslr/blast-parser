@@ -19,6 +19,10 @@ struct QiimeASV: CustomStringConvertible {
         self.taxonomy.append(taxonomy)
 	}
     
+    mutating func add(taxonomy:QiimeTaxonomy) {
+        self.taxonomy.append(taxonomy)
+    }
+    
     var description: String {
         let samplesDescription = samples.joined(separator: "\t")
         let taxonomyDescription = taxonomy.map { $0.description }.joined(separator: "\t")
@@ -44,27 +48,27 @@ final class QiimeParser: FilesParser {
 	var lines = [QiimeASV]()
 	func parse() throws -> [QiimeASV] {
         for parser in self.parsers {
-            
+            var index = 0
+            for line in parser.readStream {
+                if index == 0 {
+                    // validation
+                    let cleanLine = line.trimmingCharacters(in: .newlines)
+                    let header = cleanLine.replacingOccurrences(of: "-", with: "CN").components(separatedBy: "\t")
+                    guard header.contains("id"), header.contains("Taxon"),
+                          header.contains("Confidence") else
+                        { throw RuntimeError("Invalid Qiime 2 merged file") }
+                    
+                    let asv = getASV(line: header, count: header.count)
+                    lines.append(asv)
+                } else if index > 1 {
+                    let items = line.components(separatedBy: "\t")
+                    let asv = getASV(line: items, count: items.count)
+                    lines.append(asv)
+                }
+                index += 1
+            }
         }
-		var index = 0
-		for line in readStream {
-			if index == 0 {
-				// validation
-				let cleanLine = line.trimmingCharacters(in: .newlines)
-				let header = cleanLine.replacingOccurrences(of: "-", with: "CN").components(separatedBy: "\t")
-				guard header.contains("id"), header.contains("Taxon"),
-					  header.contains("Confidence") else
-					{ throw RuntimeError("Invalid Qiime 2 merged file") }
-				
-				let asv = getASV(line: header, count: header.count)
-				lines.append(asv)
-			} else if index > 1 {
-				let items = line.components(separatedBy: "\t")
-				let asv = getASV(line: items, count: items.count)
-				lines.append(asv)
-			}
-			index += 1
-		}
+		
 		return lines
 	}
 	
