@@ -31,6 +31,6 @@ class FilesParser {
     init?(paths: String) {
         let pathsArray = paths.components(separatedBy: " ")
         self.parsers = pathsArray.compactMap { path in FileParser(path: path) }
-        guard !parsers.isEmpty else { return nil }
+        guard parsers.count == pathsArray.count else { return nil }
     }
 }
