@@ -19,7 +19,7 @@ static let configuration = CommandConfiguration(
             the BLAST results with the respective taxa.
             """,
         usage: "blast_parser <subcommand>",
-        version: "0.3.0",
+        version: "0.4.0",
 		subcommands: [Import.self, Export.self, Parse.self, Merge.self, MergeQiime.self],
         defaultSubcommand: Import.self
     )
