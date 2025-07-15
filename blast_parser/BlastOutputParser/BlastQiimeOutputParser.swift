@@ -11,8 +11,8 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 	let taxonomyParser: QiimeParser? = nil
 	var blastASVs = [BlastQiimeASV]()
 	
-	init?(path:String, asvs: String) {
-		guard let asvsParser = QiimeMultiASVFileParser(paths: asvs)
+    init?(path:String, asvs: String, prefixes:String? = nil) {
+		guard let asvsParser = QiimeMultiASVFileParser(paths: asvs, prefixes: prefixes)
 		else { return nil }
 		
 		self.asvsParser = asvsParser

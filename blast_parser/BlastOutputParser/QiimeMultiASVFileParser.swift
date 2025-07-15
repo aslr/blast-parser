@@ -7,21 +7,28 @@
 
 import Foundation
 
-struct QiimeASVFile {
+fileprivate struct QiimeASVFile {
     let path: String
     var asvs:[QiimeASV]
     let headerPrefix: String
     
-    init(path: String, asvs: [QiimeASV]) {
+    init(path: String, asvs: [QiimeASV], prefix: String) {
         self.path = path
         self.asvs = asvs
-        let url = URL(fileURLWithPath: path, isDirectory: false)
-        let dirURL = url.deletingLastPathComponent()
-        // the default prefix will be the directory name
-        self.headerPrefix = dirURL.lastPathComponent
+        
+        if prefix.isEmpty == false {
+            self.headerPrefix = prefix
+        } else {
+            // The default prefix will be the directory name two levels up.
+            // If the directory does not exit, no prefix will be added.
+            let url = URL(fileURLWithPath: path, isDirectory: false)
+            let dirURL = url.deletingLastPathComponent().deletingLastPathComponent()
+            self.headerPrefix = dirURL.lastPathComponent
+        }
     }
     
     mutating func parseHeader() throws {
+        guard headerPrefix.isEmpty == false else { return }
         let header = asvs.first?.description
         guard let header = header
             else { throw RuntimeError("Parsing of a Qiime file header failed.") }
@@ -41,21 +48,30 @@ struct QiimeASVFile {
 }
 
 final class QiimeMultiASVFileParser {
-    var parsers = [QiimeParser]()
+    var parsers: [QiimeParser]
+    var prefixes: [String]
     
-    init?(paths: String) {
+    init?(paths: String, prefixes:String?) {
         let pathsArray = paths.components(separatedBy: " ")
         self.parsers = pathsArray.compactMap { path in QiimeParser(path: path) }
         guard parsers.count == pathsArray.count else { return nil }
+        
+        if let prefixes = prefixes {
+            self.prefixes = prefixes.components(separatedBy: " ").map { String($0) }
+        } else {
+            self.prefixes = []
+        }
     }
     
     func merge() throws -> [QiimeASV] {
         var files = [QiimeASVFile]()
         
         // parse
-        for parser in parsers {
+        let prefixCount = prefixes.count
+        for (i, parser) in parsers.enumerated() {
             let asvs = try parser.parse()
-            var file = QiimeASVFile(path: parser.path, asvs: asvs)
+            let prefix = i < prefixCount ? prefixes[i] : ""
+            var file = QiimeASVFile(path: parser.path, asvs: asvs, prefix: prefix)
             try file.parseHeader()
             files.append(file)
         }
