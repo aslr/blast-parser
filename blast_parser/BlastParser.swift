@@ -205,6 +205,7 @@ extension BlastParser {
 			try parser.print(to: outputFile)
 		}
 	}
+    
 	struct MergeQiime: ParsableCommand {
 		static let configuration = CommandConfiguration(
 			abstract: "Merges one or more tab-separated Qiime2 ASV read count files with the best hits of a BLAST search.",
@@ -226,7 +227,7 @@ extension BlastParser {
 		var blasthits:String
 		
 		@Option(name: [.short, .customLong("output")],
-				help: "Name of the output file. [OPTIONAL, default = (original name)_output.tsv]")
+				help: "Name of the output file. [OPTIONAL, default = (BLASTn output filename)_output.tsv]")
 		var outputFile:String? = nil
 		
 		@Option(name: [.customLong("hits-per-asv")],
@@ -259,9 +260,9 @@ extension BlastParser {
 				try parser.parse()
 			}
 			
-			//sets default name
+			// sets default name
 			if outputFile == nil{
-				let fileName = URL(fileURLWithPath: asvs).deletingPathExtension().lastPathComponent
+				let fileName = URL(fileURLWithPath: blasthits).deletingPathExtension().lastPathComponent
 				outputFile = "\(fileName)_output.tsv"
 			}
 		
