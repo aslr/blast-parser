@@ -7,12 +7,12 @@
 import Foundation
 
 final class BlastQiimeOutputParser: BlastOutputParser {
-	let asvsParser: QiimeParser
+	let asvsParser: QiimeMultiASVFileParser
 	let taxonomyParser: QiimeParser? = nil
 	var blastASVs = [BlastQiimeASV]()
 	
 	init?(path:String, asvs: String) {
-		guard let asvsParser = QiimeParser(path: asvs)
+		guard let asvsParser = QiimeMultiASVFileParser(paths: asvs)
 		else { return nil }
 		
 		self.asvsParser = asvsParser
@@ -73,7 +73,7 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 			throw RuntimeError("Unable to merge BLAST hits with the ASVs table because no BLAST hits were found.")
 		}
 		
-		let asvs = try asvsParser.parse()
+		let asvs = try asvsParser.merge()
 		guard asvs.isEmpty == false else {
 			throw RuntimeError("Unable to merge BLAST hits with the ASVs table because no ASVs were found.")
 		}
