@@ -65,7 +65,7 @@ final class QiimeMultiASVFileParser {
         }
         
         // check if the files can be merged
-        var count = files[0].asvs.count
+        let count = files[0].asvs.count
         for file in files[1...] {
             guard count == file.asvs.count else {
                 throw RuntimeError("Merging of Qiime files failed: " +
