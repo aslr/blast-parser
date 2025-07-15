@@ -17,7 +17,7 @@ final class QiimeParser: FileParser {
                 let header = cleanLine.replacingOccurrences(of: "-", with: "CN").components(separatedBy: "\t")
                 guard header.contains("id"), header.contains("Taxon"),
                       header.contains("Confidence") else
-                    { throw RuntimeError("Invalid Qiime 2 merged file") }
+                    { throw RuntimeError("Invalid Qiime 2 ASV read counts file") }
                 
                 let asv = getASV(line: header, count: header.count)
                 lines.append(asv)
