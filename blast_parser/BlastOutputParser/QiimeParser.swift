@@ -7,9 +7,10 @@
 import Foundation
 
 final class QiimeParser: FileParser {
-	var lines = [QiimeASV]()
 	func parse() throws -> [QiimeASV] {
+        var lines = [QiimeASV]()
         var index = 0
+        
         for line in readStream {
             if index == 0 {
                 // validation
