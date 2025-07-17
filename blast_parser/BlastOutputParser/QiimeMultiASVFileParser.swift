@@ -31,7 +31,7 @@ fileprivate struct QiimeASVFile {
         guard headerPrefix.isEmpty == false else { return }
         let header = asvs.first?.description
         guard let header = header
-            else { throw RuntimeError("Parsing of a Qiime file header failed.") }
+            else { throw RuntimeError("Parsing of a Qiime file header failed: " + "No valid header was found to be parsed.") }
         let headers = header.components(separatedBy: "\t")
         let taxonPrefixedHeaders = headers.map
             { $0.replacingOccurrences(of: "Taxon",
@@ -41,7 +41,11 @@ fileprivate struct QiimeASVFile {
                                       with: "\(headerPrefix)-Confidence") }
        
         let prefixedHeaders = confidencePrefixedHeaders.map { String($0) }
-        let prefixedHeader = QiimeASV(components: prefixedHeaders)
+        let taxonIndex = prefixedHeaders.firstIndex(of: "\(headerPrefix)-Taxon")
+        guard let prefixedHeader = QiimeASV(components: prefixedHeaders,
+                                            taxonIndex: taxonIndex) else {
+            throw RuntimeError("Parsing of a Qiime file header failed: " + "Unable to find a taxon header")
+        }
         asvs.removeFirst()
         asvs.insert(prefixedHeader, at: 0)
     }

@@ -30,12 +30,16 @@ struct QiimeASV: CustomStringConvertible {
         self.taxonomy.append(taxonomy)
 	}
     
-    init(components:[String]) {
+    init?(components:[String], taxonIndex:Int?) {
         let count = components.count
+        guard count >= 4 else { return nil }
         self.featureID = components[0]
-        self.samples = Array(components[1..<count-2])
-        let taxonomy = QiimeTaxonomy(taxonomy: components[count-2],
-                                     confidence: components[count-1])
+        let taxonIndex = taxonIndex ?? 1
+        let sampleStartIndex = (taxonIndex == 1) ? 3 : 1
+        let sampleEndIndex = (taxonIndex == 1) ? count-1 : count-3
+        self.samples = Array(components[sampleStartIndex...sampleEndIndex])
+        let taxonomy = QiimeTaxonomy(taxonomy: components[taxonIndex],
+                                     confidence: components[taxonIndex + 1])
         self.taxonomy.append(taxonomy)
     }
     
