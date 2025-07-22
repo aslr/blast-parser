@@ -43,6 +43,7 @@ final class KrakenSequenceParser: FileParser {
         for line in readStream {
             if line.first == Character(separator) {
                 sequenceID = line.replacingOccurrences(of: separator, with: "")
+                sequenceID = sequenceID.components(separatedBy: " ").first!
                 sequenceID = sequenceID.trimmingCharacters(in: .whitespacesAndNewlines)
                 matchedID = true
             } else if matchedID {
