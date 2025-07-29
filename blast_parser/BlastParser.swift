@@ -19,7 +19,7 @@ static let configuration = CommandConfiguration(
             the BLAST results with the respective taxa.
             """,
         usage: "blast_parser <subcommand>",
-        version: "0.4.0",
+        version: "0.4.2",
 		subcommands: [Import.self, Export.self, Parse.self, Merge.self, MergeQiime.self],
         defaultSubcommand: Import.self
     )
@@ -263,7 +263,7 @@ extension BlastParser {
 			// sets default name
 			if outputFile == nil{
 				let fileName = URL(fileURLWithPath: blasthits).deletingPathExtension().lastPathComponent
-				outputFile = "\(fileName)_output.tsv"
+				outputFile = "\(fileName)_merged_output.tsv"
 			}
 		
 			try parser.print(outputFile!)

@@ -53,8 +53,15 @@ final class BlastKrakenOutputParser: BlastOutputParser {
     }
     
     func print(to path:String? = nil) throws {
-        let writer = FileWriter(path: path ?? asvsParser.path,
+        var writer:FileWriter!
+        
+        if let path = path {
+            writer = FileWriter(path: path)
+        } else {
+            writer = FileWriter(path: asvsParser.path,
                                 suffix: defaultReportSuffix)
+        }
+        
         let dataWriter = try writer.makeDataWriter()
         for blastASV in blastASVs {
             dataWriter.write(line: blastASV.description)

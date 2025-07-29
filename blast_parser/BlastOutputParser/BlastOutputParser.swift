@@ -9,7 +9,7 @@ class BlastOutputParser: FileParser{
 	var hits = [BlastHit]()
 	var bins = [BlastHitBin]()
 	var hitsPerASV = 1
-	let defaultReportSuffix = "blast-report.tsv"
+	let defaultReportSuffix = "merged_output.tsv"
 	var taxonomyDatabase = "taxonomy_ncbi"
 	var taxonomyTable = "taxonomy"
 }
