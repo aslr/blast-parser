@@ -28,11 +28,12 @@ void PSDConnectToMainDB(void) {
     PSDConnectToDB(kPSDMainDB);
 }
 
+#define kConnectionBufferSize 80
+
 // NOTE: It must be paired with a PSDCloseConnection()
 void PSDConnectToDB(const char *database) {
-    const size_t bufferSize = 80;
-    char conninfo[bufferSize];
-    int charNumber = snprintf(conninfo, bufferSize - 1, "dbname = %s", database);
+    char conninfo[kConnectionBufferSize];
+    int charNumber = snprintf(conninfo, kConnectionBufferSize - 1, "dbname = %s", database);
     if (sConn == NULL && charNumber > 9) {
         PSDConnectToDBPv(conninfo);
     } else {
