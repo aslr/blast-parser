@@ -299,6 +299,19 @@ extension BlastParser {
         @Option(name: [.short, .customLong("hits-per-bin")],
                 help: "Number of reads to include in each taxon bin. [OPTIONAL, default = 5")
         var hitsPerBin:Int = 5
+        
+        mutating func run() throws {
+            guard let parser = MinimapParser(path: input,
+                                             readsPath: reads,
+                                             hitsPerBin: hitsPerBin) else {
+                throw RuntimeError("Unable to parse minimap2 output file as no valid file was found.")
+            }
+            parser.fastqOutputPath = output
+            parser.fastaOutputPath = fastaOutput
+            parser.statsOutputPath = statsOutput
+            try parser.parse()
+            try parser.print()
+        }
     }
 }
 

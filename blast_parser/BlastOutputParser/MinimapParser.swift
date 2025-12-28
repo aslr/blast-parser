@@ -8,14 +8,17 @@
 import Foundation
 
 final class MinimapParser: FileParser {
-    let sequencesPath: String
+    let readsPath: String
     let hitsPerBin: Int
     var hits = [MinimapHit]()
-    var bins = [MinimapHitBin()]
+    var bins = [MinimapHitBin]()
     var sequences = [FastqSequence]()
+    var fastqOutputPath: String?
+    var fastaOutputPath: String?
+    var statsOutputPath: String?
     
-    init?(path: String, sequencesPath:String, hitsPerBin:Int = 5) {
-        self.sequencesPath = sequencesPath
+    init?(path: String, readsPath:String, hitsPerBin:Int = 5) {
+        self.readsPath = readsPath
         self.hitsPerBin = hitsPerBin
         super.init(path: path)
     }
@@ -26,6 +29,8 @@ final class MinimapParser: FileParser {
         for line in readStream {
             if index == 0 {
                 // validation
+                Console.writeToStdOut("Parsing minimap2 classification file...")
+                
                 let header = line.split(separator: "\t")
                 guard header.count == 5 else {
                     throw RuntimeError("Invalid header line for minimap2 classification file")
@@ -44,6 +49,43 @@ final class MinimapParser: FileParser {
         try parseSequences()
     }
     
+    func print() throws {
+        Console.writeToStdOut("Generating output files...")
+        
+        guard fastqOutputPath != nil || fastaOutputPath != nil || statsOutputPath != nil else {
+            throw RuntimeError("ERROR: No output file was specified")
+        }
+        
+        var writer:FileWriter!
+        
+        if let path = fastqOutputPath {
+            writer = FileWriter(path: path)
+            let fastqWriter = try writer.makeDataWriter()
+            
+            for sequence in sequences {
+                fastqWriter.write(line: sequence.description)
+            }
+        }
+        
+        if let path = fastaOutputPath {
+            writer = FileWriter(path: path)
+            let fastaWriter = try writer.makeDataWriter()
+            
+            for sequence in sequences {
+                fastaWriter.write(line: sequence.fasta)
+            }
+        }
+        
+        if let path = statsOutputPath {
+            writer = FileWriter(path: path)
+            let statsWriter = try writer.makeDataWriter()
+            
+            for bin in bins {
+                statsWriter.write(line: bin.description)
+            }
+        }
+    }
+    
     // MARK: Private
     private func matchBin(keyword:String) -> MinimapHitBin? {
         for bin in bins {
@@ -55,6 +97,8 @@ final class MinimapParser: FileParser {
     }
     
     private func parseBins() {
+        Console.writeToStdOut("Making sequence bins with the same taxonomic assignment...")
+        
         for hit in hits {
             if var bin = matchBin(keyword: hit.species) {
                 bin.add(hit)
@@ -66,8 +110,10 @@ final class MinimapParser: FileParser {
     }
     
     private func parseSequences() throws {
-        guard let fastqParser = FastqParser(path: sequencesPath) else {
-            throw RuntimeError("Failed to parse fastq file as a valid file could not be found at \(path)")
+        Console.writeToStdOut("Parsing reads file for selected minimap2 hits...")
+        
+        guard let fastqParser = FastqParser(path: readsPath) else {
+            throw RuntimeError("Failed to parse fastq file as a valid reads file could not be found at \(path)")
         }
         let hits = self.selectedHits()
         
