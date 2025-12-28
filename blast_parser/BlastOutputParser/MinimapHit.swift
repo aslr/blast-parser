@@ -28,7 +28,7 @@ final class MinimapHit: CustomStringConvertible {
             _species = taxonomy.split(separator: ";").last.map(String.init) ?? "Unassigned"
             
             // remove any strain information
-            var components = _species!.split(separator: " ")
+            let components = _species!.split(separator: " ")
             if components.count > 2 {
                 _species = components.dropLast().joined(separator: " ")
             }
