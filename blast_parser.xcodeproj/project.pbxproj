@@ -11,6 +11,7 @@
 		8420FA772CCCF86500C94FF7 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8420FA762CCCF86500C94FF7 /* ArgumentParser */; };
 		842DD5312C8303F80028D7DE /* DataStreamWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DD5302C8303F80028D7DE /* DataStreamWriter.swift */; };
 		842DD5332C8338540028D7DE /* DataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842DD5322C8338540028D7DE /* DataStream.swift */; };
+		8430FFC62F014C90003C07D8 /* FastqParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430FFC52F014C90003C07D8 /* FastqParser.swift */; };
 		844073B62CD7C66300D7EFB8 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844073B52CD7C66300D7EFB8 /* FileParser.swift */; };
 		844A2C3E2CEABD12004B56F0 /* NCBILineage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2C3D2CEABD12004B56F0 /* NCBILineage.swift */; };
 		8462AC692C84A80400104505 /* SQLDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462AC682C84A80400104505 /* SQLDatabase.swift */; };
@@ -74,6 +75,7 @@
 		84162EDA2C83756200ED0B5E /* BlastParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastParser.swift; sourceTree = "<group>"; };
 		842DD5302C8303F80028D7DE /* DataStreamWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStreamWriter.swift; sourceTree = "<group>"; };
 		842DD5322C8338540028D7DE /* DataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStream.swift; sourceTree = "<group>"; };
+		8430FFC52F014C90003C07D8 /* FastqParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastqParser.swift; sourceTree = "<group>"; };
 		844073B52CD7C66300D7EFB8 /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
 		844A2C3C2CEABA99004B56F0 /* globals-bp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "globals-bp.h"; path = "libpq/globals-bp.h"; sourceTree = "<group>"; };
 		844A2C3D2CEABD12004B56F0 /* NCBILineage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCBILineage.swift; sourceTree = "<group>"; };
@@ -24589,6 +24591,7 @@
 			isa = PBXGroup;
 			children = (
 				8483F15A2C409B860075794B /* Console.swift */,
+				8430FFC52F014C90003C07D8 /* FastqParser.swift */,
 				844073B52CD7C66300D7EFB8 /* FileParser.swift */,
 				84A5B7592CDFD4C5008FF917 /* FileWriter.swift */,
 				847E82B72C98F1E700B3C1E0 /* Rank.swift */,
@@ -50446,6 +50449,7 @@
 				84E55E022C9799C300A92C9A /* KrakenReportParser.swift in Sources */,
 				84B010002CFB436800B87509 /* BlastAnalyzer.swift in Sources */,
 				8462AC692C84A80400104505 /* SQLDatabase.swift in Sources */,
+				8430FFC62F014C90003C07D8 /* FastqParser.swift in Sources */,
 				84162EDB2C83756200ED0B5E /* BlastParser.swift in Sources */,
 				844A2C3E2CEABD12004B56F0 /* NCBILineage.swift in Sources */,
 				84EB718A2CD58F8B006D9381 /* KrakenSequenceParser.swift in Sources */,

@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct MinimapHit: CustomStringConvertible {
+final class MinimapHit: CustomStringConvertible {
     let queryID: String
     let referenceID: String
     let alignmentScore: Int
     let alignmentLength: Int
     let taxonomy: String
+    private var _species: String? = nil
     
     var score:Int {
         10000*alignmentScore + alignmentLength
@@ -23,7 +24,17 @@ struct MinimapHit: CustomStringConvertible {
     }
     
     var species: String {
-        taxonomy.split(separator: ";").last.map(String.init) ?? "Unassigned"
+        if _species == nil {
+            _species = taxonomy.split(separator: ";").last.map(String.init) ?? "Unassigned"
+            
+            // remove any strain information
+            var components = _species!.split(separator: " ")
+            if components.count > 2 {
+                _species = components.dropLast().joined(separator: " ")
+            }
+        }
+        
+        return _species ?? "Unassigned"
     }
     
     init(from line: String) throws {

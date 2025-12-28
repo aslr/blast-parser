@@ -14,13 +14,11 @@ import ArgumentParser
 struct BlastParser: ParsableCommand {
 static let configuration = CommandConfiguration(
         abstract: """
-            Imports an NCBI ranked taxonomy dump file and exports it into a PostGresSQL \
-            database and then retrieves and parses the taxonomy information to populate \
-            the BLAST results with the respective taxa.
+            Parser to handle the output of Illumina short reads as processed by Qiime2 or Nanopore long reads as processed by Kraken2 or minimap2 and then merge this output with the output of NCBI BLASTN producing a full taxonomical lineage from a local PostgresSQL database imported from the NCBI ranked taxonomy dump file at the new_taxonomy folder.
             """,
         usage: "blast_parser <subcommand>",
-        version: "0.4.2",
-		subcommands: [Import.self, Export.self, Parse.self, Merge.self, MergeQiime.self],
+        version: "0.5",
+        subcommands: [Import.self, Export.self, Parse.self, Merge.self, MergeQiime.self, ParseMinimap.self],
         defaultSubcommand: Import.self
     )
 }
@@ -269,6 +267,39 @@ extension BlastParser {
 			try parser.print(outputFile!)
 		}
 	}
+    
+    struct ParseMinimap: ParsableCommand {
+        static let configuration = CommandConfiguration(
+            abstract: "Parses a minimap2 output tsv file containing a header row with the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy and then outputs files containing selected sequences in fastq and/or fasta format to be remapped by minimap2 with other databases or in fasta format to be the input to BLASTN and/or a read count stats file per taxon found. Warning: an error will be generated if no output file is specified.",
+            usage: "blast_parser parse-minimap --input <input> --reads <fastq-file> [--output <fastq-output>] [--fastaOutput <fasta-output>] [--stats-output <stats-output>] [--hits-per-bin <hits-per-bin>]",
+            aliases: ["prsm"] )
+        
+        @OptionGroup var options: Options
+        
+        @Option(name: [.short, .customLong("input")],
+                help: "Path to the minimap2 output table containing the following columns: queryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy")
+        var input:String
+        
+        @Option(name: [.short, .customLong("reads")],
+                help: "Path to the fastq file containing the reads that were mapped with minimap2.")
+        var reads:String
+        
+        @Option(name: [.short, .customLong("fastq-output")],
+                help: "Path to the output fastq file. [OPTIONAL]")
+        var output:String?
+        
+        @Option(name: [.short, .customLong("fasta-output")],
+                help: "Path to the output fasta file. [OPTIONAL]")
+        var fastaOutput:String?
+        
+        @Option(name: [.short, .customLong("stats-output")],
+                help: "Path to the output file containing the read count stats per taxon. [OPTIONAL]")
+        var statsOutput:String?
+        
+        @Option(name: [.short, .customLong("hits-per-bin")],
+                help: "Number of reads to include in each taxon bin. [OPTIONAL, default = 5")
+        var hitsPerBin:Int = 5
+    }
 }
 
 

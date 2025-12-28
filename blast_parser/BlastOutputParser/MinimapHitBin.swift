@@ -16,6 +16,10 @@ struct MinimapHitBin {
         hits.count
     }
     
+    var species: String? {
+        hits.first?.species
+    }
+    
     mutating func add(_ hit: MinimapHit) {
         hits.append(hit)
         
