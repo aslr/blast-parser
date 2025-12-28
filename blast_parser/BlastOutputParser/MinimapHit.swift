@@ -14,8 +14,16 @@ struct MinimapHit: CustomStringConvertible {
     let alignmentLength: Int
     let taxonomy: String
     
+    var score:Int {
+        10000*alignmentScore + alignmentLength
+    }
+    
     var description: String {
         "\(queryID)\t\(referenceID)\t\(alignmentScore)\t\(alignmentLength)\t\(taxonomy)"
+    }
+    
+    var species: String {
+        taxonomy.split(separator: ";").last.map(String.init) ?? "Unassigned"
     }
     
     init(from line: String) throws {
@@ -31,5 +39,11 @@ struct MinimapHit: CustomStringConvertible {
         self.alignmentScore = alignmentScore
         self.alignmentLength = alignmentLength
         self.taxonomy = components[4]
+    }
+}
+
+extension MinimapHit: Equatable {
+    static func == (lhs: MinimapHit, rhs: MinimapHit) -> Bool {
+        lhs.queryID == rhs.queryID
     }
 }

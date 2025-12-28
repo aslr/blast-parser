@@ -8,8 +8,10 @@
 import Foundation
 
 final class MinimapParser: FileParser {
-    func parse() throws -> [MinimapHit] {
-        var hits = [MinimapHit]()
+    var hits = [MinimapHit]()
+    var bins = [MinimapHitBin()]
+    
+    func parse() throws {
         var index = 0
         
         for line in readStream {
@@ -28,7 +30,9 @@ final class MinimapParser: FileParser {
                 hits.append(hit)
             }
         }
+    }
+    
+    func makeBins() {
         
-        return hits
     }
 }
