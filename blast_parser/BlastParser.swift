@@ -14,7 +14,7 @@ import ArgumentParser
 struct BlastParser: ParsableCommand {
 static let configuration = CommandConfiguration(
         abstract: """
-            Parser to handle the output of Illumina short reads as processed by Qiime2 or Nanopore long reads as processed by Kraken2 or minimap2 and then merge this output with the output of NCBI BLASTN producing a full taxonomical lineage from a local PostgresSQL database imported from the NCBI ranked taxonomy dump file at the new_taxonomy folder.
+            blast_parser is a bioinformatic tool that parses Qiime2 output files for Illumina short reads or Kraken2 or minimap2 output files for Nanopore long reads. It then merges this output with the output of NCBI blastn+ tool, producing a full taxonomical lineage from a local PostgresSQL database imported from the NCBI ranked taxonomy dump file available at the NCBI FTP server inside the new_taxonomy folder.
             """,
         usage: "blast_parser <subcommand>",
         version: "0.5",
