@@ -12,7 +12,7 @@ final class MinimapHitBin: CustomStringConvertible {
     var maximumScore = 0
     var minimumScore = 0
     
-    var count: Int {
+    var hitCount: Int {
         hits.count
     }
     
@@ -56,7 +56,7 @@ final class MinimapHitBin: CustomStringConvertible {
     func hits(maximumHits:Int) -> [MinimapHit] {
         var selectedHits = [MinimapHit]()
         
-        if count <= maximumHits {
+        if hitCount <= maximumHits {
             selectedHits = hits
         } else {
             let scoreStep = (maximumScore - minimumScore) / maximumHits

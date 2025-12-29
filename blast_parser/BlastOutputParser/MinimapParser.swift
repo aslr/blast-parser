@@ -104,6 +104,8 @@ final class MinimapParser: FileParser {
             }
             let statsWriter = try writer.makeDataWriter()
             
+            bins.sort { $0.hitCount > $1.hitCount }
+            
             for bin in bins {
                 statsWriter.write(line: bin.description)
             }
