@@ -40,8 +40,15 @@ final class MinimapParser: FileParser {
                 }
                 index += 1
             } else if index > 0 {
-                let hit = try MinimapHit(from: line)
-                hits.append(hit)
+                do {
+                    let hit = try MinimapHit(from: line)
+                    hits.append(hit)
+                }
+                
+                catch {
+                    // ignore any malformed hit and continue
+                }
+                
             }
         }
         
@@ -109,6 +116,7 @@ final class MinimapParser: FileParser {
             } else {
                 var bin = MinimapHitBin()
                 bin.add(hit)
+                bins.append(bin)
             }
         }
     }
