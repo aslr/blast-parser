@@ -51,17 +51,17 @@ final class MinimapHitBin: CustomStringConvertible {
     
     /// Retrieve hits with different scores
     /// This can be used to verify the validity of the minimap scores
-    /// - Parameter numberToRetrieve: Number of hits to retrieve from the bin
+    /// - Parameter maximumHits: Maximum umber of hits to retrieve from the bin
     /// - Returns: a minimap hit array within its full range of scores
-    func hits(numberToRetrieve:Int) -> [MinimapHit] {
+    func hits(maximumHits:Int) -> [MinimapHit] {
         var selectedHits = [MinimapHit]()
         
-        if count <= numberToRetrieve {
+        if count <= maximumHits {
             selectedHits = hits
         } else {
-            let scoreStep = (maximumScore - minimumScore) / numberToRetrieve
+            let scoreStep = (maximumScore - minimumScore) / maximumHits
             var score = maximumScore
-            while score > minimumScore, selectedHits.count < numberToRetrieve {
+            while score > minimumScore, selectedHits.count < maximumHits {
                 if let hit = hit(score: score) {
                     if !selectedHits.contains(where: { $0 == hit }) {
                         selectedHits.append(hit)

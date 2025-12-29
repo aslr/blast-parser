@@ -297,7 +297,7 @@ extension BlastParser {
         var statsOutput:String?
         
         @Option(name: [.short, .customLong("hits-per-bin")],
-                help: "Number of reads to include in each taxon bin. [OPTIONAL, default = 5")
+                help: "Maximum number of reads to include in each taxon bin. [OPTIONAL, default = 5")
         var hitsPerBin:Int = 5
         
         mutating func run() throws {
