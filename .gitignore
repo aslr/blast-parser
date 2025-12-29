@@ -5,3 +5,4 @@ blast_parser.xcodeproj/project.xcworkspace/xcuserdata/jcsvarela.xcuserdatad/User
 blast_parser/Products/Debug
 blast_parser/libpq/include.zip
 blast_parser/libpq/lib.zip
+bin/blast_parser

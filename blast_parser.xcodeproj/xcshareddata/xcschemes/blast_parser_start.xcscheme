@@ -41,8 +41,11 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       viewDebuggingEnabled = "No">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Users/admin/.local/bin/blast_parser">
+      </PathRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8483F14F2C4096410075794B"
@@ -50,7 +53,7 @@
             BlueprintName = "blast_parser"
             ReferencedContainer = "container:blast_parser.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

@@ -15,6 +15,7 @@
 		844073B62CD7C66300D7EFB8 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844073B52CD7C66300D7EFB8 /* FileParser.swift */; };
 		844A2C3E2CEABD12004B56F0 /* NCBILineage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2C3D2CEABD12004B56F0 /* NCBILineage.swift */; };
 		845466412F028C9F002C8685 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845466402F028C84002C8685 /* String.swift */; };
+		845466432F02D883002C8685 /* blast_parser in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8483F1502C4096410075794B /* blast_parser */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8462AC692C84A80400104505 /* SQLDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462AC682C84A80400104505 /* SQLDatabase.swift */; };
 		8463FE132CCE846C000208EF /* KrakenASVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463FE122CCE846C000208EF /* KrakenASVParser.swift */; };
 		8463FE152CCEA0CE000208EF /* KrakenASVBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463FE142CCEA0CE000208EF /* KrakenASVBin.swift */; };
@@ -70,6 +71,19 @@
 		F636C8262DF9D684003C7AA4 /* libcrypto.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F6368EBB2DF9D681003C7AA4 /* libcrypto.3.dylib */; };
 		F636C8272DF9D684003C7AA4 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F63672572DF9D681003C7AA4 /* libcrypto.dylib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		845466422F02D84E002C8685 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /Users/admin/.local/bin;
+			dstSubfolderSpec = 0;
+			files = (
+				845466432F02D883002C8685 /* blast_parser in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		84162ED72C83738A00ED0B5E /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -50384,6 +50398,7 @@
 			buildPhases = (
 				8483F14C2C4096410075794B /* Sources */,
 				8483F14D2C4096410075794B /* Frameworks */,
+				845466422F02D84E002C8685 /* CopyFiles */,
 			);
 			buildRules = (
 			);
