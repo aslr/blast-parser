@@ -11,7 +11,7 @@ struct FastqSequence: CustomStringConvertible {
     let quality:String
     
     var description: String {
-        "\(id)\n\(sequence)\n+\n\(quality)"
+        "@\(id)\n\(sequence)\n+\n\(quality)"
     }
     
     var fasta: String {
