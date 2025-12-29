@@ -13,7 +13,10 @@ class DataStream {
     let bufferSize:Int
     
     init(url:URL, blockSize:Int = 4096) throws {
-        self.url = url
+        guard let resolvedURL = url.path.resolvedFileURL() else {
+            throw RuntimeError("DataStream Error: Unable to resolve path: \(url.path)")
+        }
+        self.url = resolvedURL
         self.bufferSize = blockSize
     }
     

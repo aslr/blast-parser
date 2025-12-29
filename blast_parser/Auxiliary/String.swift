@@ -1,0 +1,146 @@
+//
+//  String.swift
+//  blast_parser
+//
+//  Created by João Varela on 29/12/2025.
+//
+
+
+import Foundation
+
+//// Example 1: Resolve absolute path
+//let absolutePath = "/Users/username/Documents/file.txt"
+//if let url = absolutePath.resolvedFileURL() {
+//    print("Absolute URL: \(url.path)")
+//}
+//
+//// Example 2: Resolve relative path (uses current directory)
+//let relativePath = "subfolder/file.txt"
+//if let url = relativePath.resolvedFileURL() {
+//    print("Resolved URL: \(url.path)")
+//}
+//
+//// Example 3: Resolve relative path with custom base
+//let customBase = URL(fileURLWithPath: "/Users/username/project")
+//if let url = "data/config.json".resolvedFileURL(relativeTo: customBase) {
+//    print("Custom base URL: \(url.path)")
+//}
+//
+//// Example 4: Handle paths with .. and .
+//let complexPath = "./subfolder/../other/file.txt"
+//if let url = complexPath.resolvedFileURL() {
+//    print("Standardized URL: \(url.path)")
+//}
+//
+//// Example 5: Expand tilde (~) for home directory
+//let homePath = "~/Documents/notes.txt"
+//if let url = homePath.resolvedFileURL() {
+//    print("Home URL: \(url.path)")
+//}
+//
+//// Example 6: Check if file exists
+//let testPath = "README.md"
+//if let url = testPath.existingFileURL() {
+//    print("File exists at: \(url.path)")
+//} else {
+//    print("File not found")
+//}
+//
+//// Example 7: Check path type
+//print("Is '/usr/bin' absolute? \(("/usr/bin" as String).isAbsolutePath)")
+//print("Is 'folder/file' relative? \(("folder/file" as String).isRelativePath)")
+//print("Is '~/Desktop' absolute? \(("~/Desktop" as String).isAbsolutePath)")
+//
+//// MARK: - Advanced Usage with Error Handling
+//
+//func processFile(at pathString: String, relativeTo base: URL? = nil) -> Result<URL, PathError> {
+//    guard let url = pathString.resolvedFileURL(relativeTo: base) else {
+//        return .failure(.invalidPath(pathString))
+//    }
+//    
+//    guard FileManager.default.fileExists(atPath: url.path) else {
+//        return .failure(.fileNotFound(url.path))
+//    }
+//    
+//    return .success(url)
+//}
+//
+//enum PathError: Error, CustomStringConvertible {
+//    case invalidPath(String)
+//    case fileNotFound(String)
+//    
+//    var description: String {
+//        switch self {
+//        case .invalidPath(let path):
+//            return "Invalid path: \(path)"
+//        case .fileNotFound(let path):
+//            return "File not found: \(path)"
+//        }
+//    }
+//}
+//
+//// Usage with error handling
+//let paths = ["/etc/hosts", "config.json", "~/Documents/data.txt", "../parent/file.txt"]
+//
+//for path in paths {
+//    switch processFile(at: path) {
+//    case .success(let url):
+//        print("✓ Successfully resolved: \(url.path)")
+//    case .failure(let error):
+//        print("✗ Error: \(error)")
+//    }
+//}
+
+extension String {
+    /// Expands tilde (~) to home directory path
+    private func expandingTilde() -> String {
+        if self.hasPrefix("~/") {
+            let homeDir = FileManager.default.homeDirectoryForCurrentUser.path
+            return homeDir + self.dropFirst(1)
+        } else if self == "~" {
+            return FileManager.default.homeDirectoryForCurrentUser.path
+        }
+        return self
+    }
+    
+    /// Converts a string path (absolute or relative) to a fully resolved URL
+    /// - Parameter base: Optional base URL. If nil, uses current directory for relative paths
+    /// - Returns: A standardized, absolute file URL, or nil if the path is invalid
+    func resolvedFileURL(relativeTo base: URL? = nil) -> URL? {
+        // Handle empty strings
+        guard !self.isEmpty else { return nil }
+        
+        // Expand tilde for home directory
+        let expandedPath = self.expandingTilde()
+        
+        // Check if path is already absolute
+        if expandedPath.hasPrefix("/") || expandedPath.hasPrefix("file://") {
+            let url = URL(fileURLWithPath: expandedPath)
+            return url.standardized
+        }
+        
+        // Handle relative paths
+        let baseURL = base ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        let url = URL(fileURLWithPath: expandedPath, relativeTo: baseURL)
+        return url.standardized
+    }
+    
+    /// Converts path to URL and checks if it exists in the file system
+    /// - Parameter base: Optional base URL for relative paths
+    /// - Returns: Resolved URL if path exists, nil otherwise
+    func existingFileURL(relativeTo base: URL? = nil) -> URL? {
+        guard let url = resolvedFileURL(relativeTo: base) else { return nil }
+        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+    }
+    
+    /// Returns true if the string represents an absolute path
+    var isAbsolutePath: Bool {
+        let expanded = self.expandingTilde()
+        return expanded.hasPrefix("/") || expanded.hasPrefix("file://")
+    }
+    
+    /// Returns true if the string represents a relative path
+    var isRelativePath: Bool {
+        return !isAbsolutePath && !self.isEmpty
+    }
+}

@@ -56,10 +56,10 @@ final class MinimapParser: FileParser {
             throw RuntimeError("ERROR: No output file was specified")
         }
         
-        var writer:FileWriter!
-        
         if let path = fastqOutputPath {
-            writer = FileWriter(path: path)
+            guard let writer = FileWriter(path: path) else {
+                throw RuntimeError("Unable to write to file at \(path) due to a malformed path.")
+            }
             let fastqWriter = try writer.makeDataWriter()
             
             for sequence in sequences {
@@ -68,7 +68,9 @@ final class MinimapParser: FileParser {
         }
         
         if let path = fastaOutputPath {
-            writer = FileWriter(path: path)
+            guard let writer = FileWriter(path: path) else {
+                throw RuntimeError("Unable to write to file at \(path) due to a malformed path.")
+            }
             let fastaWriter = try writer.makeDataWriter()
             
             for sequence in sequences {
@@ -77,7 +79,9 @@ final class MinimapParser: FileParser {
         }
         
         if let path = statsOutputPath {
-            writer = FileWriter(path: path)
+            guard let writer = FileWriter(path: path) else {
+                throw RuntimeError("Unable to write to file at \(path) due to a malformed path.")
+            }
             let statsWriter = try writer.makeDataWriter()
             
             for bin in bins {

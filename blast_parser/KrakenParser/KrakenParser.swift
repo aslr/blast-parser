@@ -84,8 +84,10 @@ final class KrakenParser {
     /// Writes a parsed report with the following format:
     /// lineNumber percentage reads assignedReads rank.abbreviation rank-variant rank-name taxID lineage"
     func printReport(to path:String? = nil) throws {
-        let writer = FileWriter(path: path ?? reportParser.path,
-                                suffix: defaultReportSuffix)
+        guard let writer = FileWriter(path: path ?? reportParser.path,
+                                      suffix: defaultReportSuffix) else {
+            throw RuntimeError("Unable to open file for writing the Kraken2 parsed report due to a malformed path.")
+        }
         let dataWriter = try writer.makeDataWriter()
         for line in reportParser.lines {
             dataWriter.write(line: line.getLine())
@@ -100,8 +102,10 @@ final class KrakenParser {
         guard let asvs = self.asvs
             else { throw RuntimeError("Invalid ASV file.")}
         
-        let writer = FileWriter(path: path ?? reportParser.path,
-                                suffix: defaultClassificationSuffix)
+        guard let writer = FileWriter(path: path ?? reportParser.path,
+                                      suffix: defaultClassificationSuffix) else {
+            throw RuntimeError("Unable to open file for writing the Kraken2 parsed taxonomic assignment report due to a malformed path.")
+        }
         let dataWriter = try writer.makeDataWriter()
         for asv in asvs {
             dataWriter.write(line: asv.description)
@@ -113,8 +117,10 @@ final class KrakenParser {
     /// Writes a parsed report with the selected sequences in fasta format
     /// that will be searched by BLASTn
     func printParsedSequences(to path:String? = nil) throws {
-        let writer = FileWriter(path: path ?? reportParser.path,
-                                suffix: defaultSequenceSuffix)
+        guard let writer = FileWriter(path: path ?? reportParser.path,
+                                      suffix: defaultSequenceSuffix) else {
+            throw RuntimeError("Unable to open file for writing the Kraken2 parsed sequences due to a malformed path.")
+        }
         let dataWriter = try writer.makeDataWriter()
         for sequence in sequenceParser.sequences {
             dataWriter.write(line: ">" + sequence.sequenceID)

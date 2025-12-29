@@ -14,6 +14,7 @@
 		8430FFC62F014C90003C07D8 /* FastqParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430FFC52F014C90003C07D8 /* FastqParser.swift */; };
 		844073B62CD7C66300D7EFB8 /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844073B52CD7C66300D7EFB8 /* FileParser.swift */; };
 		844A2C3E2CEABD12004B56F0 /* NCBILineage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2C3D2CEABD12004B56F0 /* NCBILineage.swift */; };
+		845466412F028C9F002C8685 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845466402F028C84002C8685 /* String.swift */; };
 		8462AC692C84A80400104505 /* SQLDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462AC682C84A80400104505 /* SQLDatabase.swift */; };
 		8463FE132CCE846C000208EF /* KrakenASVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463FE122CCE846C000208EF /* KrakenASVParser.swift */; };
 		8463FE152CCEA0CE000208EF /* KrakenASVBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463FE142CCEA0CE000208EF /* KrakenASVBin.swift */; };
@@ -79,6 +80,7 @@
 		844073B52CD7C66300D7EFB8 /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
 		844A2C3C2CEABA99004B56F0 /* globals-bp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "globals-bp.h"; path = "libpq/globals-bp.h"; sourceTree = "<group>"; };
 		844A2C3D2CEABD12004B56F0 /* NCBILineage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCBILineage.swift; sourceTree = "<group>"; };
+		845466402F028C84002C8685 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		8462AC642C84A73D00104505 /* blast_parser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "blast_parser-Bridging-Header.h"; sourceTree = "<group>"; };
 		8462AC682C84A80400104505 /* SQLDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLDatabase.swift; sourceTree = "<group>"; };
 		8463FE122CCE846C000208EF /* KrakenASVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVParser.swift; sourceTree = "<group>"; };
@@ -24590,6 +24592,7 @@
 		8463FE0F2CCE5CEC000208EF /* Auxiliary */ = {
 			isa = PBXGroup;
 			children = (
+				845466402F028C84002C8685 /* String.swift */,
 				8483F15A2C409B860075794B /* Console.swift */,
 				8430FFC52F014C90003C07D8 /* FastqParser.swift */,
 				844073B52CD7C66300D7EFB8 /* FileParser.swift */,
@@ -50442,6 +50445,7 @@
 				848F00CE2C86B557003A0C05 /* parser.c in Sources */,
 				848F00CF2C86B557003A0C05 /* libpq-bp.c in Sources */,
 				8463FE192CCEDEDE000208EF /* KrakenASV.swift in Sources */,
+				845466412F028C9F002C8685 /* String.swift in Sources */,
 				8483F15B2C409B860075794B /* Console.swift in Sources */,
 				8463FE172CCEDE6C000208EF /* KrakenASVBinArray.swift in Sources */,
 				842DD5312C8303F80028D7DE /* DataStreamWriter.swift in Sources */,

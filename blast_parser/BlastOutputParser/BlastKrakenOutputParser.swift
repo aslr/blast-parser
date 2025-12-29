@@ -53,13 +53,17 @@ final class BlastKrakenOutputParser: BlastOutputParser {
     }
     
     func print(to path:String? = nil) throws {
-        var writer:FileWriter!
+        var writer:FileWriter?
         
         if let path = path {
             writer = FileWriter(path: path)
         } else {
             writer = FileWriter(path: asvsParser.path,
                                 suffix: defaultReportSuffix)
+        }
+        
+        guard let writer = writer else {
+            throw RuntimeError("Unable to open file to write BLASTn and Kraken2 output due to a malformed path.")
         }
         
         let dataWriter = try writer.makeDataWriter()

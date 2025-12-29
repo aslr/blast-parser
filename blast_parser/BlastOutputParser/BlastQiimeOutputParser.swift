@@ -26,7 +26,9 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 	}
 	
 	func print(_ path:String) throws{
-		let writer = FileWriter(path:path)
+        guard let writer = FileWriter(path:path) else {
+            throw RuntimeError("Unable to print merged Qiime 2 and BLASTn output to file due to a malformed path.")
+        }
 		let dataWriter = try writer.makeDataWriter()
 		for blastASV in blastASVs {
 			dataWriter.write(line: blastASV.description)

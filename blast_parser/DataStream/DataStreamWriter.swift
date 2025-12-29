@@ -31,10 +31,13 @@ final class DataStreamWriter: DataStream {
     override init(url:URL, blockSize:Int = 4096) throws {
         let filemanager = FileManager.default
         // NOTE: this will overwrite the previous contents of an existing file
-        guard filemanager.createFile(atPath: url.path, contents: nil)
-            else { throw DataStreamWriterError.writeError(url.path) }
-        try super.init(url: url, blockSize: blockSize)
-        filehandle = try FileHandle(forWritingTo: url)
+        guard let resolvedURL = url.path.resolvedFileURL() else {
+            throw DataStreamWriterError.writeError(url.path)
+        }
+        guard filemanager.createFile(atPath: resolvedURL.path, contents: nil)
+            else { throw DataStreamWriterError.writeError(resolvedURL.path) }
+        try super.init(url: resolvedURL, blockSize: blockSize)
+        filehandle = try FileHandle(forWritingTo: resolvedURL)
     }
     
     deinit {
