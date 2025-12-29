@@ -111,10 +111,10 @@ final class MinimapParser: FileParser {
         Console.writeToStdOut("Making sequence bins with the same taxonomic assignment...")
         
         for hit in hits {
-            if var bin = matchBin(keyword: hit.species) {
+            if let bin = matchBin(keyword: hit.species) {
                 bin.add(hit)
             } else {
-                var bin = MinimapHitBin()
+                let bin = MinimapHitBin()
                 bin.add(hit)
                 bins.append(bin)
             }
