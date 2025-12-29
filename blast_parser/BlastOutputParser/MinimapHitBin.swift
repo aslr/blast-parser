@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MinimapHitBin: CustomStringConvertible {
+final class MinimapHitBin: CustomStringConvertible {
     private var hits = [MinimapHit]()
     var maximumScore = 0
     var minimumScore = 0
@@ -28,11 +28,14 @@ struct MinimapHitBin: CustomStringConvertible {
         return "\(taxonomy)\t\(hits.count)"
     }
     
-    mutating func add(_ hit: MinimapHit) {
+    func add(_ hit: MinimapHit) {
         hits.append(hit)
         
         if hit.score > maximumScore {
             maximumScore = hit.score
+            if minimumScore == 0 {
+                minimumScore = hit.score
+            }
         }
         if hit.score < minimumScore {
             minimumScore = hit.score
