@@ -34,7 +34,7 @@ final class MinimapParser: FileParser {
         for line in readStream {
             if index == 0 {
                 // validation
-                Console.writeToStdOut("Parsing minimap2 classification file...")
+                Console.writeToStdOut("Parsing minimap2 classification file: \(readStream.url.lastPathComponent)\n")
                 
                 let header = line.split(separator: "\t")
                 guard header.count == 5 else {
@@ -81,6 +81,8 @@ final class MinimapParser: FileParser {
             for sequence in sequences {
                 fastqWriter.write(line: sequence.description)
             }
+            
+            Console.writeToStdOut("Generated output .fastq file \(fastqWriter.url.lastPathComponent) with representative sequences.")
         }
         
         if let path = fastaOutputPath {
@@ -92,6 +94,8 @@ final class MinimapParser: FileParser {
             for sequence in sequences {
                 fastaWriter.write(line: sequence.fasta)
             }
+            
+            Console.writeToStdOut("Generated output .fasta file \(fastaWriter.url.lastPathComponent) with representative sequences.")
         }
         
         if let path = statsOutputPath {
@@ -103,6 +107,8 @@ final class MinimapParser: FileParser {
             for bin in bins {
                 statsWriter.write(line: bin.description)
             }
+            
+            Console.writeToStdOut("Generated stats file \(statsWriter.url.lastPathComponent).")
         }
     }
     
@@ -135,7 +141,7 @@ final class MinimapParser: FileParser {
         let hits = self.selectedHits()
         
         guard let fastqParser = FastqParser(path: readsPath) else {
-            throw RuntimeError("Failed to parse fastq file as a valid reads file could not be found at \(path)")
+            throw RuntimeError("Failed to parse .fastq file as a valid reads file could not be found at \(path)")
         }
     
         try fastqParser.parse()
@@ -151,7 +157,7 @@ final class MinimapParser: FileParser {
     private func selectedHits() -> [MinimapHit] {
         var _selectedHits = [MinimapHit]()
         for bin in bins {
-            _selectedHits.append(contentsOf: bin.hits(numberToRetrieve: hitsPerBin))
+            _selectedHits.append(contentsOf: bin.hits(maximumHits: hitsPerBin))
         }
         return _selectedHits
     }
