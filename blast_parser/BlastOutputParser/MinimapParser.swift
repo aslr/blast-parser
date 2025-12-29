@@ -123,11 +123,13 @@ final class MinimapParser: FileParser {
     
     private func parseSequences() throws {
         Console.writeToStdOut("Parsing reads file for selected minimap2 hits...")
+        let hits = self.selectedHits()
         
         guard let fastqParser = FastqParser(path: readsPath) else {
             throw RuntimeError("Failed to parse fastq file as a valid reads file could not be found at \(path)")
         }
-        let hits = self.selectedHits()
+    
+        try fastqParser.parse()
         
         for hit in hits {
             guard let sequence = fastqParser.sequence(queryID: hit.queryID) else {

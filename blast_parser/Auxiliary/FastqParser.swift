@@ -35,42 +35,45 @@ final class FastqParser: FileParser {
         var sequence:String? = nil
         var quality:String? = nil
         var sequenceLength = 0
+        var lineNumber = 0
         
         for line in readStream {
             // remove empty lines
             let cleanLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
             guard cleanLine != "" else { continue }
+            lineNumber += 1
             
-            if cleanLine.hasPrefix("@") {
-                // retrieve only the queryID
-                guard let readID = cleanLine.split(separator: " ").map(String.init).first else { throw RuntimeError("Invalid FastQ file at \(path)") }
-                    sequenceID = readID
-                    sequenceID!.removeFirst()
-            } else if sequenceID != nil && sequence == nil && quality == nil {
-                guard isValidNucleotideSequence(cleanLine) else { throw RuntimeError("Invalid sequence \(sequenceID!) in file at \(path)")
-                }
+            switch lineNumber % 4 {
+            case 1:
+                guard cleanLine.hasPrefix("@")
+                    else { throw RuntimeError("Invalid FastQ file at \(path)") }
+                guard let readID = cleanLine.split(separator: " ").map(String.init).first
+                    else { throw RuntimeError("Invalid FastQ file at \(path)") }
+                sequenceID = readID
+                sequenceID!.removeFirst()
+            case 2:
+                guard isValidNucleotideSequence(cleanLine) else
+                    { throw RuntimeError("Invalid sequence \(sequenceID!) in file at \(path)") }
                 sequence = cleanLine
                 sequenceLength = cleanLine.count
-            } else if cleanLine == "+" {
-                guard sequenceID != nil, sequence != nil, quality == nil else {
-                    throw RuntimeError("Malformed in sequence: \(sequenceID!) in file at \(path)")
-                }
-                continue
-            } else if sequenceID != nil && sequence != nil && quality == nil {
-                guard isValidQualityString(cleanLine) else { throw RuntimeError("Invalid quality score in sequence \(sequenceID!) in file at \(path)")
-                }
+            case 3:
+                guard cleanLine == "+"
+                    else { throw RuntimeError("Invalid FastQ file at \(path)") }
+            case 0:
+                guard isValidQualityString(cleanLine)
+                    else { throw RuntimeError("Invalid quality score in sequence \(sequenceID!) in file at \(path)") }
                 quality = cleanLine
-                guard cleanLine.count == sequenceLength else { throw RuntimeError("Quality string length does not match nucleotide sequence length in sequence \(sequenceID!) in file at \(path)")
-                }
-            } else if sequenceID != nil && sequence != nil && quality != nil {
+                guard cleanLine.count == sequenceLength
+                    else { throw RuntimeError("Quality string length does not match nucleotide sequence length in sequence \(sequenceID!) in file at \(path)") }
+                
                 let fastqSequence = FastqSequence(id: sequenceID!, sequence: sequence!, quality: quality!)
                 sequences.append(fastqSequence)
                 sequenceID = nil
                 sequence = nil
                 quality = nil
                 sequenceLength = 0
-            } else {
-                throw RuntimeError("Invalid FastQ file at \(path)")
+            default:
+                fatalError("Unhandled case in FastqParser")
             }
         }
     }
