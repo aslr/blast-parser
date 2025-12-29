@@ -30,7 +30,7 @@ final class MinimapHit: CustomStringConvertible {
             // remove any strain information
             let components = _species!.split(separator: " ")
             if components.count > 2 {
-                _species = components.dropLast().joined(separator: " ")
+                _species = String(components[0]) + " " + String(components[1])
             }
         }
         
