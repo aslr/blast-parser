@@ -23,8 +23,13 @@ final class MinimapParser: FileParser {
         super.init(path: path)
     }
     
+    /// Parses a minimap2 classification file contqining a header with the following columns:
+    /// Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy
+    /// WARNING: Assumes the file is already sorted by Query_ID, Alignment_Score and
+    /// Alignment_Length in descending order of the last two criteria
     func parse() throws {
         var index = 0
+        var lastQueryID: String = ""
         
         for line in readStream {
             if index == 0 {
@@ -42,13 +47,17 @@ final class MinimapParser: FileParser {
             } else if index > 0 {
                 do {
                     let hit = try MinimapHit(from: line)
-                    hits.append(hit)
+                    
+                    // retrieve only the best hit
+                    if lastQueryID.isEmpty || lastQueryID != hit.queryID {
+                        hits.append(hit)
+                        lastQueryID = hit.queryID
+                    }
                 }
                 
                 catch {
                     // ignore any malformed hit and continue
                 }
-                
             }
         }
         
