@@ -63,7 +63,7 @@ final class MinimapHitBin: CustomStringConvertible {
             var score = maximumScore
             while score > minimumScore, selectedHits.count < numberToRetrieve {
                 if let hit = hit(score: score) {
-                    if !hits.contains(where: { $0 == hit }) {
+                    if !selectedHits.contains(where: { $0 == hit }) {
                         selectedHits.append(hit)
                     }
                 }
