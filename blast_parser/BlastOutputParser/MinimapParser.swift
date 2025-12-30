@@ -84,7 +84,7 @@ final class MinimapParser: FileParser {
             throw RuntimeError("ERROR: No output file was specified")
         }
         
-        Console.writeToStdOut("Generating output files to \(outputDirectory!.lastPathComponent)")
+        Console.writeToStdOut("Generating output files to \(outputDirectory!.path)")
         
         if let path = fastqOutputPath {
             guard let writer = FileWriter(path: path) else {
