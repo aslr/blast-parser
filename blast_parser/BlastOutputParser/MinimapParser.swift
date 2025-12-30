@@ -34,7 +34,7 @@ final class MinimapParser: FileParser {
         for line in readStream {
             if index == 0 {
                 // validation
-                Console.writeToStdOut("Parsing minimap2 classification file: \(readStream.url.lastPathComponent)\n")
+                Console.writeToStdOut("Parsing minimap2 classification file: \(readStream.url.lastPathComponent)")
                 
                 let header = line.split(separator: "\t")
                 guard header.count == 5 else {
@@ -65,12 +65,26 @@ final class MinimapParser: FileParser {
         try parseSequences()
     }
     
+    /// Prints out the output files selected by the user, namely a fastq and/or fasta
+    /// file containing representative sequences of each taxon and/or a statistics
+    /// tsv table containing the following columns: Taxonomy, Hit_Count, Maximum_Score
+    /// and Minimum_Score sorted in descending order by Hit_Count
     func print() throws {
-        Console.writeToStdOut("Generating output files...")
+        var outputDirectory: URL?
         
-        guard fastqOutputPath != nil || fastaOutputPath != nil || statsOutputPath != nil else {
+        if let fastqOutputPath = fastqOutputPath {
+            outputDirectory = URL(fileURLWithPath: fastqOutputPath).deletingLastPathComponent()
+        } else if let fastaOutputPath = fastaOutputPath {
+            outputDirectory = URL(fileURLWithPath: fastaOutputPath).deletingLastPathComponent()
+        } else if let statsOutputPath = statsOutputPath {
+            outputDirectory = URL(fileURLWithPath: statsOutputPath).deletingLastPathComponent()
+        }
+        
+        guard outputDirectory != nil else {
             throw RuntimeError("ERROR: No output file was specified")
         }
+        
+        Console.writeToStdOut("Generating output files to \(outputDirectory!.lastPathComponent)")
         
         if let path = fastqOutputPath {
             guard let writer = FileWriter(path: path) else {
@@ -82,7 +96,7 @@ final class MinimapParser: FileParser {
                 fastqWriter.write(line: sequence.description)
             }
             
-            Console.writeToStdOut("Generated output .fastq file \(fastqWriter.url.lastPathComponent) with representative sequences.")
+            Console.writeToStdOut("Generated .fastq file \(fastqWriter.url.lastPathComponent) with representative sequences.")
         }
         
         if let path = fastaOutputPath {
@@ -95,7 +109,7 @@ final class MinimapParser: FileParser {
                 fastaWriter.write(line: sequence.fasta)
             }
             
-            Console.writeToStdOut("Generated output .fasta file \(fastaWriter.url.lastPathComponent) with representative sequences.")
+            Console.writeToStdOut("Generated .fasta file \(fastaWriter.url.lastPathComponent) with representative sequences.")
         }
         
         if let path = statsOutputPath {
@@ -103,8 +117,10 @@ final class MinimapParser: FileParser {
                 throw RuntimeError("Unable to write to file at \(path) due to a malformed path.")
             }
             let statsWriter = try writer.makeDataWriter()
-            
             bins.sort { $0.hitCount > $1.hitCount }
+            
+            let header = "Taxonomy\tHit_Count\tMaximum_Score\tMinimum_Score"
+            statsWriter.write(line: header)
             
             for bin in bins {
                 statsWriter.write(line: bin.description)

@@ -25,7 +25,7 @@ final class MinimapHitBin: CustomStringConvertible {
     }
     
     var description: String {
-        return "\(taxonomy)\t\(hits.count)"
+        return "\(taxonomy)\t\(hits.count)\t\(maximumScore)\t\(minimumScore)"
     }
     
     func add(_ hit: MinimapHit) {
