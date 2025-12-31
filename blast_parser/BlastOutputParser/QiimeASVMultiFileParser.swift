@@ -63,7 +63,7 @@ final class QiimeASVMultiFileParser {
     var parsers: [QiimeParser]
     var prefixes: [String]
     
-    /// QiimeMultiASVFileParser merges different ASV files by keeping an
+    /// QiimeASVMultiFileParser merges different ASV files by keeping a
     /// QiimeParser array, which will do the parsing of each ASV file
     /// - Parameter paths: paths separated by spaces to each ASV file
     /// - Parameter prefixes: prefixes to add to the header column names,
