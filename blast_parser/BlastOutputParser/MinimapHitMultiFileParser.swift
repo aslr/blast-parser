@@ -47,9 +47,9 @@ final class MinimapHitMultiFileParser {
     
     /// Merges different hit files, which should contain the exact same assignments,
     /// classified by using minimap2 with different databases
-    /// - Returns: An array of MinimapHit objects that contain the merged columns containing
+    /// - Returns: An array of MinimapMergedHit objects that contain the merged columns containing
     /// the taxonomy and the score of the assignment
-    func merge() throws -> [MinimapHit] {
+    func merge() throws -> [MinimapMergedHit] {
         for parser in parsers {
             try parser.parse()
         }

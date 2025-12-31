@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Class for storing a minimap2 hit
 final class MinimapHit: CustomStringConvertible {
     let queryID: String
     let referenceID: String
