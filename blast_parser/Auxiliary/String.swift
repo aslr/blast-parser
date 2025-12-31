@@ -125,6 +125,23 @@ extension String {
         return url.standardized
     }
     
+    /// Find files in the directory pointed to by self with a suffix
+    /// - Parameter suffix: suffix to be searched, which can be a file
+    /// extension or more than that
+    func findFiles(suffix: String) -> [String]? {
+        let fileManager = FileManager.default
+        
+        do {
+            let contents = try fileManager.contentsOfDirectory(atPath: self)
+            let matchingFiles = contents
+                .filter { $0.hasSuffix(suffix) }
+                .map { (self as NSString).appendingPathComponent($0) }
+            return matchingFiles
+        } catch {
+            return nil
+        }
+    }
+    
     /// Converts path to URL and checks if it exists in the file system
     /// - Parameter base: Optional base URL for relative paths
     /// - Returns: Resolved URL if path exists, nil otherwise
@@ -137,6 +154,15 @@ extension String {
     var isAbsolutePath: Bool {
         let expanded = self.expandingTilde()
         return expanded.hasPrefix("/") || expanded.hasPrefix("file://")
+    }
+    
+    // Returns nil if file or directory do not exist
+    var isDirectory: Bool? {
+        var isDir: ObjCBool = false
+        guard FileManager.default.fileExists(atPath: self,
+                                             isDirectory: &isDir)
+            else { return nil }
+        return isDir.boolValue
     }
     
     /// Returns true if the string represents a relative path
