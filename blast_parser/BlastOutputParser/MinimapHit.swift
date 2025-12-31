@@ -16,11 +16,15 @@ final class MinimapHit: CustomStringConvertible {
     private var _species: String? = nil
     
     var score:Int {
-        10000*alignmentScore + alignmentLength
+        (10000*alignmentScore + alignmentLength)/1000
     }
     
     var description: String {
         "\(queryID)\t\(referenceID)\t\(alignmentScore)\t\(alignmentLength)\t\(taxonomy)"
+    }
+    
+    var abstract:String {
+        "\(taxonomy)\t\(score)\t"
     }
     
     var species: String {
