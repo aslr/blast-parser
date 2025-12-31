@@ -7,6 +7,9 @@
 import Foundation
 
 final class QiimeParser: FileParser {
+    /// Parses a Qiime2 ASV read counts table with the following columns:
+    /// Feature ID, sample(s) counts, taxonomy, confidence (of the assignment)
+    /// - Returns: An array of QiimeASVs
 	func parse() throws -> [QiimeASV] {
         var lines = [QiimeASV]()
         var index = 0

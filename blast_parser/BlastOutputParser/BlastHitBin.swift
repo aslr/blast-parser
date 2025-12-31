@@ -15,9 +15,10 @@ class BlastHitBin {
         return hits[0].querySequenceID
     }
     
-    /// Returns the best hits per taxon
-    /// NOTE: assumes that hits are already sorted
+    /// Retrieves the best BLASTn hits of a taxon
+    /// Assumes that hits are already sorted
     /// using sort(criterion:)
+    /// - Returns: the best hits per taxon
     var bestHitsPerTaxID:[BlastHit]? {
         var bestHits = [BlastHit]()
         var currentTaxID = -1
@@ -43,8 +44,10 @@ class BlastHitBin {
         hits.append(hit)
     }
     
-    /// Returns a `hitNumber` of best hits regardless of the taxon
+    /// Retrieves the best BLASTn hits regardless of the taxon
     /// NOTE: assumes that hits are already sorted
+    /// - Parameter hitNumber: number of hits to retrieve
+    /// - Returns: the best hits
     func bestHits(_ hitNumber:Int = 1) -> [BlastHit]? {
         guard self.hits.isEmpty == false else { return nil }
         var hits = [BlastHit]()
