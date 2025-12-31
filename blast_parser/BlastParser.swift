@@ -323,12 +323,8 @@ extension BlastParser {
         @OptionGroup var options: Options
         
         @Option(name: [.short, .customLong("hits")],
-                help: "Path(s) to the minimap2 output table(s) containing the hits selected by the parse-minimap subcommand. Each table should contain the following columns: QueryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy. Multiple file or paths, separated by spaces, can be given to merge multiple tables. If a path to a directory is given, all the files with the suffix '_representative_classified.tsv' will be used.")
+                help: "Path(s) to the minimap2 output table(s). The first path should point to a single table containing the hits of all reads that was used as input to the parse-minimap subcommand. The following paths should point to the files containing the hits selected by the parse-minimap subcommand. Each table should contain the following columns: QueryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy. If a path to a directory is given, the file with the suffix '_classified.tsv' will be used as the main hits file. Files containing only the select hits should have the suffix '_representative_classified.tsv'.")
         var minimapHits:String
-        
-        @Option(name: [.short, .customLong("main-hits")],
-                help: "Path to the minimap2 hits table containing the top 5 taxonomic assignments of all reads with the following columns: QueryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy.")
-        var minimapStats:String
         
         @Option(name: [.short, .customLong("blasthits")],
                 help: "Path to the BLAST output file using a 13 columns format with following order: qsedid pident length evalue bitscore score nident saccver stitle qcovs staxids sscinames sskingdoms.")
@@ -339,7 +335,7 @@ extension BlastParser {
         var outputFile:String? = nil
         
         @Option(name: [.short, .customLong("prefixes")],
-                help: "Prefix(es) to add to the output file header row separated by spaces to distinguish between different classifiers or databases. If no prefix is given no header row will be generated (e.g., 'silva pr2 eukaryome') [OPTIONAL].")
+                help: "Prefix(es) to add to the output file header row separated by spaces to distinguish between different classifiers or databases. If no prefix is given no header row will be generated (e.g., 'silva pr2 eukaryome'). The first prefix should be the one that will be used for the main output [OPTIONAL].")
         var prefixes:String?
     }
 }
