@@ -1,5 +1,5 @@
 //
-//  QiimeMultiASVFileParser.swift
+//  QiimeASVMultiFileParser.swift
 //  blast_parser
 //
 //  Created by João Varela on 14/07/2025.
@@ -59,7 +59,7 @@ fileprivate struct QiimeASVFile {
     }
 }
 
-final class QiimeMultiASVFileParser {
+final class QiimeASVMultiFileParser {
     var parsers: [QiimeParser]
     var prefixes: [String]
     
