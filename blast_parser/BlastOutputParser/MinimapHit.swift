@@ -16,6 +16,8 @@ final class MinimapHit: CustomStringConvertible {
     let taxonomy: String
     private var _species: String? = nil
     
+    var sampleID:String?
+    
     var score:Int {
         (10000*alignmentScore + alignmentLength)/1000
     }

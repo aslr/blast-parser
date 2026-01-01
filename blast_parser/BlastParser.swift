@@ -323,7 +323,7 @@ extension BlastParser {
         @OptionGroup var options: Options
         
         @Option(name: [.short, .customLong("hits")],
-                help: "Path(s) to the minimap2 output table(s). The first path should point to a single table containing the hits of all reads that was used as input to the parse-minimap subcommand. The following paths should point to the files containing the hits selected by the parse-minimap subcommand. Each table should contain the following columns: QueryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy. If a path to a directory is given, the file with the suffix '_classified.tsv' will be used as the main hits file. Files containing only the select hits should have the suffix '_representative_classified.tsv'.")
+                help: "Path(s) to the minimap2 output table(s) files separated by spaces or one path to a directory containing such files. Each table should contain the following columns: QueryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy. Files containing the hits of all reads should have the suffix '_classified.tsv'. Files containing only the hits selected by parse-minimap subcommand should have the suffix '_representative_classified.tsv'. The rest of the filename(s) must correspond to the sample ID(s) of the reads.")
         var minimapHits:String
         
         @Option(name: [.short, .customLong("blasthits")],

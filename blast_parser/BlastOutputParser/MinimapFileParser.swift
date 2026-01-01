@@ -9,6 +9,27 @@ import Foundation
 
 class MinimapFileParser: FileParser {
     var hits = [MinimapHit]()
+    
+    var filename:String {
+        readStream.url.lastPathComponent
+    }
+    
+    /// Extracts the sampleID from the filename passed in path
+    /// Assumes that it is either a main or a representative hit file
+    /// whose filename has either '_representative_classified.tsv' or
+    /// '_classified.tsv' as sufixes, respectively.
+    private var _sampleID: String?
+    var sampleID: String? {
+        guard _sampleID == nil else { return _sampleID }
+        if let prefix = filename.sampleID(suffix: "_classified.tsv") {
+            _sampleID = prefix
+            return prefix
+        } else if let prefix = filename.sampleID(suffix: "_representative_classified.tsv") {
+            _sampleID = prefix
+            return prefix
+        }
+        return nil
+    }
         
     /// Parses a minimap2 classification file contqining a header with the following columns:
     /// Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy
@@ -21,7 +42,7 @@ class MinimapFileParser: FileParser {
         for line in readStream {
             if index == 0 {
                 // validation
-                Console.writeToStdOut("Parsing minimap2 classification file: \(readStream.url.lastPathComponent)")
+                Console.writeToStdOut("Parsing minimap2 classification file: \(filename)")
                 
                 let header = line.split(separator: "\t")
                 guard header.count == 5 else {
@@ -40,6 +61,8 @@ class MinimapFileParser: FileParser {
                         hits.append(hit)
                         lastQueryID = hit.queryID
                     }
+                    
+                    hit.sampleID = sampleID
                 }
                 
                 catch {
