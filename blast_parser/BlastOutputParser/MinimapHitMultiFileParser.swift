@@ -9,46 +9,39 @@ import Foundation
 
 final class MinimapHitMultiFileParser {
     var parsers = [MinimapFileParser]()
-    var prefixes:[String]
+    var prefixes = [String]()
     
     /// MinimapHitMultiFileParser merges different minimap2 hit files by keeping a
     /// QiimeParser array, which will do the parsing of each minimap2 hit file
-    /// - Parameter paths: paths separated by spaces to each minimap2 hit file, the first path
-    /// muast be the main hits file containing all the reads; if a path to a directory is given,
-    /// the file with the suffix '_classified.tsv' will be used as the main hits file. Files
-    /// containing only the select hits should have the suffix '_representative_classified.tsv'.
-    /// - Parameter prefixes: prefixes to add to the header column names,
-    /// following the order of the paths given, suitable to distinguish the
-    /// output of minimap2 using different databases
-    init?(paths:String, prefixes:String) {
+    /// - Parameter paths: paths separated by spaces to each minimap2 hit file or paths pointing to directories containing such files; the path pointing
+    /// to the main hits file containing all the reads must have the suffix
+    /// '_classified.tsv'. Files containing only the hits selected by the
+    /// parse-minimap subcommand must have the suffix '_representative_classified.tsv'
+    /// The rest of the filename will be interpreted as the sample ID.
+    /// Prefixes corresponding to the databases used to classify the reads to be added
+    /// to the header column names will be extracted from the directory name
+    init(paths:String) throws {
         let pathsArray = paths.components(separatedBy: " ")
-        if pathsArray.count == 1 {
-            // assume it is a directory if only one path was given
-            if let isDirectory = pathsArray[0].isDirectory, isDirectory {
-                let directory = pathsArray.first!
-                // search for main file
-                guard let mainPath = directory.findFiles(suffix: "_classified.tsv")
-                    else { return nil }
-                guard let repPaths = directory.findFiles(suffix: "_representative_classified.tsv")
-                    else { return nil }
-                let allPaths = mainPath + repPaths
-                self.parsers = allPaths.compactMap { path in MinimapFileParser(path: path) }
-            } else {
-                // not merging with just one file
-                return nil
-            }
-        } else if pathsArray.count > 1 {
-            // assume that they are file paths
-            self.parsers = pathsArray.compactMap { path in MinimapFileParser(path: path) }
-        }
+        guard pathsArray.count > 0 else { throw RuntimeError("No valid minimap2 directories were provided. The path was empty.") }
         
-        self.prefixes = prefixes.components(separatedBy: " ").map { String($0) }
+        for directory in pathsArray {
+            guard let isDirectory = directory.isDirectory, isDirectory else {throw RuntimeError("\(directory) is not a directory") }
+            guard let mainPaths = directory.findFiles(suffix: "_classified.tsv")
+                else { throw RuntimeError("No files ending in '_classified.tsv' were found in \(directory)") }
+            guard let repPaths = directory.findFiles(suffix: "_representative_classified.tsv")
+                else { throw RuntimeError("No files ending in '_representative_classified.tsv' were found in \(directory)") }
+            let allPaths = mainPaths + repPaths
+            self.parsers = allPaths.compactMap { path in MinimapFileParser(path: path) }
+            let url = URL(fileURLWithPath: directory, isDirectory: true)
+            let prefix = url.lastPathComponent
+            prefixes.append(prefix)
+        }
     }
     
     /// Merges different hit files, which should contain the exact same assignments,
     /// classified by using minimap2 with different databases
-    /// - Returns: An array of MinimapMergedHit objects that contain the merged columns containing
-    /// the taxonomy and the score of the assignment
+    /// - Returns: An array of MinimapMergedHit objects that contain the merged columns
+    /// containing the taxonomy and the score of the assignment
     func merge() throws -> [MinimapMergedHit] {
         for parser in parsers {
             try parser.parse()

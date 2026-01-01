@@ -323,20 +323,16 @@ extension BlastParser {
         @OptionGroup var options: Options
         
         @Option(name: [.short, .customLong("hits")],
-                help: "Path(s) to the minimap2 output table(s) files separated by spaces or one path to a directory containing such files. Each table should contain the following columns: QueryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy. Files containing the hits of all reads should have the suffix '_classified.tsv'. Files containing only the hits selected by parse-minimap subcommand should have the suffix '_representative_classified.tsv'. The rest of the filename(s) must correspond to the sample ID(s) of the reads.")
+                help: "Path(s) to the directories containing minimap2 output table(s) files separated by spaces. Each table should contain the following columns: QueryID, Reference_ID, Alignment_Score, Alignment_Length and Taxonomy. Files containing the hits of all reads should have the suffix '_classified.tsv'. Files containing only the hits selected by parse-minimap subcommand should have the suffix '_representative_classified.tsv'. The rest of the filename(s) must correspond to the sample ID(s) of the reads. Each directory should be named as the database used to classify the reads as that will be used as a prefix to the corresponding column headers.")
         var minimapHits:String
         
         @Option(name: [.short, .customLong("blasthits")],
-                help: "Path to the BLAST output file using a 13 columns format with following order: qsedid pident length evalue bitscore score nident saccver stitle qcovs staxids sscinames sskingdoms.")
+                help: "Path to the directory containing the BLAST output files using a 13-columns format with following order: qsedid pident length evalue bitscore score nident saccver stitle qcovs staxids sscinames sskingdoms. The suffix of the files must be '_representative_blast.tsv'. The rest of the filename will be interpreted as the sample ID.")
         var blasthits:String
         
         @Option(name: [.short, .customLong("output")],
                 help: "Name of the output file. [OPTIONAL, default = (BLASTn output filename)_merged_output.tsv].")
         var outputFile:String? = nil
-        
-        @Option(name: [.short, .customLong("prefixes")],
-                help: "Prefix(es) to add to the output file header row separated by spaces to distinguish between different classifiers or databases. If no prefix is given no header row will be generated (e.g., 'silva pr2 eukaryome'). The first prefix should be the one that will be used for the main output [OPTIONAL].")
-        var prefixes:String?
     }
 }
 
