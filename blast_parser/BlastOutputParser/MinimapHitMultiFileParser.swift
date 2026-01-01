@@ -43,10 +43,12 @@ final class MinimapHitMultiFileParser {
     /// - Returns: An array of MinimapMergedHit objects that contain the merged columns
     /// containing the taxonomy and the score of the assignment
     func merge() throws -> [MinimapMergedHit] {
+        var mergedHits = [MinimapMergedHit]()
+        
         for parser in parsers {
             try parser.parse()
         }
         
-        
+        return mergedHits
     }
 }
