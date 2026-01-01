@@ -92,6 +92,14 @@ import Foundation
 //}
 
 extension String {
+    /// Converts path to URL and checks if it exists in the file system
+    /// - Parameter base: Optional base URL for relative paths
+    /// - Returns: Resolved URL if path exists, nil otherwise
+    func existingFileURL(relativeTo base: URL? = nil) -> URL? {
+        guard let url = resolvedFileURL(relativeTo: base) else { return nil }
+        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+    }
+    
     /// Expands tilde (~) to home directory path
     private func expandingTilde() -> String {
         if self.hasPrefix("~/") {
@@ -101,28 +109,6 @@ extension String {
             return FileManager.default.homeDirectoryForCurrentUser.path
         }
         return self
-    }
-    
-    /// Converts a string path (absolute or relative) to a fully resolved URL
-    /// - Parameter base: Optional base URL. If nil, uses current directory for relative paths
-    /// - Returns: A standardized, absolute file URL, or nil if the path is invalid
-    func resolvedFileURL(relativeTo base: URL? = nil) -> URL? {
-        // Handle empty strings
-        guard !self.isEmpty else { return nil }
-        
-        // Expand tilde for home directory
-        let expandedPath = self.expandingTilde()
-        
-        // Check if path is already absolute
-        if expandedPath.hasPrefix("/") || expandedPath.hasPrefix("file://") {
-            let url = URL(fileURLWithPath: expandedPath)
-            return url.standardized
-        }
-        
-        // Handle relative paths
-        let baseURL = base ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        let url = URL(fileURLWithPath: expandedPath, relativeTo: baseURL)
-        return url.standardized
     }
     
     /// Find files in the directory pointed to by self with a suffix
@@ -140,14 +126,6 @@ extension String {
         } catch {
             return nil
         }
-    }
-    
-    /// Converts path to URL and checks if it exists in the file system
-    /// - Parameter base: Optional base URL for relative paths
-    /// - Returns: Resolved URL if path exists, nil otherwise
-    func existingFileURL(relativeTo base: URL? = nil) -> URL? {
-        guard let url = resolvedFileURL(relativeTo: base) else { return nil }
-        return FileManager.default.fileExists(atPath: url.path) ? url : nil
     }
     
     /// Returns true if the string represents an absolute path
@@ -168,5 +146,43 @@ extension String {
     /// Returns true if the string represents a relative path
     var isRelativePath: Bool {
         return !isAbsolutePath && !self.isEmpty
+    }
+    
+    /// Converts a string path (absolute or relative) to a fully resolved URL
+    /// - Parameter base: Optional base URL. If nil, uses current directory for
+    /// relative paths
+    /// - Returns: A standardized, absolute file URL, or nil if the path is invalid
+    func resolvedFileURL(relativeTo base: URL? = nil) -> URL? {
+        // Handle empty strings
+        guard !self.isEmpty else { return nil }
+        
+        // Expand tilde for home directory
+        let expandedPath = self.expandingTilde()
+        
+        // Check if path is already absolute
+        if expandedPath.hasPrefix("/") || expandedPath.hasPrefix("file://") {
+            let url = URL(fileURLWithPath: expandedPath)
+            return url.standardized
+        }
+        
+        // Handle relative paths
+        let baseURL = base ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        let url = URL(fileURLWithPath: expandedPath, relativeTo: baseURL)
+        return url.standardized
+    }
+    
+    /// Extract sample ID from filename by removing a known suffix
+    /// - Parameters:
+    ///   - filename: The full filename (e.g., "sample123_processed.fastq")
+    ///   - suffix: The suffix to remove (e.g., "_processed.fastq")
+    /// - Returns: The sample ID (prefix before the suffix) but returns nil
+    /// if the filename does not contain the required suffix or if the
+    /// sampleID is empty
+    func sampleID(suffix: String) -> String? {
+        guard self.hasSuffix(suffix) else { return nil }
+        let endIndex = self.index(self.endIndex, offsetBy: -suffix.count)
+        let sampleID = String(self[..<endIndex])
+        guard sampleID.isEmpty == false else { return nil }
+        return sampleID
     }
 }
