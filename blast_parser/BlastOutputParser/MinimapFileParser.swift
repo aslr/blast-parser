@@ -21,14 +21,21 @@ class MinimapFileParser: FileParser {
     private var _sampleID: String?
     var sampleID: String? {
         guard _sampleID == nil else { return _sampleID }
-        if let prefix = filename.sampleID(suffix: "_classified.tsv") {
+        if let prefix = filename.sampleID(suffix: .main) {
             _sampleID = prefix
             return prefix
-        } else if let prefix = filename.sampleID(suffix: "_representative_classified.tsv") {
+        } else if let prefix = filename.sampleID(suffix: .representative) {
             _sampleID = prefix
             return prefix
         }
         return nil
+    }
+    
+    private var _isMainFile: Bool? = nil
+    var isMainFile: Bool {
+        guard _isMainFile == nil else { return _isMainFile! }
+        _isMainFile = filename.hasSuffix(MinimapFileSuffix.main.rawValue)
+        return _isMainFile!
     }
         
     /// Parses a minimap2 classification file contqining a header with the following columns:
@@ -63,6 +70,7 @@ class MinimapFileParser: FileParser {
                     }
                     
                     hit.sampleID = sampleID
+                    hit.isMainFileHit = isMainFile
                 }
                 
                 catch {

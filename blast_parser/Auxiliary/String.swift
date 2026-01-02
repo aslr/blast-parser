@@ -111,23 +111,6 @@ extension String {
         return self
     }
     
-    /// Find files in the directory pointed to by self with a suffix
-    /// - Parameter suffix: suffix to be searched, which can be a file
-    /// extension or more than that
-    func findFiles(suffix: String) -> [String]? {
-        let fileManager = FileManager.default
-        
-        do {
-            let contents = try fileManager.contentsOfDirectory(atPath: self)
-            let matchingFiles = contents
-                .filter { $0.hasSuffix(suffix) }
-                .map { (self as NSString).appendingPathComponent($0) }
-            return matchingFiles
-        } catch {
-            return nil
-        }
-    }
-    
     /// Returns true if the string represents an absolute path
     var isAbsolutePath: Bool {
         let expanded = self.expandingTilde()
@@ -170,6 +153,31 @@ extension String {
         let url = URL(fileURLWithPath: expandedPath, relativeTo: baseURL)
         return url.standardized
     }
+}
+
+// MARK: Suffixes
+enum MinimapFileSuffix: String {
+    case main = "_classified.tsv"
+    case representative = "_representative_classified.tsv"
+}
+
+extension String {
+    /// Find files in the directory pointed to by self with a suffix
+    /// - Parameter suffix: suffix to be searched, which can be a file
+    /// extension or more than that
+    func findFiles(suffix: MinimapFileSuffix) -> [String]? {
+        let fileManager = FileManager.default
+        
+        do {
+            let contents = try fileManager.contentsOfDirectory(atPath: self)
+            let matchingFiles = contents
+                .filter { $0.hasSuffix(suffix.rawValue) }
+                .map { (self as NSString).appendingPathComponent($0) }
+            return matchingFiles
+        } catch {
+            return nil
+        }
+    }
     
     /// Extract sample ID from filename by removing a known suffix
     /// - Parameters:
@@ -178,9 +186,9 @@ extension String {
     /// - Returns: The sample ID (prefix before the suffix) but returns nil
     /// if the filename does not contain the required suffix or if the
     /// sampleID is empty
-    func sampleID(suffix: String) -> String? {
-        guard self.hasSuffix(suffix) else { return nil }
-        let endIndex = self.index(self.endIndex, offsetBy: -suffix.count)
+    func sampleID(suffix: MinimapFileSuffix) -> String? {
+        guard self.hasSuffix(suffix.rawValue) else { return nil }
+        let endIndex = self.index(self.endIndex, offsetBy: -suffix.rawValue.count)
         let sampleID = String(self[..<endIndex])
         guard sampleID.isEmpty == false else { return nil }
         return sampleID

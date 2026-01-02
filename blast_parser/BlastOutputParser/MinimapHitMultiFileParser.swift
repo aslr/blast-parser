@@ -25,12 +25,21 @@ final class MinimapHitMultiFileParser {
         guard pathsArray.count > 0 else { throw RuntimeError("No valid minimap2 directories were provided. The path was empty.") }
         
         for directory in pathsArray {
-            guard let isDirectory = directory.isDirectory, isDirectory else {throw RuntimeError("\(directory) is not a directory") }
-            guard let mainPaths = directory.findFiles(suffix: "_classified.tsv")
-                else { throw RuntimeError("No files ending in '_classified.tsv' were found in \(directory)") }
-            guard let repPaths = directory.findFiles(suffix: "_representative_classified.tsv")
-                else { throw RuntimeError("No files ending in '_representative_classified.tsv' were found in \(directory)") }
-            let allPaths = mainPaths + repPaths
+            guard let isDirectory = directory.isDirectory, isDirectory
+                else { throw RuntimeError("\(directory) is not a directory") }
+            
+            var allPaths = [String]()
+            if let mainPaths = directory.findFiles(suffix: .main) {
+                allPaths = mainPaths
+            }
+            
+            if let repPaths = directory.findFiles(suffix: .representative) {
+                allPaths += repPaths
+            }
+            
+            guard allPaths.isEmpty == false
+                else { throw RuntimeError("No minimap2 hit files were found in \(directory)") }
+            
             self.parsers = allPaths.compactMap { path in MinimapFileParser(path: path) }
             let url = URL(fileURLWithPath: directory, isDirectory: true)
             let prefix = url.lastPathComponent

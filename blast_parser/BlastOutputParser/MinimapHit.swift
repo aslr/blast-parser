@@ -17,6 +17,7 @@ final class MinimapHit: CustomStringConvertible {
     private var _species: String? = nil
     
     var sampleID:String?
+    var isMainFileHit = false
     
     var score:Int {
         (10000*alignmentScore + alignmentLength)/1000
