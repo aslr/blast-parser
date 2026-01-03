@@ -12,7 +12,6 @@ final class BlastKrakenOutputParser: BlastOutputParser {
     var taxonomyParser:KrakenTaxonomyParser? = nil
     var blastASVs = [BlastKrakenASV]()
 
-    
     /// Initializer for a parser that will merge the output files of the parse
     /// subcommand with the BLASTn output file which should have the following
     /// 13 columns:
@@ -46,12 +45,6 @@ final class BlastKrakenOutputParser: BlastOutputParser {
         super.init(path: path)
     }
     
-    func parse(criterion:BlastHit.SortCriterion = .bitScore) throws {
-        try parseBlastOutput()
-        try parseBins(criterion: criterion)
-        try merge()
-    }
-    
     func print(to path:String? = nil) throws {
         var writer:FileWriter?
         
@@ -73,39 +66,9 @@ final class BlastKrakenOutputParser: BlastOutputParser {
         Console.writeToStdOut("Written merged Kraken2 and BLASTn output to file at \(dataWriter.url.path)")
     }
     
-    private func parseBlastOutput() throws {
-        Console.writeToStdOut("Parsing BLASTn output...")
-        
-        for line in readStream {
-            let hit = try BlastHit(line: line)
-            hits.append(hit)
-        }
-    }
-    
-    /// Parses the BLASTn output into bins with the same sequenceID
-    /// Assumes the hits are sorted by their sequenceIDs
-    private func parseBins(criterion:BlastHit.SortCriterion) throws {
-        Console.writeToStdOut("Parsing BLASTn output into bins...")
-        var previousID = String()
-        for hit in hits {
-            if hit.querySequenceID != previousID {
-                let bin = BlastHitBin(hit: hit)
-                bin.sort(criterion: criterion)
-                bins.append(bin)
-                previousID = hit.querySequenceID
-            } else {
-                if let previousBin = bins.last {
-                    previousBin.append(hit: hit)
-                } else {
-                    throw RuntimeError("Unable to append BLAST hit to bin.")
-                }
-            }
-        }
-    }
-    
     /// Merge Kraken ASVs with BLASTn best hit(s) of each bin
     /// depending upon the `hitsPerASV` instance variable
-    private func merge() throws {
+    override func merge() throws {
         Console.writeToStdOut("Merging Kraken ASVs with BLASTn output...")
         
         guard hits.isEmpty == false else {
