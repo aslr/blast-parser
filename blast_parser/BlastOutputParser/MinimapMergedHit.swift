@@ -25,8 +25,8 @@ final class MinimapMergedHit: CustomStringConvertible {
     
     var header:String {
         var result = "Query_ID"
-        var addPrefixes = hits.count == prefixes.count
-        for (i, hit) in hits.enumerated() {
+        let addPrefixes = hits.count == prefixes.count
+        for (i, _) in hits.enumerated() {
             if addPrefixes {
                 result += "\(prefixes[i])_Taxonomy\t\(prefixes[i])_Score\t"
             } else {
