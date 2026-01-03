@@ -37,6 +37,10 @@ class MinimapFileParser: FileParser {
         _isMainFile = filename.hasSuffix(MinimapFileSuffix.main.rawValue)
         return _isMainFile!
     }
+    
+    var directory: String? {
+        readStream.url.deletingLastPathComponent().lastPathComponent
+    }
         
     /// Parses a minimap2 classification file contqining a header with the following columns:
     /// Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy
