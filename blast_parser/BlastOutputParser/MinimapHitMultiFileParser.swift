@@ -13,7 +13,8 @@ final class MinimapHitMultiFileParser {
     
     /// MinimapHitMultiFileParser merges different minimap2 hit files by keeping a
     /// QiimeParser array, which will do the parsing of each minimap2 hit file
-    /// - Parameter paths: paths separated by spaces to each minimap2 hit file or paths pointing to directories containing such files; the path pointing
+    /// - Parameter paths: paths separated by spaces to each minimap2 hit file or paths
+    /// pointing to directories containing such files; the path pointing
     /// to the main hits file containing all the reads must have the suffix
     /// '_classified.tsv'. Files containing only the hits selected by the
     /// parse-minimap subcommand must have the suffix '_representative_classified.tsv'
@@ -22,7 +23,10 @@ final class MinimapHitMultiFileParser {
     /// to the header column names will be extracted from the directory name
     init(paths:String) throws {
         let pathsArray = paths.components(separatedBy: " ")
-        guard pathsArray.count > 0 else { throw RuntimeError("No valid minimap2 directories were provided. The path was empty.") }
+        guard pathsArray.count > 0
+        else {
+            throw RuntimeError("No valid minimap2 directories were provided. The path was empty.")
+        }
         
         for directory in pathsArray {
             guard let isDirectory = directory.isDirectory, isDirectory
