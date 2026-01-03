@@ -11,19 +11,6 @@ enum BlastASVError: Error {
     case invalidLineage
 }
 
-class BlastASV: CustomStringConvertible{
-	var hit: BlastHit
-	var blastTaxonomy = Hierarchy()
-	
-	var description: String{
-		return "\(hit)\t\(blastTaxonomy)"
-	}
-	
-	init(hit: BlastHit) {
-		self.hit = hit
-	}
-}
-
 class BlastKrakenASV: BlastASV {
     let asv:KrakenASV
     
@@ -94,36 +81,6 @@ class BlastKrakenASV: BlastASV {
         
         catch {
             Console.writeToStdErr("Invalid taxonomy for sequence \(asv.sequenceID)")
-        }
-    }
-    
-    /// Sets BLASTn taxonomy:
-    /// - parameters:
-    ///   - database: SQLDatabase object that handles all calls
-    ///   to the PostgresSQL taxonomic database imported by the `import` and
-    ///   `export` subcommands.
-    func setBlastTaxonomy(database:SQLDatabase) {
-        let taxID = self.hit.ncbiTaxID
-        do {
-            if let lineage = NCBILineage(database: database, taxID: taxID) {
-                blastTaxonomy = try Hierarchy(lineage: lineage)
-                
-                if lineage.species.isEmpty {
-                    let species = try Rank.rank(abbreviation: "S",
-                                                name: hit.scientificName)
-                    blastTaxonomy.dropLastRank()
-                    blastTaxonomy.addRank(species)
-                }
-            } else if taxID != 0 {
-                // if taxID == 0 then blastTaxonomy is already inited
-                // with an "Unclassified" Rank, so we do nothing, but
-                // otherwise any other taxID is an error.
-                throw BlastASVError.invalidLineage
-            }
-        }
-        
-        catch {
-            Console.writeToStdErr("Invalid taxonomy for tax_id = \(taxID)")
         }
     }
     
