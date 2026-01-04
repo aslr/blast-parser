@@ -20,8 +20,8 @@ final class MinimapHitBin: CustomStringConvertible {
         hits.first?.taxonomy ?? "No taxonomy was found"
     }
     
-    var species: String? {
-        hits.first?.species
+    var taxon: String? {
+        hits.first?.taxon
     }
     
     var description: String {

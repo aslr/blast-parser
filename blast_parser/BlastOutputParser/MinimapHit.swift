@@ -9,12 +9,12 @@ import Foundation
 
 /// Class for storing a minimap2 hit
 final class MinimapHit: CustomStringConvertible {
+    let unassignedTaxon = "Unassigned"
     let queryID: String
     let referenceID: String
     let alignmentScore: Int
     let alignmentLength: Int
     let taxonomy: String
-    private var _species: String? = nil
     var sampleID:String?
     var prefix:String?
     var isMainFileHit = false
@@ -31,18 +31,19 @@ final class MinimapHit: CustomStringConvertible {
         "\(taxonomy)\t\(score)\t"
     }
     
-    var species: String {
-        if _species == nil {
-            _species = taxonomy.split(separator: ";").last.map(String.init) ?? "Unassigned"
+    private var _taxon: String? = nil
+    var taxon: String {
+        if _taxon == nil {
+            _taxon = taxonomy.split(separator: ";").last.map(String.init) ?? unassignedTaxon
             
             // remove any strain information
-            let components = _species!.split(separator: " ")
+            let components = _taxon!.split(separator: " ")
             if components.count > 2 {
-                _species = String(components[0]) + " " + String(components[1])
+                _taxon = String(components[0]) + " " + String(components[1])
             }
         }
         
-        return _species ?? "Unassigned"
+        return _taxon ?? unassignedTaxon
     }
     
     init(from line: String) throws {
