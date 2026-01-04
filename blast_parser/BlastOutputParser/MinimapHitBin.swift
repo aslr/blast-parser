@@ -74,3 +74,19 @@ final class MinimapHitBin: CustomStringConvertible {
         return selectedHits
     }
 }
+
+extension [MinimapHitBin] {
+    mutating func appendBins(from hits: [MinimapHit]) {
+        Console.writeToStdOut("Making sequence bins with the same taxonomic assignment...")
+        
+        for hit in hits {
+            if let bin = self.first(where:{ $0.taxon == hit.taxon }) {
+                bin.add(hit)
+            } else {
+                let bin = MinimapHitBin()
+                bin.add(hit)
+                self.append(bin)
+            }
+        }
+    }
+}

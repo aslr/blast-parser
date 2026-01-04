@@ -10,7 +10,6 @@ import Foundation
 final class MinimapParser: MinimapFileParser {
     let readsPath: String
     let hitsPerBin: Int
-    var bins = [MinimapHitBin]()
     var sequences = [FastqSequence]()
     var fastqOutputPath: String?
     var fastaOutputPath: String?
@@ -28,7 +27,7 @@ final class MinimapParser: MinimapFileParser {
     /// Alignment_Length in descending order of the last two criteria
     override func parse() throws {
         try super.parse()
-        parseBins()
+        bins.appendBins(from: hits)
         try parseSequences()
     }
     
@@ -98,29 +97,6 @@ final class MinimapParser: MinimapFileParser {
     }
     
     // MARK: Private
-    private func matchBin(keyword:String) -> MinimapHitBin? {
-        for bin in bins {
-            if bin.species == keyword {
-                return bin
-            }
-        }
-        return nil
-    }
-    
-    private func parseBins() {
-        Console.writeToStdOut("Making sequence bins with the same taxonomic assignment...")
-        
-        for hit in hits {
-            if let bin = matchBin(keyword: hit.species) {
-                bin.add(hit)
-            } else {
-                let bin = MinimapHitBin()
-                bin.add(hit)
-                bins.append(bin)
-            }
-        }
-    }
-    
     private func parseSequences() throws {
         Console.writeToStdOut("Parsing reads file for selected minimap2 hits...")
         let hits = self.selectedHits()

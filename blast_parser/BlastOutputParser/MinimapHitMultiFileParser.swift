@@ -95,7 +95,7 @@ final class MinimapHitMultiFileParser {
                 if let mergedHit = mergedHits.first(where: { $0.queryID == hit.queryID }) {
                     mergedHit.hits.append(hit)
                 } else {
-                    let mergedHit = MinimapMergedHit(prefix: hit.prefix!,
+                    let mergedHit = MinimapMergedHit(prefixes: prefixes,
                                                      queryID: hit.queryID,
                                                      hit: hit)
                     mergedHits.append(mergedHit)
@@ -103,7 +103,7 @@ final class MinimapHitMultiFileParser {
             }
         }
         
-        mergedHits.forEach {$0.consolidateHits()}
+        try mergedHits.forEach {mergedHit in try mergedHit.consolidateHits()}
     }
     
     private func validateDatabases() throws {
