@@ -27,6 +27,13 @@ final class MinimapHitMultiFileParser {
     var databases = [MinimapDatabase]()
     var mergedHits = [MinimapMergedHit]()
     
+    private var _prefixes = [String]()
+    var prefixes: [String] {
+        guard _prefixes.isEmpty == false else { return _prefixes }
+        _prefixes = databases.map(\.prefix)
+        return _prefixes
+    }
+    
     /// MinimapHitMultiFileParser merges different minimap2 hit files by keeping a
     /// QiimeParser array, which will do the parsing of each minimap2 hit file
     /// - Parameter paths: paths separated by spaces to each minimap2 hit file or paths
@@ -73,34 +80,30 @@ final class MinimapHitMultiFileParser {
     func merge() throws {
         try validateDatabases()
         try parseHitFiles()
-        try parseRepresentativeHits()
     }
     
     /// Parse all hit files
     private func parseHitFiles() throws {
+        // parse files
         for parser in parsers {
             try parser.parse()
         }
-    }
-    
-    private func parseMainHits() throws {
+        
+        // initialize merged hits and their array
         for parser in parsers {
             for hit in parser.hits {
-                if hit.isMainFileHit {
-                    
+                if let mergedHit = mergedHits.first(where: { $0.queryID == hit.queryID }) {
+                    mergedHit.hits.append(hit)
+                } else {
+                    let mergedHit = MinimapMergedHit(prefix: hit.prefix!,
+                                                     queryID: hit.queryID,
+                                                     hit: hit)
+                    mergedHits.append(mergedHit)
                 }
             }
         }
-    }
-    
-    private func parseRepresentativeHits() throws {
-        for parser in parsers {
-            for hit in parser.hits {
-                if !hit.isMainFileHit {
-                    
-                }
-            }
-        }
+        
+        mergedHits.forEach {$0.consolidateHits()}
     }
     
     private func validateDatabases() throws {

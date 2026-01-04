@@ -15,8 +15,8 @@ final class MinimapHit: CustomStringConvertible {
     let alignmentLength: Int
     let taxonomy: String
     private var _species: String? = nil
-    
     var sampleID:String?
+    var prefix:String?
     var isMainFileHit = false
     
     var score:Int {

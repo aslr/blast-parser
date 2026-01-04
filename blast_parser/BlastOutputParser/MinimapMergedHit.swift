@@ -32,9 +32,9 @@ extension [MinimapSampleCounts] {
 /// classified using different databases but referring to
 /// the same read
 final class MinimapMergedHit: CustomStringConvertible {
-    var prefixes:[String]
+    var prefixes = [String]()
     let queryID:String
-    var hits:[MinimapHit]
+    var hits = [MinimapHit]()
     var hitCounts = [MinimapSampleCounts]()
     
     var description: String {
@@ -59,12 +59,17 @@ final class MinimapMergedHit: CustomStringConvertible {
     /// Initializer for a class used to store a minimap2 hit for a
     /// given read and merge the taxonomic assignment obtained from
     /// different databases
-    /// - Parameter prefixes: an array of prefixes to add to the column headers
-    /// - Parameter qyeryID: the read id
-    /// - Parameter hits: an array of hits to be merged
-    init(prefixes:[String], queryID: String, hits: [MinimapHit]) {
-        self.prefixes = prefixes
+    /// - Parameter prefixes: first prefix to add to the column headers
+    /// - Parameter queryID: the read id
+    /// - Parameter hit: first hit to be merged
+    init(prefix:String, queryID: String, hit: MinimapHit) {
+        self.prefixes.append(prefix)
         self.queryID = queryID
-        self.hits = hits
+        self.hits.append(hit)
+    }
+    
+    
+    func consolidateHits() {
+        
     }
 }

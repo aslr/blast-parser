@@ -75,6 +75,7 @@ class MinimapFileParser: FileParser {
                     
                     hit.sampleID = sampleID
                     hit.isMainFileHit = isMainFile
+                    hit.prefix = directory
                 }
                 
                 catch {
