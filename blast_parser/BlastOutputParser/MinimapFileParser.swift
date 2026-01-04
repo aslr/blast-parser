@@ -9,6 +9,7 @@ import Foundation
 
 class MinimapFileParser: FileParser {
     var hits = [MinimapHit]()
+    var bins = [MinimapHitBin]()
     
     var filename:String {
         readStream.url.lastPathComponent
@@ -43,7 +44,8 @@ class MinimapFileParser: FileParser {
     }
         
     /// Parses a minimap2 classification file contqining a header with the following columns:
-    /// Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy
+    /// Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy by retrieving the
+    /// best hit for each read
     /// WARNING: Assumes the file is already sorted by Query_ID, Alignment_Score and
     /// Alignment_Length in descending order of the last two criteria
     func parse() throws {
