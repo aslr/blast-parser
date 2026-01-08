@@ -31,6 +31,7 @@ final class MinimapHit: CustomStringConvertible {
         "\(taxonomy)\t\(score)\t"
     }
     
+    /// - Returns: the last taxom, usuallay the species, of a taxonomic lineage
     private var _taxon: String? = nil
     var taxon: String {
         if _taxon == nil {

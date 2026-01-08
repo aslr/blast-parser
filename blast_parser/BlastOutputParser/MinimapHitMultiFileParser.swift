@@ -25,6 +25,7 @@ struct MinimapDatabase {
 final class MinimapHitMultiFileParser {
     var databases = [MinimapDatabase]()
     var hits = [MinimapHit]()
+    var mainBins = [MinimapHitBin]()
     var mergedHits = [MinimapMergedHit]()
     
     private var _prefixes = [String]()
@@ -115,7 +116,8 @@ final class MinimapHitMultiFileParser {
             throw RuntimeError("Unable to merge minimap hits, as a prefix for the main hits was not found.")
         }
         
-        let hits = mainHits
+        let mainHits = self.mainHits
+        mainBins.appendBins(from: mainHits)
     }
     
     /// Parses hit files and appends them to the `hits` array of this object

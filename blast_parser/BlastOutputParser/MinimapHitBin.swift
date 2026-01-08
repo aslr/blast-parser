@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Class used to create and store main hit bins
+/// CAUTION: Do NOT use it with representative hits
 final class MinimapHitBin: CustomStringConvertible {
     private var hits = [MinimapHit]()
     var maximumScore = 0
@@ -40,6 +42,14 @@ final class MinimapHitBin: CustomStringConvertible {
         if hit.score < minimumScore {
             minimumScore = hit.score
         }
+    }
+    
+    func containsHit(queryID:String) -> Bool {
+        hits.contains(where: { $0.queryID == queryID })
+    }
+    
+    func hit(queryID:String) -> MinimapHit? {
+        return hits.first(where: { $0.queryID == queryID })
     }
     
     /// Retrieves a minimap2 hit with a given score or lower
@@ -76,6 +86,10 @@ final class MinimapHitBin: CustomStringConvertible {
 }
 
 extension [MinimapHitBin] {
+    /// Creates a new bin if the hit taxonomy is different, if the same
+    /// appends the hit to the corresponding bin
+    /// CAUTION: Do not use it with representative hits
+    /// - Parameter hits - the hits to be added to the bin array
     mutating func appendBins(from hits: [MinimapHit]) {
         Console.writeToStdOut("Making sequence bins with the same taxonomic assignment...")
         
@@ -88,5 +102,14 @@ extension [MinimapHitBin] {
                 self.append(bin)
             }
         }
+    }
+    
+    /// Ensures the hit exits within the bin and is unique
+    /// Used to validate the correctness of the bin array
+    /// - Parameter queryID - the hit ID to find whether the hit is stored
+    /// only once in the bin array
+    /// - Returns: true if it exists and is not repeated within the bin
+    func isHitUnique(queryID:String) -> Bool {
+        self.filter({ $0.containsHit(queryID: queryID) }).count == 1
     }
 }
