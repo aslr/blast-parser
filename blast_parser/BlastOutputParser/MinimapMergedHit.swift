@@ -56,24 +56,6 @@ final class MinimapMergedHit: CustomStringConvertible {
         return result
     }
     
-    var mainHitPrefix:String? {
-        return self.hits.first(where: {$0.isMainFileHit})?.prefix
-    }
-    
-    var mainHits:[MinimapHit] {
-        return self.hits.filter({$0.isMainFileHit})
-    }
-    
-    var representativeHits:[MinimapHit] {
-        return self.hits.filter({$0.isMainFileHit == false})
-    }
-    
-    var sampleIDs:[String] {
-        let samples: [String] = self.hits.map({$0.sampleID!})
-        return Array(Set(samples))
-            .sorted {$0.localizedStandardCompare($1) == .orderedAscending}
-    }
-    
     /// Initializer for a class used to store a minimap2 hit for a
     /// given read and merge the taxonomic assignment obtained from
     /// different databases
@@ -84,21 +66,5 @@ final class MinimapMergedHit: CustomStringConvertible {
         self.prefixes = prefixes
         self.queryID = queryID
         self.hits.append(hit)
-    }
-    
-    func consolidateHits() throws {
-        guard let mainPrefix = mainHitPrefix else {
-            throw RuntimeError("Unable to merge minimap hits, as a prefix for the main hits was not found.")
-        }
-        
-        let hits = representativeHits
-    }
-    
-    func hits(for prefix: String) -> [MinimapHit] {
-        self.hits.filter({$0.prefix == prefix})
-    }
-    
-    func hits(for prefix: String, sampleID: String) -> [MinimapHit] {
-        self.hits.filter({$0.prefix == prefix && $0.sampleID == sampleID})
     }
 }

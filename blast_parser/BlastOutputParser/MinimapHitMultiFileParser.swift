@@ -23,8 +23,8 @@ struct MinimapDatabase {
 }
 
 final class MinimapHitMultiFileParser {
-    var parsers = [MinimapFileParser]()
     var databases = [MinimapDatabase]()
+    var hits = [MinimapHit]()
     var mergedHits = [MinimapMergedHit]()
     
     private var _prefixes = [String]()
@@ -32,6 +32,24 @@ final class MinimapHitMultiFileParser {
         guard _prefixes.isEmpty == false else { return _prefixes }
         _prefixes = databases.map(\.prefix)
         return _prefixes
+    }
+    
+    var mainHitPrefix:String? {
+        return self.hits.first(where: {$0.isMainFileHit})?.prefix
+    }
+    
+    var mainHits:[MinimapHit] {
+        return self.hits.filter({$0.isMainFileHit})
+    }
+    
+    var representativeHits:[MinimapHit] {
+        return self.hits.filter({$0.isMainFileHit == false})
+    }
+    
+    var sampleIDs:[String] {
+        let samples: [String] = self.hits.map({$0.sampleID!})
+        return Array(Set(samples))
+            .sorted {$0.localizedStandardCompare($1) == .orderedAscending}
     }
     
     /// MinimapHitMultiFileParser merges different minimap2 hit files by keeping a
@@ -67,10 +85,19 @@ final class MinimapHitMultiFileParser {
             guard allPaths.isEmpty == false
                 else { throw RuntimeError("No minimap2 hit files were found in \(directory)") }
             
-            self.parsers = allPaths.compactMap { path in MinimapFileParser(path: path) }
+            let parsers = allPaths.compactMap { path in MinimapFileParser(path: path) }
+            try parseHitFiles(parsers: parsers)
             let database = MinimapDatabase(path: directory, isMain: isMainDirectory)
             databases.append(database)
         }
+    }
+    
+    func hits(for prefix: String) -> [MinimapHit] {
+        self.hits.filter({$0.prefix == prefix})
+    }
+    
+    func hits(for prefix: String, sampleID: String) -> [MinimapHit] {
+        self.hits.filter({$0.prefix == prefix && $0.sampleID == sampleID})
     }
     
     /// Merges different hit files, which should contain the exact same assignments,
@@ -79,33 +106,33 @@ final class MinimapHitMultiFileParser {
     /// containing the taxonomy and the score of the assignment
     func merge() throws {
         try validateDatabases()
-        try parseHitFiles()
+        try consolidateHits()
     }
     
-    /// Parse all hit files
-    private func parseHitFiles() throws {
+    // MARK: Private methods
+    private func consolidateHits() throws {
+        guard let mainPrefix = mainHitPrefix else {
+            throw RuntimeError("Unable to merge minimap hits, as a prefix for the main hits was not found.")
+        }
+        
+        let hits = mainHits
+    }
+    
+    /// Parses hit files and appends them to the `hits` array of this object
+    /// This peivate method is called by init.
+    /// - Parameter parsers: parsers used to parse the hits in files, normally
+    /// in a given directory
+    private func parseHitFiles(parsers:[MinimapFileParser]) throws {
         // parse files
         for parser in parsers {
             try parser.parse()
+            hits.append(contentsOf: parser.hits)
         }
-        
-        // initialize merged hits and their array
-        for parser in parsers {
-            for hit in parser.hits {
-                if let mergedHit = mergedHits.first(where: { $0.queryID == hit.queryID }) {
-                    mergedHit.hits.append(hit)
-                } else {
-                    let mergedHit = MinimapMergedHit(prefixes: prefixes,
-                                                     queryID: hit.queryID,
-                                                     hit: hit)
-                    mergedHits.append(mergedHit)
-                }
-            }
-        }
-        
-        try mergedHits.forEach {mergedHit in try mergedHit.consolidateHits()}
     }
     
+    /// Validates whether the expected main database was included, as this one has
+    /// retained all reads, which will be essential to determine the hit counts for
+    /// a particular taxon
     private func validateDatabases() throws {
         var mainDatabaseCount = 0
         for database in databases {
