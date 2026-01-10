@@ -12,10 +12,10 @@ struct MinimapDatabase {
     let isMainDatabase: Bool
     let prefix: String
     
-    init(path: String, isMain:Bool = false) {
+    init(path: String, isMain:Bool = false) throws {
         self.directoryPath = path
         guard let isDirectory = path.isDirectory, isDirectory else {
-            fatalError("\(path) is not a directory or does not exist")
+            throw RuntimeError("\(path) is not a directory or does not exist")
         }
         self.isMainDatabase = isMain
         self.prefix = URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
@@ -53,43 +53,41 @@ final class MinimapHitMultiFileParser {
             .sorted {$0.localizedStandardCompare($1) == .orderedAscending}
     }
     
-    /// MinimapHitMultiFileParser merges different minimap2 hit files by keeping a
-    /// QiimeParser array, which will do the parsing of each minimap2 hit file
-    /// - Parameter paths: paths separated by spaces to each minimap2 hit file or paths
-    /// pointing to directories containing such files; the path pointing
-    /// to the main hits file containing all the reads must have the suffix
-    /// '_classified.tsv'. Files containing only the hits selected by the
-    /// parse-minimap subcommand must have the suffix '_representative_classified.tsv'
-    /// The rest of the filename will be interpreted as the sample ID.
+    /// MinimapHitMultiFileParser merges different minimap2 hit files
+    /// - Parameters:
+    ///  - mainDirectory: path to the directory containing the main hit files with
+    ///  all the reads assigned to their corresponding taxonomies; files must be named
+    ///  as follows: 'sample_ID_classified.tsv'
+    ///  - representativeDirectories: paths separated by spaces pointing to directories
+    ///  containing the hits selected by the `parse-minimap` subcommand; files must be
+    ///  named as follows: 'sample_ID_representative_classified.tsv'
     /// Prefixes corresponding to the databases used to classify the reads to be added
-    /// to the header column names will be extracted from the directory name
-    init(paths:String) throws {
-        let pathsArray = paths.components(separatedBy: " ")
-        guard pathsArray.count > 0
-        else {
-            throw RuntimeError("No valid minimap2 directories were provided. The path was empty.")
+    /// to the header column names will be extracted from the directory name.
+    init(mainDirectory:String, representativeDirectories:String?) throws {
+        guard let mainPaths = mainDirectory.findFiles(suffix: .main) else {
+            throw RuntimeError("No minimap2 hit files were found in \(mainDirectory)")
         }
         
-        var isMainDirectory = false
-        for directory in pathsArray {
-            guard let isDirectory = directory.isDirectory, isDirectory
-                else { throw RuntimeError("\(directory) is not a directory") }
+        let database = try MinimapDatabase(path: mainDirectory, isMain: true)
+        databases.append(database)
+        let mainParsers = mainPaths.compactMap{ path in MinimapFileParser(path: path) }
+        try parseHitFiles(parsers: mainParsers)
+        
+        if let directories = representativeDirectories {
+            let directoryPaths = directories.components(separatedBy: " ")
             
-            var allPaths = [String]()
-            if let mainPaths = directory.findFiles(suffix: .main) {
-                allPaths = mainPaths
-                isMainDirectory = true
-            } else if let repPaths = directory.findFiles(suffix: .representative) {
-                allPaths += repPaths
+            for directory in directoryPaths {
+                // check if they are valid directories and then saved them
+                let database = try MinimapDatabase(path: directory)
+                databases.append(database)
+                
+                guard let paths = directory.findFiles(suffix: .representative) else {
+                    throw RuntimeError("No minimap2 hit files were found in \(directory)")
+                }
+                
+                let parsers = paths.compactMap { path in MinimapFileParser(path: path) }
+                try parseHitFiles(parsers: parsers)
             }
-            
-            guard allPaths.isEmpty == false
-                else { throw RuntimeError("No minimap2 hit files were found in \(directory)") }
-            
-            let parsers = allPaths.compactMap { path in MinimapFileParser(path: path) }
-            try parseHitFiles(parsers: parsers)
-            let database = MinimapDatabase(path: directory, isMain: isMainDirectory)
-            databases.append(database)
         }
     }
     
@@ -106,7 +104,6 @@ final class MinimapHitMultiFileParser {
     /// - Returns: An array of MinimapMergedHit objects that contain the merged columns
     /// containing the taxonomy and the score of the assignment
     func merge() throws {
-        try validateDatabases()
         try consolidateHits()
     }
     
@@ -129,27 +126,6 @@ final class MinimapHitMultiFileParser {
         for parser in parsers {
             try parser.parse()
             hits.append(contentsOf: parser.hits)
-        }
-    }
-    
-    /// Validates whether the expected main database was included, as this one has
-    /// retained all reads, which will be essential to determine the hit counts for
-    /// a particular taxon
-    private func validateDatabases() throws {
-        var mainDatabaseCount = 0
-        for database in databases {
-            if database.isMainDatabase {
-                mainDatabaseCount += 1
-            }
-        }
-        
-        switch mainDatabaseCount {
-        case 0:
-            throw RuntimeError("ERROR: No directory was found containing main hit files, i.e., files containing the classification of all reads. This is not supported as hit counts cannot be determined without them.")
-        case 1:
-            return
-        default:
-            throw RuntimeError("ERROR: Only one directory may contains main hit files, i.e., files containing the classification of all reads. You can have multiple directories containing minimap2 hit files with representaive reads selected by the parse-minimap submcommand but you must have only one directory containing main hit files.")
         }
     }
 }
