@@ -51,6 +51,14 @@ extension [MinimapDatabase] {
         return first(where: \.isMainDatabase)
     }
     
+    var representativeDatabases: [MinimapDatabase] {
+        self.filter({!$0.isMainDatabase})
+    }
+    
+    var representativePrefixes: [String] {
+        representativeDatabases.map(\.prefix)
+    }
+    
     var mainHits: [MinimapHit] {
         mainDatabase.map(\.hits) ?? []
     }
@@ -59,12 +67,29 @@ extension [MinimapDatabase] {
         self.filter({!$0.isMainDatabase}).flatMap(\.hits)
     }
     
+    var representativeQueryIDs: [String] {
+        let queryIDSet = Set(representativeHits.map(\.queryID))
+        return Array<String>(queryIDSet)
+    }
+    
     var isMainDatabaseUnique: Bool {
         self.map(\.isMainDatabase).count == 1
     }
     
+    func hit(for prefix: String, queryID: String) -> MinimapHit? {
+        hits(for: prefix).first(where: {$0.queryID == queryID} )
+    }
+    
+    func hit(for prefix: String, sampleID: String, queryID: String) -> MinimapHit? {
+        hits(for: prefix, sampleID: sampleID).first(where: {$0.queryID == queryID} )
+    }
+    
     func hits(for prefix: String) -> [MinimapHit] {
         self.filter({$0.prefix == prefix}).flatMap(\.hits)
+    }
+    
+    func hits(for prefix:String, queryIDs: [String]) -> [MinimapHit] {
+        hits(for: prefix).filter({queryIDs.contains($0.queryID)})
     }
     
     func hits(for prefix: String, sampleID: String) -> [MinimapHit] {

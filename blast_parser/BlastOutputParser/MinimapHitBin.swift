@@ -18,6 +18,10 @@ final class MinimapHitBin: CustomStringConvertible {
         hits.count
     }
     
+    var queryIDs: [String] {
+        hits.map(\.queryID)
+    }
+    
     var taxonomy: String {
         hits.first?.taxonomy ?? "No taxonomy was found"
     }
@@ -102,6 +106,10 @@ extension [MinimapHitBin] {
                 self.append(bin)
             }
         }
+    }
+    
+    func bin(for queryID: String) -> MinimapHitBin? {
+        self.first(where: { $0.containsHit(queryID: queryID) })
     }
     
     /// Ensures the hit exits within the bin and is unique

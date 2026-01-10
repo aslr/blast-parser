@@ -62,6 +62,7 @@ final class MinimapHitMultiFileParser {
     /// containing the taxonomy and the score of the assignment
     func merge() throws {
         try consolidateHits()
+        try mergeHits()
     }
     
     // MARK: Private methods
@@ -72,5 +73,19 @@ final class MinimapHitMultiFileParser {
         
         let mainHits = databases.mainHits
         mainBins.appendBins(from: mainHits)
+    }
+    
+    private func mergeHits() throws {
+        let representativePrefixes = databases.representativePrefixes
+        let queryIDs = databases.representativeQueryIDs
+        
+        for queryID in queryIDs {
+            guard mainBins.isHitUnique(queryID: queryID) else {
+                throw RuntimeError("Found multiple minimap2 hits for the same query ID: \(queryID).")
+            }
+            
+            let hit = mainBins.bin(for: queryID)
+            
+        }
     }
 }
