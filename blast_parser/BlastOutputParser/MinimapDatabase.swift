@@ -97,4 +97,8 @@ extension [MinimapDatabase] {
             .flatMap(\.hits)
             .filter({$0.sampleID == sampleID})
     }
+    
+    func isHitUnique(for prefix: String, queryID: String) -> Bool {
+        hits(for: prefix).filter({$0.queryID == queryID}).count == 1
+    }
 }
