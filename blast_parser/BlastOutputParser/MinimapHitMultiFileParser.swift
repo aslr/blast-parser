@@ -7,24 +7,8 @@
 
 import Foundation
 
-struct MinimapDatabase {
-    let directoryPath: String
-    let isMainDatabase: Bool
-    let prefix: String
-    
-    init(path: String, isMain:Bool = false) throws {
-        self.directoryPath = path
-        guard let isDirectory = path.isDirectory, isDirectory else {
-            throw RuntimeError("\(path) is not a directory or does not exist")
-        }
-        self.isMainDatabase = isMain
-        self.prefix = URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
-    }
-}
-
 final class MinimapHitMultiFileParser {
     var databases = [MinimapDatabase]()
-    var hits = [MinimapHit]()
     var mainBins = [MinimapHitBin]()
     var mergedHits = [MinimapMergedHit]()
     
@@ -35,22 +19,12 @@ final class MinimapHitMultiFileParser {
         return _prefixes
     }
     
+    var mainDatabase:MinimapDatabase? {
+        return self.databases.mainDatabase
+    }
+    
     var mainHitPrefix:String? {
-        return self.hits.first(where: {$0.isMainFileHit})?.prefix
-    }
-    
-    var mainHits:[MinimapHit] {
-        return self.hits.filter({$0.isMainFileHit})
-    }
-    
-    var representativeHits:[MinimapHit] {
-        return self.hits.filter({$0.isMainFileHit == false})
-    }
-    
-    var sampleIDs:[String] {
-        let samples: [String] = self.hits.map({$0.sampleID!})
-        return Array(Set(samples))
-            .sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+        return self.databases.mainDatabase?.prefix
     }
     
     /// MinimapHitMultiFileParser merges different minimap2 hit files
@@ -70,8 +44,6 @@ final class MinimapHitMultiFileParser {
         
         let database = try MinimapDatabase(path: mainDirectory, isMain: true)
         databases.append(database)
-        let mainParsers = mainPaths.compactMap{ path in MinimapFileParser(path: path) }
-        try parseHitFiles(parsers: mainParsers)
         
         if let directories = representativeDirectories {
             let directoryPaths = directories.components(separatedBy: " ")
@@ -80,23 +52,8 @@ final class MinimapHitMultiFileParser {
                 // check if they are valid directories and then saved them
                 let database = try MinimapDatabase(path: directory)
                 databases.append(database)
-                
-                guard let paths = directory.findFiles(suffix: .representative) else {
-                    throw RuntimeError("No minimap2 hit files were found in \(directory)")
-                }
-                
-                let parsers = paths.compactMap { path in MinimapFileParser(path: path) }
-                try parseHitFiles(parsers: parsers)
             }
         }
-    }
-    
-    func hits(for prefix: String) -> [MinimapHit] {
-        self.hits.filter({$0.prefix == prefix})
-    }
-    
-    func hits(for prefix: String, sampleID: String) -> [MinimapHit] {
-        self.hits.filter({$0.prefix == prefix && $0.sampleID == sampleID})
     }
     
     /// Merges different hit files, which should contain the exact same assignments,
@@ -113,19 +70,7 @@ final class MinimapHitMultiFileParser {
             throw RuntimeError("Unable to merge minimap hits, as a prefix for the main hits was not found.")
         }
         
-        let mainHits = self.mainHits
+        let mainHits = databases.mainHits
         mainBins.appendBins(from: mainHits)
-    }
-    
-    /// Parses hit files and appends them to the `hits` array of this object
-    /// This peivate method is called by init.
-    /// - Parameter parsers: parsers used to parse the hits in files, normally
-    /// in a given directory
-    private func parseHitFiles(parsers:[MinimapFileParser]) throws {
-        // parse files
-        for parser in parsers {
-            try parser.parse()
-            hits.append(contentsOf: parser.hits)
-        }
     }
 }
