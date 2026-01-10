@@ -38,10 +38,6 @@ final class MinimapHitMultiFileParser {
     /// Prefixes corresponding to the databases used to classify the reads to be added
     /// to the header column names will be extracted from the directory name.
     init(mainDirectory:String, representativeDirectories:String?) throws {
-        guard let mainPaths = mainDirectory.findFiles(suffix: .main) else {
-            throw RuntimeError("No minimap2 hit files were found in \(mainDirectory)")
-        }
-        
         let database = try MinimapDatabase(path: mainDirectory, isMain: true)
         databases.append(database)
         
@@ -67,16 +63,11 @@ final class MinimapHitMultiFileParser {
     
     // MARK: Private methods
     private func consolidateHits() throws {
-        guard let mainPrefix = mainHitPrefix else {
-            throw RuntimeError("Unable to merge minimap hits, as a prefix for the main hits was not found.")
-        }
-        
         let mainHits = databases.mainHits
         mainBins.appendBins(from: mainHits)
     }
     
     private func mergeHits() throws {
-        let representativePrefixes = databases.representativePrefixes
         let queryIDs = databases.representativeQueryIDs
         
         for queryID in queryIDs {
@@ -84,7 +75,11 @@ final class MinimapHitMultiFileParser {
                 throw RuntimeError("Found multiple minimap2 hits for the same query ID: \(queryID).")
             }
             
-            let hit = mainBins.bin(for: queryID)
+            guard let bin = mainBins.bin(for: queryID) else {
+                throw RuntimeError("No bin was found for query ID: \(queryID)")
+            }
+            
+            
             
         }
     }
