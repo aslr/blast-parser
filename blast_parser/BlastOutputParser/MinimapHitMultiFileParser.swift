@@ -69,6 +69,7 @@ final class MinimapHitMultiFileParser {
     
     private func mergeHits() throws {
         let queryIDs = databases.representativeQueryIDs
+        let prefixes = databases.representativePrefixes
         
         for queryID in queryIDs {
             guard mainBins.isHitUnique(queryID: queryID) else {
@@ -76,11 +77,28 @@ final class MinimapHitMultiFileParser {
             }
             
             guard let bin = mainBins.bin(for: queryID) else {
-                throw RuntimeError("No bin was found for query ID: \(queryID)")
+                throw RuntimeError("No bin was found for query ID: \(queryID).")
             }
             
+            guard let mainhit = bin.hit(queryID: queryID) else {
+                throw RuntimeError("No main hit was found for query ID: \(queryID).")
+            }
             
+            let mergedHit = MinimapMergedHit(prefixes: prefixes, queryID: queryID, hit: mainhit)
             
+            for prefix in prefixes {
+                guard databases.isHitUnique(for: prefix, queryID: queryID) else {
+                    throw RuntimeError("Less or more than one hit was found for database \(prefix) with queryID \(queryID), making it impossible to merge files with missing or ambiguous hits.")
+                }
+                
+                guard let hit = databases.hit(for: prefix, queryID: queryID) else {
+                    throw RuntimeError("No representative hit was found for database \(prefix) and queryID \(queryID).")
+                }
+                
+                mergedHit.add(hit)
+            }
+            
+            mergedHits.append(mergedHit)
         }
     }
 }

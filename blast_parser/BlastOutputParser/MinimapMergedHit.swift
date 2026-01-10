@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MinimapSampleCounts: CustomStringConvertible {
+fileprivate struct MinimapSampleCounts: CustomStringConvertible {
     let sampleID:String
     let count:Int
     
@@ -16,7 +16,7 @@ struct MinimapSampleCounts: CustomStringConvertible {
     }
 }
 
-extension [MinimapSampleCounts] {
+fileprivate extension [MinimapSampleCounts] {
     var sampleIDDescription: String {
         let idStrings: [String] = self.map(\.sampleID)
         return idStrings.joined(separator: "\t")
@@ -34,8 +34,8 @@ extension [MinimapSampleCounts] {
 final class MinimapMergedHit: CustomStringConvertible {
     var prefixes = [String]()
     let queryID:String
-    var hits = [MinimapHit]()
-    var hitCounts = [MinimapSampleCounts]()
+    private var hits = [MinimapHit]()
+    private var hitCounts = [MinimapSampleCounts]()
     
     var description: String {
         var result = "\(queryID)"
@@ -66,5 +66,13 @@ final class MinimapMergedHit: CustomStringConvertible {
         self.prefixes = prefixes
         self.queryID = queryID
         self.hits.append(hit)
+    }
+    
+    func add(_ hit: MinimapHit) {
+        hits.append(hit)
+    }
+    
+    func appendCounts(from bin: MinimapHitBin) {
+        
     }
 }
