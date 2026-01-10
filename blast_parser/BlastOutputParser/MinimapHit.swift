@@ -9,12 +9,12 @@ import Foundation
 
 /// Class for storing a minimap2 hit
 final class MinimapHit: CustomStringConvertible {
-    let unassignedTaxon = "Unassigned"
-    let queryID: String
-    let referenceID: String
-    let alignmentScore: Int
-    let alignmentLength: Int
-    let taxonomy: String
+    static let unassignedTaxon = "Unassigned"
+    var queryID: String
+    var referenceID = String()
+    var alignmentScore = 0
+    var alignmentLength = 0
+    var taxonomy: String = MinimapHit.unassignedTaxon
     var sampleID:String?
     var prefix:String?
     var isMainFileHit = false
@@ -35,7 +35,9 @@ final class MinimapHit: CustomStringConvertible {
     private var _taxon: String? = nil
     var taxon: String {
         if _taxon == nil {
-            _taxon = taxonomy.split(separator: ";").last.map(String.init) ?? unassignedTaxon
+            _taxon = taxonomy.split(separator: ";")
+                .last
+                .map(String.init) ?? MinimapHit.unassignedTaxon
             
             // remove any strain information
             let components = _taxon!.split(separator: " ")
@@ -44,9 +46,16 @@ final class MinimapHit: CustomStringConvertible {
             }
         }
         
-        return _taxon ?? unassignedTaxon
+        return _taxon ?? MinimapHit.unassignedTaxon
     }
     
+    /// Default initializer for an empty hit
+    init(queryID:String = MinimapHit.unassignedTaxon) {
+        self.queryID = queryID
+    }
+    
+    /// Initializer for parsing a hit from a file line
+    /// - Parameter line - line from a table file to be parsed
     init(from line: String) throws {
         let components = line.split(separator: "\t").map(String.init)
         guard components.count == 5,
