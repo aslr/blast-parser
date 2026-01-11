@@ -11,6 +11,7 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 	let taxonomyParser: QiimeParser? = nil
 	var blastASVs = [BlastQiimeASV]()
 	
+    /// Parser for outputing the results of merging BLASTn hits
     init?(path:String, asvs: String, prefixes:String? = nil) {
 		guard let asvsParser = QiimeASVMultiFileParser(paths: asvs, prefixes: prefixes)
 		else { return nil }
