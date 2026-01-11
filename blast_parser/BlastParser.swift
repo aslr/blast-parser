@@ -317,7 +317,7 @@ extension BlastParser {
     struct MergeMinimap: ParsableCommand {
         static let configuration = CommandConfiguration(
             abstract: "Merges minimap2 output tsv files containing a header row with the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy with a with the best hits of a BLAST search. ",
-            usage: "blast_parser merge-minimap --main-hits <main-hits> --blasthits <blasthits>  --reads <fasta-file> [--rep-hits <representative-hits> --o-merged <merged-file> --o-hitcounts <hitcounts-file>]",
+            usage: "blast_parser merge-minimap --main-hits <main-hits> --blasthits <blasthits>  --reads <fasta-file> [--rep-hits <representative-hits>] [--o-merged <merged-file>] [--o-hitcounts <hitcounts-file>] [--sort <sort>]",
             aliases: ["mrgm"] )
         
         @OptionGroup var options: Options
@@ -341,6 +341,31 @@ extension BlastParser {
         @Option(name: [.customShort("h"), .customLong("o-hitcounts")],
                 help: "Name of the hit counts file with the taxonomic assignment sorted by their hit counts in descending order [OPTIONAL, default = (BLASTn output filename)_hitcounts_output.tsv].")
         var outputHitCountsFile:String?
+        
+        @Option(name: [.short, .customLong("sort")],
+                help: "Sorting order of the output file, which can be either pident, bitscore or evalue. [OPTIONAL, default = bitscore]")
+        var sort:String?
+        
+        mutating func run() throws {
+            guard let parser = BlastMinimapOutputParser(path: blasthits,
+                                                        mainHits: mainHits,
+                                                        representativeHits: representativeHits) else {
+                throw RuntimeError("Unable to merge the minimap2 and BLASTn output files because one of the files is invalid.")
+            }
+            
+            parser.outputMergedFile = outputMergedFile
+            parser.outputHitCountsFile = outputHitCountsFile
+            
+            if let sort = self.sort {
+                if let criterion = BlastHit.SortCriterion(rawValue: sort) {
+                    try parser.parse(criterion: criterion)
+                } else {
+                    throw RuntimeError("Wrong criterion for sorting the output file. Please use either pident, bitscore or evalue.")
+                }
+            } else {
+                try parser.parse()
+            }
+        }
     }
 }
 
