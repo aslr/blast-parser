@@ -12,6 +12,11 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 	var blastASVs = [BlastQiimeASV]()
 	
     /// Parser for outputing the results of merging BLASTn hits
+    /// - Parameters:
+    ///  - path: path to the BLAST hits file
+    ///  - asvs: path to the Qiime2 ASVs file
+    ///  - prefixes: space-seprated database prefixes to be added to taxonomic headers
+    ///  of the output file
     init?(path:String, asvs: String, prefixes:String? = nil) {
 		guard let asvsParser = QiimeASVMultiFileParser(paths: asvs, prefixes: prefixes)
 		else { return nil }
@@ -20,6 +25,8 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 		super.init(path: path)
 	}
 	
+    /// Print the merged output table
+    /// - Parameter path: path for the output file to be written to
 	func print(_ path:String) throws{
         guard let writer = FileWriter(path:path) else {
             throw RuntimeError("Unable to print merged Qiime 2 and BLASTn output to file due to a malformed path.")

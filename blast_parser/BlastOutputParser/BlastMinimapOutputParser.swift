@@ -12,10 +12,18 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     var outputMergedFile:String?
     var outputHitCountsFile:String?
     
+    /// Parser for outputing the results of merging BLASTn hits
+    /// - Parameters:
+    ///  - path: path to the BLAST hits file
+    ///  - mainHits: path to the directory to find minimap2 main hit
+    ///  files containing the taxonomic assignment of all reads
+    ///  - representativeHits: space-separated paths to the directories
+    ///  to find minimap2 representative hits containing the taxonomic
+    ///  assignment of reads selected by the `parse-minimap` subcommand.
     init?(path:String, mainHits:String, representativeHits:String?) {
         do {
-            self.multiFileParser = try MinimapHitMultiFileParser(mainDirectory: mainHits,
-                                                                 representativeDirectories: representativeHits)
+            multiFileParser = try MinimapHitMultiFileParser(mainDirectory: mainHits,
+                                                            representativeDirectories: representativeHits)
             super.init(path: path)
         }
         
@@ -26,5 +34,9 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     
     override func merge() throws {
         try multiFileParser.merge()
+    }
+    
+    func print() throws {
+        
     }
 }

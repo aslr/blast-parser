@@ -12,18 +12,17 @@ struct FileWriter {
 	let outputURL:URL
 	
 	/// Generates a data stream writer without any changes to the path
-	/// - Parameters:
-	///     - path: path to file to write data to
+	/// - Parameter path: path to file to write data to
 	init?(path: String){
         guard let resolvedURL = path.resolvedFileURL() else { return nil }
         self.path = resolvedURL.path
         self.outputURL = URL(fileURLWithPath: self.path, isDirectory: false)
 	}
     
-    /// Generates a data stream writer where the path will be edited by adding  a suffix
+    /// Generates a data stream writer where the path will be edited by adding a suffix
     /// - Parameters:
-    ///     - path: path to file to write data to
-    ///     - suffix: suffix to add to filename, which will be based on the name of the sequence output directory (2 levels up)
+    ///  - path: path to file to write data to
+    ///  - suffix: suffix to add to filename, which will be based on the name of the sequence output directory (2 levels up)
     init?(path:String, suffix:String) {
         guard let resolvedURL = path.resolvedFileURL() else { return nil }
         self.path = resolvedURL.path
