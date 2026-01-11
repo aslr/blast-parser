@@ -14,6 +14,11 @@ fileprivate struct MinimapSampleCounts: CustomStringConvertible {
     var description: String {
         return String(count)
     }
+    
+    init(sampleID: String, count: Int = 0) {
+        self.sampleID = sampleID
+        self.count = count
+    }
 }
 
 fileprivate extension [MinimapSampleCounts] {
@@ -32,26 +37,29 @@ fileprivate extension [MinimapSampleCounts] {
 /// classified using different databases but referring to
 /// the same read
 final class MinimapMergedHit: CustomStringConvertible {
-    var prefixes = [String]()
+    let prefixes: [String]
     let queryID:String
     private var hits = [MinimapHit]()
     private var hitCounts = [MinimapSampleCounts]()
+    private var averageScore = 0
     
     var description: String {
-        var result = "\(queryID)"
+        var result = "\(queryID)\t"
         for hit in hits {
             result += "\(hit.abstract)\t"
         }
+        result += "\(averageScore)\t"
         result += "\(hitCounts.countsDescription)"
         return result
     }
     
     var header:String? {
-        var result = "Query_ID"
+        var result = "Query_ID\t"
         guard hits.count == prefixes.count else { return nil }
         for prefix in prefixes {
             result += "\(prefix)_Taxonomy\t\(prefix)_Score\t"
         }
+        result += "Average_Score\t"
         result += "\(hitCounts.sampleIDDescription)"
         return result
     }
@@ -72,7 +80,20 @@ final class MinimapMergedHit: CustomStringConvertible {
         hits.append(hit)
     }
     
-    func appendCounts(from bin: MinimapHitBin) {
-        
+    func appendCounts(from bin: MinimapHitBin, sampleIDs: [String]) {
+        for sampleID in sampleIDs {
+            let counts = bin.hits(sampleID: sampleID).count
+            let storage = MinimapSampleCounts(sampleID: sampleID, count: counts)
+            hitCounts.append(storage)
+        }
+    }
+    
+    /// Sets the average score from the main hits bin
+    /// This means that this NOT the average score across different databases
+    /// or classifiers but only the avergae score for all hits using the main
+    /// classifier
+    /// - Parameter bin - the bin containing all (main) hits
+    func setAverageScore(from bin: MinimapHitBin) {
+        averageScore = bin.averageScore
     }
 }

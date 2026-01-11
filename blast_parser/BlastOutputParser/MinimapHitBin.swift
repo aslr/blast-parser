@@ -8,11 +8,22 @@
 import Foundation
 
 /// Class used to create and store main hit bins
-/// CAUTION: Do NOT use it with representative hits
+/// CAUTION: Do NOT use it with representative hits as the latter lack any information
+/// about hit counts
 final class MinimapHitBin: CustomStringConvertible {
     private var hits = [MinimapHit]()
     var maximumScore = 0
     var minimumScore = 0
+    
+    /// Calculates the average score from the main hits bin
+    /// This means that this NOT the average score across different databases
+    /// or classifiers but only the average score using the main classifier as this was
+    /// the only one that classified all hits
+    /// - Returns: the average score of the main hits only
+    var averageScore: Int {
+        hits.isEmpty ? 0 :
+            Int((Double(hits.map(\.score).reduce(0, +)) / Double(hits.count)).rounded())
+    }
     
     var hitCount: Int {
         hits.count
@@ -61,6 +72,10 @@ final class MinimapHitBin: CustomStringConvertible {
     /// - Returns: a minimap hit with an approximate given score if one exists
     func hit(score:Int) -> MinimapHit? {
         hits.first(where: { $0.score <= score })
+    }
+    
+    func hits(sampleID: String) -> [MinimapHit] {
+        hits.filter { $0.sampleID == sampleID }
     }
     
     /// Retrieve hits with different scores

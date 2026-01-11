@@ -70,6 +70,7 @@ final class MinimapHitMultiFileParser {
     private func mergeHits() throws {
         let queryIDs = databases.representativeQueryIDs
         let prefixes = databases.representativePrefixes
+        let sampleIDs = databases.sampleIDs
         
         for queryID in queryIDs {
             guard mainBins.isHitUnique(queryID: queryID) else {
@@ -98,6 +99,8 @@ final class MinimapHitMultiFileParser {
                 mergedHit.add(hit)
             }
             
+            mergedHit.appendCounts(from: bin, sampleIDs: sampleIDs)
+            mergedHit.setAverageScore(from: bin)
             mergedHits.append(mergedHit)
         }
     }

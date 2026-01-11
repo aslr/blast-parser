@@ -72,6 +72,12 @@ extension [MinimapDatabase] {
         return Array<String>(queryIDSet)
     }
     
+    var sampleIDs: [String] {
+        let samples: [String] = self.flatMap(\.sampleIDs)
+        return Array<String>(Set(samples))
+            .sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+    }
+    
     var isMainDatabaseUnique: Bool {
         self.map(\.isMainDatabase).count == 1
     }
