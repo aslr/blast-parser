@@ -33,18 +33,42 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     }
     
     override func merge() throws {
+        Console.writeToStdOut("Merging minimap2 hits with BLASTn output...")
+        
+        guard hits.isEmpty == false else {
+            throw RuntimeError("Unable to merge BLAST hits with the minimap2 table because no BLAST hits were found.")
+        }
+        
         try multiFileParser.merge()
     }
     
     func print() throws {
-        let mergedHits = multiFileParser.mergedHits
+        let mergedFilePath = resolveOutputMergedFilePath()
+        try printMergedFile(path: mergedFilePath)
         
-        
+        let hitCountsFilePath = resolveOutputHitCountsFilePath()
+        try printHitCountsFile(path: hitCountsFilePath)
     }
     
     // MARK: Private
     private func blastFilename() -> String {
         URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
+    }
+    
+    private func printHitCountsFile(path: String) throws {
+        
+    }
+    
+    private func printMergedFile(path: String) throws {
+        guard let writer = FileWriter(path:path) else {
+            throw RuntimeError("Unable to print merged minimap2 and BLASTn hits to file due to a malformed path.")
+        }
+        let dataWriter = try writer.makeDataWriter()
+        
+        let mergedHits = multiFileParser.mergedHits
+        for mergedHit in mergedHits {
+            dataWriter.write(line: mergedHit.description)
+        }
     }
     
     private func resolveOutputMergedFilePath() -> String {
@@ -57,9 +81,9 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     }
     
     private func resolveOutputHitCountsFilePath() -> String {
-        if let outputMergedFile = self.outputHitCountsFile,
-           outputMergedFile.resolvedFileURL() != nil {
-            return outputMergedFile
+        if let outputHitCountsFile = self.outputHitCountsFile,
+           outputHitCountsFile.resolvedFileURL() != nil {
+            return outputHitCountsFile
         } else {
             return "\(blastFilename())_hitcounts_output.tsv"
         }
