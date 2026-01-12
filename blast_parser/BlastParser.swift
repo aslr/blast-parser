@@ -241,7 +241,7 @@ extension BlastParser {
                                                       asvs: asvs,
                                                       prefixes: prefixes)
 			else {
-				throw RuntimeError("Could not find a valid Qiime 2 file to be merged with the BLAST hits file.")
+				throw RuntimeError("Could not find a valid Qiime 2 file or a BLASTn hits file to be merged.")
 			}
 			
 			if let hitsPerAsv = self.hitsPerAsv {
@@ -350,7 +350,7 @@ extension BlastParser {
             guard let parser = BlastMinimapOutputParser(path: blasthits,
                                                         mainHits: mainHits,
                                                         representativeHits: representativeHits) else {
-                throw RuntimeError("Unable to merge the minimap2 and BLASTn output files because one of the files is invalid.")
+                throw RuntimeError("Unable to merge the minimap2 and BLASTn output files because at least one file could not be found or is invalid.")
             }
             
             parser.outputMergedFile = outputMergedFile

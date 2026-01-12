@@ -19,7 +19,7 @@ final class BlastQiimeOutputParser: BlastOutputParser {
     ///  of the output file
     init?(path:String, asvs: String, prefixes:String? = nil) {
 		guard let asvsParser = QiimeASVMultiFileParser(paths: asvs, prefixes: prefixes)
-		else { return nil }
+            else { return nil }
 		
 		self.asvsParser = asvsParser
 		super.init(path: path)
