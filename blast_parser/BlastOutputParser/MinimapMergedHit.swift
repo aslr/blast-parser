@@ -43,25 +43,36 @@ final class MinimapMergedHit: CustomStringConvertible {
     private var hitCounts = [MinimapSampleCounts]()
     private var averageScore = 0
     
-    var description: String {
-        var result = "\(queryID)\t"
-        for hit in hits {
-            result += "\(hit.abstract)\t"
-        }
-        result += "\(averageScore)\t"
-        result += "\(hitCounts.countsDescription)"
-        return result
+    var coreDescription: String {
+        "\(hits.map(\.abstract).joined(separator: "\t"))" + "\t\(averageScore)"
     }
     
-    var header:String? {
-        var result = "Query_ID\t"
+    var description: String {
+        "\(queryID)\t" + coreDescription
+    }
+    
+    var abstract: String {
+        coreDescription + "\t\(hitCounts.countsDescription)"
+    }
+    
+    var coreHeader: String? {
+        var result = ""
         guard hits.count == prefixes.count else { return nil }
         for prefix in prefixes {
             result += "\(prefix)_Taxonomy\t\(prefix)_Score\t"
         }
-        result += "Average_Score\t"
-        result += "\(hitCounts.sampleIDDescription)"
+        result += "Average_Score"
         return result
+    }
+    
+    var header:String? {
+        guard let coreHeader = self.coreHeader else { return nil }
+        return "Query_ID\t\(coreHeader)"
+    }
+    
+    var abstractHeader: String? {
+        guard let coreHeader = self.coreHeader else { return nil }
+        return coreHeader + "\t\(hitCounts.sampleIDDescription)"
     }
     
     /// Initializer for a class used to store a minimap2 hit for a
