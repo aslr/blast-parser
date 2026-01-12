@@ -37,6 +37,31 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     }
     
     func print() throws {
+        let mergedHits = multiFileParser.mergedHits
         
+        
+    }
+    
+    // MARK: Private
+    private func blastFilename() -> String {
+        URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
+    }
+    
+    private func resolveOutputMergedFilePath() -> String {
+        if let outputMergedFile = self.outputMergedFile,
+           outputMergedFile.resolvedFileURL() != nil {
+            return outputMergedFile
+        } else {
+            return "\(blastFilename())_merged_output.tsv"
+        }
+    }
+    
+    private func resolveOutputHitCountsFilePath() -> String {
+        if let outputMergedFile = self.outputHitCountsFile,
+           outputMergedFile.resolvedFileURL() != nil {
+            return outputMergedFile
+        } else {
+            return "\(blastFilename())_hitcounts_output.tsv"
+        }
     }
 }
