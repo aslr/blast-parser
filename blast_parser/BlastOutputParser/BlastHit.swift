@@ -35,6 +35,10 @@ struct BlastHit: CustomStringConvertible {
                """
     }
     
+    var header: String {
+        "Subject\tIdentity\tScore\tE_value\tTaxID\tScientific_Name"
+    }
+    
     /// Standard initializer
     init(querySequenceID:String = String(),
          subjectSequenceID:String,

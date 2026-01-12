@@ -12,8 +12,12 @@ class BlastASV: CustomStringConvertible{
     var hit: BlastHit
     var blastTaxonomy = Hierarchy()
     
-    var description: String{
+    var description: String {
         return "\(hit)\t\(blastTaxonomy)"
+    }
+    
+    var header: String? {
+        return "\(hit.header)\tTaxonomy"
     }
     
     init(hit: BlastHit) {
