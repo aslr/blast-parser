@@ -50617,13 +50617,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = blast_parser/blast_parser.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = SGHT62K667;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = U57H83X6M8;
 				ENABLE_APP_SANDBOX = NO;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/Cellar/libpq/17.5/include,
@@ -50632,7 +50632,7 @@
 					/opt/homebrew/Cellar/libpq/17.5/lib,
 					"/opt/homebrew/Cellar/openssl@3/3.5.0/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				OTHER_LDFLAGS = (
 					"-rpath",
 					"@executable_path/",
@@ -50651,13 +50651,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = blast_parser/blast_parser.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = SGHT62K667;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = U57H83X6M8;
 				ENABLE_APP_SANDBOX = NO;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/Cellar/libpq/17.5/include,
@@ -50666,7 +50666,7 @@
 					/opt/homebrew/Cellar/libpq/17.5/lib,
 					"/opt/homebrew/Cellar/openssl@3/3.5.0/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				OTHER_LDFLAGS = (
 					"-rpath",
 					"@executable_path/",

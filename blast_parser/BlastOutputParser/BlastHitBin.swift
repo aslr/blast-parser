@@ -64,3 +64,9 @@ class BlastHitBin {
         hits.sort(criterion: criterion)
     }
 }
+
+extension [BlastHitBin] {
+    func bin(for sequenceID: String) -> BlastHitBin? {
+        self.first(where: { $0.sequenceID == sequenceID })
+    }
+}
