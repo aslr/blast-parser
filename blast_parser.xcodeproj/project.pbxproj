@@ -50632,7 +50632,7 @@
 					/opt/homebrew/Cellar/libpq/17.5/lib,
 					"/opt/homebrew/Cellar/openssl@3/3.5.0/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				OTHER_LDFLAGS = (
 					"-rpath",
 					"@executable_path/",
@@ -50666,7 +50666,7 @@
 					/opt/homebrew/Cellar/libpq/17.5/lib,
 					"/opt/homebrew/Cellar/openssl@3/3.5.0/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				OTHER_LDFLAGS = (
 					"-rpath",
 					"@executable_path/",

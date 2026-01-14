@@ -18,7 +18,7 @@ static let configuration = CommandConfiguration(
             """,
         usage: "blast_parser <subcommand>",
         version: "0.6.0",
-        subcommands: [Import.self, Export.self, Parse.self, Merge.self, MergeQiime.self, ParseMinimap.self],
+        subcommands: [Import.self, Export.self, Parse.self, Merge.self, MergeQiime.self, ParseMinimap.self, MergeMinimap.self],
         defaultSubcommand: Import.self
     )
 }
@@ -316,8 +316,8 @@ extension BlastParser {
     
     struct MergeMinimap: ParsableCommand {
         static let configuration = CommandConfiguration(
-            abstract: "Merges minimap2 output tsv files containing a header row with the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy with a with the best hits of a BLAST search. ",
-            usage: "blast_parser merge-minimap --main-hits <main-hits> --blasthits <blasthits>  --reads <fasta-file> [--rep-hits <representative-hits>] [--o-merged <merged-file>] [--o-hitcounts <hitcounts-file>] [--sort <sort>]",
+            abstract: "Merges minimap2 output tsv files containing a header row with the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy with the best hits of a BLAST search. ",
+            usage: "blast_parser merge-minimap --main-hits <main-hits> --blasthits <blasthits> --reads <fasta-file> [--rep-hits <representative-hits>] [--o-merged <merged-file>] [--o-hitcounts <hitcounts-file>] [--sort <sort>]",
             aliases: ["mrgm"] )
         
         @OptionGroup var options: Options
