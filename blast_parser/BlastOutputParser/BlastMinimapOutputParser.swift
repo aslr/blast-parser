@@ -35,11 +35,25 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     override func merge() throws {
         Console.writeToStdOut("Merging minimap2 hits with BLASTn output...")
         
-        guard hits.isEmpty == false else {
-            throw RuntimeError("Unable to merge BLAST hits with the minimap2 table because no BLAST hits were found.")
+        guard hits.isEmpty == false && bins.isEmpty == false else {
+            throw RuntimeError("Unable to merge BLAST hits with the minimap2 table because no BLAST hits or bins were found.")
         }
         
         try multiFileParser.merge()
+        let mergedHits = multiFileParser.mergedHits
+        
+        guard mergedHits.isEmpty == false else {
+            throw RuntimeError("Unable to merge BLAST hits with minimap hit table because no BLAST hits were found.")
+        }
+        
+        let taxonomyDatabase = SQLDatabase(database: taxonomyDatabase,
+                                           table: taxonomyTable)
+        taxonomyDatabase.connect()
+        
+        for bin in bins {
+            
+            
+        }
     }
     
     func print() throws {
