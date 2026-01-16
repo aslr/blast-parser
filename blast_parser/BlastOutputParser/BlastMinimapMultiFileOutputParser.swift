@@ -1,5 +1,5 @@
 //
-//  BlastMinimapOutputParser.swift
+//  BlastMinimapMultiFileOutputParser.swift
 //  blast_parser
 //
 //  Created by João Varela on 30/12/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BlastMinimapOutputParser: BlastOutputParser {
+final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
     let multiFileParser: MinimapHitMultiFileParser
     var mergedBlastHits = [BlastMinimapHit]()
     var outputMergedFile:String?
@@ -15,7 +15,7 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     
     /// Parser for outputing the results of merging BLASTn hits
     /// - Parameters:
-    ///  - path: path to the BLAST hits file
+    ///  - path: path to the BLAST hits directory
     ///  - mainHits: path to the directory to find minimap2 main hit
     ///  files containing the taxonomic assignment of all reads
     ///  - representativeHits: space-separated paths to the directories
@@ -25,7 +25,7 @@ final class BlastMinimapOutputParser: BlastOutputParser {
         do {
             multiFileParser = try MinimapHitMultiFileParser(mainDirectory: mainHits,
                                                             representativeDirectories: representativeHits)
-            super.init(path: path)
+            try super.init(path: path)
         }
         
         catch {
@@ -35,8 +35,12 @@ final class BlastMinimapOutputParser: BlastOutputParser {
     
     /// Merge minimap2 with BLASTn best hit(s) of each bin
     /// Used in `merge-minimap` subcommand, where `hitsPerASV` is always 1
-    override func merge() throws {
+    func merge() throws {
         Console.writeToStdOut("Merging minimap2 hits with BLASTn output...")
+        
+        // make local variables as self vars are computed
+        let hits = self.hits
+        let bins = self.bins
         
         guard hits.isEmpty == false && bins.isEmpty == false else {
             throw RuntimeError("Unable to merge BLAST hits with the minimap2 table because no BLAST hits or bins were found.")
@@ -49,8 +53,8 @@ final class BlastMinimapOutputParser: BlastOutputParser {
             throw RuntimeError("Unable to merge BLAST hits with minimap hit table because no BLAST hits were found.")
         }
         
-        let taxonomyDatabase = SQLDatabase(database: taxonomyDatabase,
-                                           table: taxonomyTable)
+        let taxonomyDatabase = SQLDatabase(database: .database,
+                                           table: .table)
         taxonomyDatabase.connect()
         
         for mergedHit in mergedHits {
@@ -78,11 +82,6 @@ final class BlastMinimapOutputParser: BlastOutputParser {
         
         let hitCountsFilePath = resolveOutputHitCountsFilePath()
         try printHitCountsFile(path: hitCountsFilePath)
-    }
-    
-    // MARK: Private
-    private func blastFilename() -> String {
-        URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
     }
     
     /// Print the hit counts of the merged output table
@@ -130,7 +129,7 @@ final class BlastMinimapOutputParser: BlastOutputParser {
            outputMergedFile.resolvedFileURL() != nil {
             return outputMergedFile
         } else {
-            return "\(blastFilename())_merged_output.tsv"
+            return FilePrefix.blast.rawValue + FileSuffix.report.rawValue
         }
     }
     
@@ -139,7 +138,7 @@ final class BlastMinimapOutputParser: BlastOutputParser {
            outputHitCountsFile.resolvedFileURL() != nil {
             return outputHitCountsFile
         } else {
-            return "\(blastFilename())_hitcounts_output.tsv"
+            return FilePrefix.blast.rawValue + FileSuffix.hitcounts.rawValue
         }
     }
 }

@@ -86,7 +86,7 @@ extension BlastParser {
 		var table:String?
 		
 		mutating func run() throws {
-			let database = SQLDatabase(database: database, table: table)
+            let database = SQLDatabase(database: .database, table: .table)
 			database.createDatabase()
 			database.importDatabase(pathToCSVFile: inputFile)
 		}
@@ -347,9 +347,9 @@ extension BlastParser {
         var sort:String?
         
         mutating func run() throws {
-            guard let parser = BlastMinimapOutputParser(path: blasthits,
-                                                        mainHits: mainHits,
-                                                        representativeHits: representativeHits) else {
+            guard let parser = BlastMinimapMultiFileOutputParser(path: blasthits,
+                                                                 mainHits: mainHits,
+                                                                 representativeHits: representativeHits) else {
                 throw RuntimeError("Unable to merge the minimap2 and BLASTn output files because at least one file could not be found or is invalid.")
             }
             
@@ -365,7 +365,7 @@ extension BlastParser {
             } else {
                 try parser.parse()
             }
-            
+            try parser.merge()
             try parser.print()
         }
     }
