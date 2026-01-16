@@ -9,9 +9,6 @@ class BlastOutputParser: FileParser {
 	var hits = [BlastHit]()
 	var bins = [BlastHitBin]()
 	var hitsPerASV = 1
-	let defaultReportSuffix = "merged_output.tsv"
-	var taxonomyDatabase = "taxonomy_ncbi"
-	var taxonomyTable = "taxonomy"
     
     func parse(criterion:BlastHit.SortCriterion = .bitScore) throws {
         try parseBlastOutput()
@@ -20,11 +17,11 @@ class BlastOutputParser: FileParser {
     }
     
     func merge() throws {
-        fatalError("You must override this method.")
+        fatalError("You must override BlastOutputParser.merge() method.")
     }
     
     private func parseBlastOutput() throws {
-        Console.writeToStdOut("Parsing BLASTn output...")
+        Console.writeToStdOut("Parsing BLASTn output at \(path)")
         
         for line in readStream {
             let hit = try BlastHit(line: line)

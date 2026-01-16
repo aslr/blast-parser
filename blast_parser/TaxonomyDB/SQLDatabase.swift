@@ -7,6 +7,12 @@
 
 import Foundation
 
+// MARK: Taxonomy Database
+enum TaxonomyDatabase: String {
+    case database = "taxonomy_ncbi"
+    case table = "taxonomy"
+}
+
 final class SQLDatabase {
     let database:String
     let table:String?
@@ -25,9 +31,9 @@ final class SQLDatabase {
         """
     let bufferSize = Int(kPSDMaxBufferSize)
     
-    init(database:String, table:String?) {
-        self.database = database
-        self.table = table
+    init(database:TaxonomyDatabase, table:TaxonomyDatabase?) {
+        self.database = database.rawValue
+        self.table = table?.rawValue
     }
     
     func connect() {

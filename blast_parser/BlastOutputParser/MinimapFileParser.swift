@@ -35,7 +35,7 @@ class MinimapFileParser: FileParser {
     private var _isMainFile: Bool? = nil
     var isMainFile: Bool {
         guard _isMainFile == nil else { return _isMainFile! }
-        _isMainFile = filename.hasSuffix(MinimapFileSuffix.main.rawValue)
+        _isMainFile = filename.hasSuffix(FileSuffix.main.rawValue)
         return _isMainFile!
     }
     

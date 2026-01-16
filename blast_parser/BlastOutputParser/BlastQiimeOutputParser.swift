@@ -53,8 +53,8 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 		}
 		// Initialize the object that will connect to the PostgresSQL
 		// database containing the whole NCBI taxonomic lineages
-		let taxonomyDatabase = SQLDatabase(database: taxonomyDatabase,
-										   table: taxonomyTable)
+        let taxonomyDatabase = SQLDatabase(database: .database,
+                                           table: .table)
 		taxonomyDatabase.connect()
 		
 		// We get the current index to make the search faster in the ASVs table

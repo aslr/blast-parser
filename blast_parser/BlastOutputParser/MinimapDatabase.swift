@@ -31,7 +31,7 @@ struct MinimapDatabase {
     
     /// Parses hit files and appends them to the `hits` array of this object
     private mutating func parseHitFiles() throws {
-        let suffix: MinimapFileSuffix = isMainDatabase ? .main : .representative
+        let suffix: FileSuffix = isMainDatabase ? .main : .representative
         
         guard let paths = directoryPath.findFiles(suffix: suffix) else {
             throw RuntimeError("No minimap2 hit files were found in \(directoryPath)")
