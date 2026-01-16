@@ -16,9 +16,9 @@ class BlastOutputParser: FileParser {
         try merge()
     }
     
-    func merge() throws {
-        fatalError("You must override BlastOutputParser.merge() method.")
-    }
+    /// Placeholder for a merging hits method
+    /// Default implementation does nothing
+    func merge() throws {}
     
     private func parseBlastOutput() throws {
         Console.writeToStdOut("Parsing BLASTn output at \(path)")

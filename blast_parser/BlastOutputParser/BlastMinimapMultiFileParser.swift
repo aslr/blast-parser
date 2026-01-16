@@ -7,16 +7,8 @@
 
 import Foundation
 
-final class BlastMinimapOutputParser: BlastOutputParser {
-    override func merge() throws {
-        // do nothing as the merge will take place in the caller
-        // but we need to overide this method in order to prevent
-        // a fatal error in the base class
-    }
-}
-
 class BlastMinimapMultiFileParser {
-    var parsers = [BlastMinimapOutputParser]()
+    var parsers = [BlastOutputParser]()
     
     var hits: [BlastHit] {
         parsers.map(\.hits).flatMap(\.self)
@@ -32,7 +24,7 @@ class BlastMinimapMultiFileParser {
         }
         
         for path in paths {
-            guard let parser = BlastMinimapOutputParser(path: path) else {
+            guard let parser = BlastOutputParser(path: path) else {
                 throw RuntimeError("Unable to create BlastOutputParser for \(path).")
             }
             self.parsers.append(parser)
