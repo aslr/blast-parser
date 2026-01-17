@@ -22,10 +22,12 @@ class MinimapFileParser: FileParser {
     private var _sampleID: String?
     var sampleID: String? {
         guard _sampleID == nil else { return _sampleID }
-        if let prefix = filename.sampleID(suffix: .main) {
+        // NOTE: the order of this test is important as .representative
+        // contains .main, causing a parsing error if the order is reversed
+        if let prefix = filename.sampleID(suffix: .representative) {
             _sampleID = prefix
             return prefix
-        } else if let prefix = filename.sampleID(suffix: .representative) {
+        } else if let prefix = filename.sampleID(suffix: .main) {
             _sampleID = prefix
             return prefix
         }
@@ -71,13 +73,12 @@ class MinimapFileParser: FileParser {
                     
                     // retrieve only the best hit
                     if lastQueryID.isEmpty || lastQueryID != hit.queryID {
+                        hit.sampleID = sampleID
+                        hit.isMainFileHit = isMainFile
+                        hit.prefix = directory
                         hits.append(hit)
                         lastQueryID = hit.queryID
                     }
-                    
-                    hit.sampleID = sampleID
-                    hit.isMainFileHit = isMainFile
-                    hit.prefix = directory
                 }
                 
                 catch {
