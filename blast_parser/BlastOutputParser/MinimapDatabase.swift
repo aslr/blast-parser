@@ -51,6 +51,10 @@ extension [MinimapDatabase] {
         return first(where: \.isMainDatabase)
     }
     
+    var prefixes: [String] {
+        self.map(\.prefix)
+    }
+    
     var representativeDatabases: [MinimapDatabase] {
         self.filter({!$0.isMainDatabase})
     }

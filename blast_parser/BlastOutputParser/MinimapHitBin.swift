@@ -74,6 +74,10 @@ final class MinimapHitBin: CustomStringConvertible {
         hits.first(where: { $0.score <= score })
     }
     
+    func hits(queryID: String) -> [MinimapHit] {
+        hits.filter { $0.queryID == queryID }
+    }
+    
     func hits(sampleID: String) -> [MinimapHit] {
         hits.filter { $0.sampleID == sampleID }
     }
@@ -132,7 +136,7 @@ extension [MinimapHitBin] {
     /// - Parameter queryID - the hit ID to find whether the hit is stored
     /// only once in the bin array
     /// - Returns: true if it exists and is not repeated within the bin
-    func isHitUnique(queryID:String) -> Bool {
-        self.filter({ $0.containsHit(queryID: queryID) }).count == 1
+    func bins(for queryID: String) -> [MinimapHitBin] {
+        self.filter( { $0.containsHit(queryID: queryID) })
     }
 }

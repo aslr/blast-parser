@@ -62,23 +62,31 @@ final class MinimapHitMultiFileParser {
     }
     
     // MARK: Private methods
+    /// Consolidates main hits into bins with the same taxonomy
     private func consolidateHits() throws {
         let mainHits = databases.mainHits
         mainBins.appendBins(from: mainHits)
     }
     
+    /// Merges minimap hits from different databases into a single merged hit
     private func mergeHits() throws {
         let queryIDs = databases.representativeQueryIDs
-        let prefixes = databases.representativePrefixes
+        let prefixes = databases.prefixes
+        let representativePrefixes = databases.representativePrefixes
         let sampleIDs = databases.sampleIDs
+        let queryIDCount = queryIDs.count
         
-        for queryID in queryIDs {
-            guard mainBins.isHitUnique(queryID: queryID) else {
-                throw RuntimeError("Found multiple minimap2 hits for the same query ID: \(queryID).")
+        for (i, queryID) in queryIDs.enumerated() {
+            Console.writeToStdOutInPlace("Merging hit with query ID \(queryID), \(i + 1) out of \(queryIDCount)...")
+            
+            let bins = mainBins.bins(for: queryID)
+            
+            guard bins.count < 2 else {
+                throw RuntimeError("Found multiple bins for query ID: \(queryID)")
             }
             
-            guard let bin = mainBins.bin(for: queryID) else {
-                throw RuntimeError("No bin was found for query ID: \(queryID).")
+            guard let bin = bins.first else {
+                throw RuntimeError("No bin was found for query ID: \(queryID)")
             }
             
             guard let mainhit = bin.hit(queryID: queryID) else {
@@ -87,10 +95,10 @@ final class MinimapHitMultiFileParser {
             
             let mergedHit = MinimapMergedHit(prefixes: prefixes, queryID: queryID, hit: mainhit)
             
-            for prefix in prefixes {
-                let hits = databases.hits(for: prefix, queryID: queryID)
+            for representativePrefix in representativePrefixes {
+                let hits = databases.hits(for: representativePrefix, queryID: queryID)
                 guard hits.count <= 1 else {
-                    throw RuntimeError("More than one hit was found for database \(prefix) with queryID \(queryID), making it impossible to merge files with ambiguous hits.")
+                    throw RuntimeError("More than one hit was found for database \(representativePrefix) with queryID \(queryID), making it impossible to merge files with ambiguous hits.")
                 }
                 
                 if hits.count == 1, let hit = hits.first {
