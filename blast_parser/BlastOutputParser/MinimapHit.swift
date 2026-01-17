@@ -68,7 +68,7 @@ final class MinimapHit: CustomStringConvertible {
         self.referenceID = components[1]
         self.alignmentScore = alignmentScore
         self.alignmentLength = alignmentLength
-        self.taxonomy = components[4]
+        self.taxonomy = components[4].trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
