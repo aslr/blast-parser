@@ -16,20 +16,20 @@ final class BlastMinimapHit: BlastASV {
     }
     
     override var description: String {
-        "\(minimapHit.description)\t\(super.description)"
+        "\(super.description)\t\(minimapHit.description)"
     }
     
     var abstract: String {
-        "\(minimapHit.abstract)\t\(super.description)"
+        "\(super.description)\t\(minimapHit.abstract)"
     }
     
     override var header: String? {
         guard let minimapHeader = minimapHit.header else { return nil }
-        return "\(minimapHeader)\t\(super.header!)"
+        return "\(super.header!)\t\(minimapHeader)"
     }
     
     var abstractHeader: String? {
         guard let minimapAbstract = minimapHit.abstractHeader else { return nil }
-        return "\(minimapAbstract)\t\(super.header!)"
+        return "\(super.header!)\t\(minimapAbstract)"
     }
 }
