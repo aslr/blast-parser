@@ -94,6 +94,10 @@ extension [MinimapDatabase] {
         self.filter({$0.prefix == prefix}).flatMap(\.hits)
     }
     
+    func hits(for prefix:String, queryID: String) -> [MinimapHit] {
+        hits(for: prefix).filter({$0.queryID == queryID})
+    }
+    
     func hits(for prefix:String, queryIDs: [String]) -> [MinimapHit] {
         hits(for: prefix).filter({queryIDs.contains($0.queryID)})
     }
@@ -105,6 +109,6 @@ extension [MinimapDatabase] {
     }
     
     func isHitUnique(for prefix: String, queryID: String) -> Bool {
-        hits(for: prefix).filter({$0.queryID == queryID}).count == 1
+        hits(for: prefix, queryID: queryID).count == 1
     }
 }

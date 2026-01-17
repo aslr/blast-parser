@@ -101,7 +101,7 @@ final class MinimapMergedHit: CustomStringConvertible {
     
     /// Sets the average score from the main hits bin
     /// This means that this NOT the average score across different databases
-    /// or classifiers but only the avergae score for all hits using the main
+    /// or classifiers but only the average score for all hits using the main
     /// classifier
     /// - Parameter bin - the bin containing all (main) hits
     func setAverageScore(from bin: MinimapHitBin) {

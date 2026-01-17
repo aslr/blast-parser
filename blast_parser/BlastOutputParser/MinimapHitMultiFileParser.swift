@@ -88,15 +88,17 @@ final class MinimapHitMultiFileParser {
             let mergedHit = MinimapMergedHit(prefixes: prefixes, queryID: queryID, hit: mainhit)
             
             for prefix in prefixes {
-                guard databases.isHitUnique(for: prefix, queryID: queryID) else {
-                    throw RuntimeError("Less or more than one hit was found for database \(prefix) with queryID \(queryID), making it impossible to merge files with missing or ambiguous hits.")
+                let hits = databases.hits(for: prefix, queryID: queryID)
+                guard hits.count > 1 else {
+                    throw RuntimeError("More than one hit was found for database \(prefix) with queryID \(queryID), making it impossible to merge files with ambiguous hits.")
                 }
                 
-                guard let hit = databases.hit(for: prefix, queryID: queryID) else {
-                    throw RuntimeError("No representative hit was found for database \(prefix) and queryID \(queryID).")
+                if hits.count == 1, let hit = hits.first {
+                    mergedHit.add(hit)
+                } else {
+                    let hit = MinimapHit(queryID: queryID)
+                    mergedHit.add(hit)
                 }
-                
-                mergedHit.add(hit)
             }
             
             mergedHit.appendCounts(from: bin, sampleIDs: sampleIDs)
