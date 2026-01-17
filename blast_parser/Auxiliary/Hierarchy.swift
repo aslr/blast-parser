@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Hierarchy {
+struct Hierarchy: CustomStringConvertible {
     private var ranks = [Rank]()
     
     var firstRank:Rank? {
@@ -20,6 +20,18 @@ struct Hierarchy {
     
     var lastRankIndex:Int {
         return ranks.count - 1
+    }
+    
+    var description: String {
+        var rankString = String()
+        
+        for rank in ranks {
+            if rank.variant == 0 {
+                rankString += "\(rank.abbreviation):\(rank.taxonName);"
+            }
+        }
+        
+        return rankString
     }
     
     /// Default initializer with an Unclassified rank
@@ -103,18 +115,6 @@ struct Hierarchy {
             return ranks[index]
         }
         return nil
-    }
-    
-    func getRanks() -> String {
-        var rankString = String()
-        
-        for rank in ranks {
-            if rank.variant == 0 {
-                rankString += "\(rank.abbreviation):\(rank.taxonName);"
-            }
-        }
-        
-        return rankString
     }
     
     mutating func reset() {

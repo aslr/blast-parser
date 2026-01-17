@@ -23,7 +23,7 @@ struct KrakenReportLine {
                "Rank and hierarchy should not be nil")
         var result = "\(lineNumber)\t\(percentage)\t\(reads)\t\(assignedReads)\t"
         result += "\(rank.abbreviation)\t\(rank.variant)\t\(rank.taxonName)\t"
-        result += "\(taxID)\t\(hierarchy.getRanks())"
+        result += "\(taxID)\t\(hierarchy.description)"
         return result
     }
 }

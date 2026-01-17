@@ -85,7 +85,7 @@ class BlastKrakenASV: BlastASV {
     }
     
     override var description:String {
-        let blastRanks = blastTaxonomy.getRanks()
+        let blastRanks = blastTaxonomy.description
         if blastRanks.isEmpty == false {
             return "\(asv)\t\(hit)\t\(blastRanks)"
         } else {

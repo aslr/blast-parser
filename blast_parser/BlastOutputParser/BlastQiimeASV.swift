@@ -17,7 +17,7 @@ final class BlastQiimeASV: BlastASV {
 	}
     
 	func merge() throws {
-		let blastRanks = blastTaxonomy.getRanks()
+		let blastRanks = blastTaxonomy.description
         
         switch asv.featureID {
         case "id":
