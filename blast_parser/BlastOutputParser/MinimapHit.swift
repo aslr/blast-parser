@@ -28,7 +28,7 @@ final class MinimapHit: CustomStringConvertible {
     }
     
     var abstract:String {
-        "\(taxonomy)\t\(score)\t"
+        "\(taxonomy)\t\(score)"
     }
     
     /// - Returns: the last taxom, usuallay the species, of a taxonomic lineage
