@@ -16,7 +16,7 @@ final class BlastMinimapHit: BlastASV {
     }
     
     override var description: String {
-        "\(minimapHit)\t\(super.description)"
+        "\(minimapHit.description)\t\(super.description)"
     }
     
     var abstract: String {

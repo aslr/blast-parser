@@ -38,21 +38,21 @@ fileprivate extension [MinimapSampleCounts] {
 /// the same read
 final class MinimapMergedHit: CustomStringConvertible {
     let prefixes: [String]
-    let queryID:String
+    let queryID: String
     private var hits = [MinimapHit]()
     private var hitCounts = [MinimapSampleCounts]()
     private var averageScore = 0
     
     var coreDescription: String {
-        "\(hits.map(\.abstract).joined(separator: "\t"))" + "\t\(averageScore)"
+        "\(hits.map(\.abstract).joined(separator: "\t"))\t\(averageScore)"
     }
     
     var description: String {
-        "\(queryID)\t" + coreDescription
+        "\(queryID)\t\(coreDescription)"
     }
     
     var abstract: String {
-        coreDescription + "\t\(hitCounts.countsDescription)"
+        "\(coreDescription)\t\(hitCounts.countsDescription)"
     }
     
     var coreHeader: String? {
