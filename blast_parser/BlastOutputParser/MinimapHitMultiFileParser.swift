@@ -54,8 +54,6 @@ final class MinimapHitMultiFileParser {
     
     /// Merges different hit files, which should contain the exact same assignments,
     /// classified by using minimap2 with different databases
-    /// - Returns: An array of MinimapMergedHit objects that contain the merged columns
-    /// containing the taxonomy and the score of the assignment
     func merge() throws {
         try consolidateHits()
         try mergeHits()
@@ -68,7 +66,8 @@ final class MinimapHitMultiFileParser {
         mainBins.appendBins(from: mainHits)
     }
     
-    /// Merges minimap hits from different databases into a single merged hit
+    /// Merges minimap hits with the same queryID from different databases into
+    /// a single merged hit
     private func mergeHits() throws {
         let queryIDs = databases.representativeQueryIDs
         let prefixes = databases.prefixes
@@ -93,11 +92,14 @@ final class MinimapHitMultiFileParser {
                 throw RuntimeError("No main hit was found for query ID: \(queryID).")
             }
             
-            let mergedHit = MinimapMergedHit(prefixes: prefixes, queryID: queryID, hit: mainhit)
+            let mergedHit = MinimapMergedHit(prefixes: prefixes,
+                                             queryID: queryID,
+                                             hit: mainhit,
+                                             binID: bin.id)
             
             for representativePrefix in representativePrefixes {
                 let hits = databases.hits(for: representativePrefix, queryID: queryID)
-                guard hits.count <= 1 else {
+                guard hits.count < 2 else {
                     throw RuntimeError("More than one hit was found for database \(representativePrefix) with queryID \(queryID), making it impossible to merge files with ambiguous hits.")
                 }
                 

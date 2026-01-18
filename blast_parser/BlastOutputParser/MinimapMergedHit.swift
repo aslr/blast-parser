@@ -7,9 +7,9 @@
 
 import Foundation
 
-fileprivate struct MinimapSampleCounts: CustomStringConvertible {
+struct MinimapSampleCounts: CustomStringConvertible {
     let sampleID:String
-    let count:Int
+    var count:Int
     
     var description: String {
         return String(count)
@@ -21,7 +21,7 @@ fileprivate struct MinimapSampleCounts: CustomStringConvertible {
     }
 }
 
-fileprivate extension [MinimapSampleCounts] {
+extension [MinimapSampleCounts] {
     var sampleIDDescription: String {
         let idStrings: [String] = self.map(\.sampleID)
         return idStrings.joined(separator: "\t")
@@ -31,6 +31,20 @@ fileprivate extension [MinimapSampleCounts] {
         let countStrings: [String] = self.map(\.description)
         return countStrings.joined(separator: "\t")
     }
+    
+    mutating func add(counts: [MinimapSampleCounts]) {
+        for count in counts {
+            self.add(sampleID: count.sampleID, count: count.count)
+        }
+    }
+    
+    mutating func add(sampleID: String, count: Int) {
+        if let index = self.firstIndex(where: { $0.sampleID == sampleID }) {
+            self[index].count += count  // Direct mutation
+        } else {
+            self.append(MinimapSampleCounts(sampleID: sampleID, count: count))
+        }
+    }
 }
 
 /// Class for storing and merging one or more minimap2 hits
@@ -39,9 +53,10 @@ fileprivate extension [MinimapSampleCounts] {
 final class MinimapMergedHit: CustomStringConvertible {
     let prefixes: [String]
     let queryID: String
-    private var hits = [MinimapHit]()
-    private var hitCounts = [MinimapSampleCounts]()
-    private var averageScore = 0
+    let binID: UUID
+    var hits = [MinimapHit]()
+    var hitCounts = [MinimapSampleCounts]()
+    var averageScore = 0
     
     var coreDescription: String {
         "\(hits.map(\.abstract).joined(separator: "\t"))\t\(averageScore)"
@@ -75,16 +90,24 @@ final class MinimapMergedHit: CustomStringConvertible {
         return coreHeader + "\t\(hitCounts.sampleIDDescription)"
     }
     
+    var taxonomy: String {
+        "\(hits.map(\.taxonomy).joined(separator: "\t"))"
+    }
+    
     /// Initializer for a class used to store a minimap2 hit for a
     /// given read and merge the taxonomic assignment obtained from
     /// different databases
-    /// - Parameter prefixes: prefixes to add to the column headers
-    /// - Parameter queryID: the read id
-    /// - Parameter hit: first hit to be merged
-    init(prefixes:[String], queryID: String, hit: MinimapHit) {
+    /// - Parameters:
+    ///  - prefixes: prefixes to add to the column headers
+    ///  - queryID: the read id
+    ///  - hit: first hit to be merged
+    ///  - binID: bin UUID of each main hit to allow the proper merging of
+    ///  hits coming from the same bin
+    init(prefixes:[String], queryID: String, hit: MinimapHit, binID:UUID) {
         self.prefixes = prefixes
         self.queryID = queryID
         self.hits.append(hit)
+        self.binID = binID
     }
     
     func add(_ hit: MinimapHit) {

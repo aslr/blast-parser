@@ -11,6 +11,7 @@ import Foundation
 /// CAUTION: Do NOT use it with representative hits as the latter lack any information
 /// about hit counts
 final class MinimapHitBin: CustomStringConvertible {
+    let id = UUID()
     private var hits = [MinimapHit]()
     var maximumScore = 0
     var minimumScore = 0

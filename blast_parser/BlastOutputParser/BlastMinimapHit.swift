@@ -32,4 +32,10 @@ final class BlastMinimapHit: BlastASV {
         guard let minimapAbstract = minimapHit.abstractHeader else { return nil }
         return "\(super.header!)\t\(minimapAbstract)"
     }
+    
+    var averageScore: Int {
+        let blastScore = Int(hit.bitscore)
+        let minimapScore = Int(minimapHit.averageScore)
+        return (blastScore + (minimapScore/10)) / 2
+    }
 }
