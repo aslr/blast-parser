@@ -36,7 +36,7 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
     
     /// Merges minimap2 with BLASTn hits of each bin but taking into account
     /// their queryIDs to match them together; then bins them into bins with
-    /// uniqye taxonomy assignments for calculating the correct hit counts
+    /// unique taxonomy assignments for calculating the correct hit counts
     /// per taxon
     /// Used in `merge-minimap` subcommand, where `hitsPerASV` is always 1
     func merge() throws {
@@ -98,7 +98,7 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
     private func mergeBins() throws {
         var lastBin: BlastMinimapHitBin? = nil
         
-        // merge first by binID which identifies the original bins ontained
+        // merge first by binID which identifies the original bins obtained
         // via the main classifier
         mergedBlastHits.sort(by: { $0.minimapHit.binID > $1.minimapHit.binID })
         for mergedHit in mergedBlastHits {
@@ -135,7 +135,8 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
     /// Print the hit counts of the merged output table
     /// This table results from the consolidation of all sequence bins
     /// into bins containing the same taxonomic assignment using the main
-    /// classifier for the minimap hits (i.e., the "main hits")
+    /// classifier for the minimap hits (i.e., the "main hits") and the
+    /// BLASTn assignment using the core_nt database
     /// - Parameter path: path for the output file to be written to
     private func printHitCountsFile(path: String) throws {
         Console.writeToStdOut("Writing \(path) output file...")
