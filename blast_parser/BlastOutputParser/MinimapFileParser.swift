@@ -45,7 +45,7 @@ class MinimapFileParser: FileParser {
         readStream.url.deletingLastPathComponent().lastPathComponent
     }
         
-    /// Parses a minimap2 classification file contqining a header with the following columns:
+    /// Parses a minimap2 classification file containing a header with the following columns:
     /// Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy by retrieving the
     /// best hit for each read
     /// WARNING: Assumes the file is already sorted by Query_ID, Alignment_Score and
@@ -63,7 +63,7 @@ class MinimapFileParser: FileParser {
                 guard header.count == 5 else {
                     throw RuntimeError("Invalid header line for minimap2 classification file")
                 }
-                guard header.contains("Query_ID"), header.contains("Reference_ID"),  header.contains("Alignment_Score"), header.contains("Alignment_Length"), header.contains("Taxonomy") else {
+                guard header.contains("Query_ID"), header.contains("Reference_ID"), header.contains("Alignment_Score"), header.contains("Alignment_Length"), header.contains("Taxonomy") else {
                     throw RuntimeError("Invalid header: It should contain the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy")
                 }
                 index += 1
