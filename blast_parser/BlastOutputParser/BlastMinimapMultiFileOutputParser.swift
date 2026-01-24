@@ -160,7 +160,7 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
     /// their assignments and their queryIDs
     /// - Parameter path: path for the output file to be written to
     private func printMergedFile(path: String) throws {
-        Console.writeToStdOut("Writing \(path) hit counts file...")
+        Console.writeToStdOut("\n\nWriting \(path) merged hits file...")
         
         guard let writer = FileWriter(path:path) else {
             throw RuntimeError("Unable to print merged minimap2 and BLASTn hits to file due to a malformed path.")
