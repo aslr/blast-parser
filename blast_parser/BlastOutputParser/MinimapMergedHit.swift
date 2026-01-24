@@ -56,7 +56,13 @@ final class MinimapMergedHit: CustomStringConvertible {
     let binID: UUID
     var hits = [MinimapHit]()
     var hitCounts = [MinimapSampleCounts]()
-    var averageScore = 0
+    private var _averageScore = 0
+    
+    var averageScore: Int {
+        guard _averageScore == 0 else { return _averageScore }
+        _averageScore = hits.map((\.score)).reduce(0, +) / hits.count
+        return _averageScore
+    }
     
     var coreDescription: String {
         "\(hits.map(\.abstract).joined(separator: "\t"))\t\(averageScore)"
@@ -120,14 +126,5 @@ final class MinimapMergedHit: CustomStringConvertible {
             let storage = MinimapSampleCounts(sampleID: sampleID, count: counts)
             hitCounts.append(storage)
         }
-    }
-    
-    /// Sets the average score from the main hits bin
-    /// This means that this NOT the average score across different databases
-    /// or classifiers but only the average score for all hits using the main
-    /// classifier
-    /// - Parameter bin - the bin containing all (main) hits
-    func setAverageScore(from bin: MinimapHitBin) {
-        averageScore = bin.averageScore
     }
 }

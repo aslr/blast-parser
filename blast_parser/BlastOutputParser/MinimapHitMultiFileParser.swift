@@ -112,7 +112,6 @@ final class MinimapHitMultiFileParser {
             }
             
             mergedHit.appendCounts(from: bin, sampleIDs: sampleIDs)
-            mergedHit.setAverageScore(from: bin)
             mergedHits.append(mergedHit)
         }
     }
