@@ -1,14 +1,9 @@
-//
-//  Readme.md
-//  blast_parser
-//
-//  Created by João Varela on 21/10/2024.
-//
 
-# `blast_parser`
+
+# `blast-parser`
 
 ## Abstract
-This is an Xcode project written in Swift and C to build a CLI tool to bridge the Kraken2 taxonomic assignment of Nanopore sequences, so that these assignments can be validated by BLASTn searches. In this new version (0.4.0), it can also be used for validating Qiime 2 denoised ASVs and merge files from different classifiers and databases into a single read counts file and respective taxonomies. In this way, you can compare the results of different classifiers and databases as long as the representative sequence file has the same sequences. 
+This is a Swift package to build a CLI tool to bridge the Kraken2 and minimap2 taxonomic assignment of Nanopore sequences, so that these assignments can be validated by BLASTn searches. It can also be used for validating Qiime 2 denoised ASVs and merge files from different classifiers and databases into a single read counts file and respective taxonomies.
 
 ## Background
 ### Data explosion
@@ -18,7 +13,7 @@ Because of the explosion of sequencing data enabled by massive parallel sequenci
 In the beginning of this revolution, genomics, or the study of genomes, was focused on samples of known biological origin. However, with the introduction of MPS, the study of all the genomes present in an environmental sample became possible. This led to the advent of metagenomics. However, that created the need for assigning the biological origin of each DNA sequence retrieved from a sample.
 
 ### Use of marker genes to assign the biological origin of DNA sequences
-Specific genes are often used to assign the biological origin of DNA sequences retrieved from a sample. Although you potentially could do this with any genomic sequence, in order to classify a sequence as belonging to a given organism, we need to use tools that are able compare that unknown sequence with known sequences present in databases. However, these databases are not comprehensive enough to contain all possible genes from every organism. **If the unknown sequence cannot be matched to a similar sequence in the database, then the assignment will fail. The unknown sequence will remain "unclassified".** Therefore, databases tend to contain specific marker genes. These marker genes should be present in all organisms, being often called "universal". The sequence of these marker genes are often used as "barcodes" to identify a given organism. Often used marker genes are the 16S ribosomal RNA gene for prokaryotes, 18S ribosomal RNA gene for eukaryotes and ITS (internal transcribed spacer) for fungi and algae. However, plastidial (e.g., *rbc*L), and mitochondrial (e.g., *cox*1) marker genes are also used. 
+Specific genes are often used to assign the biological origin of DNA sequences retrieved from a sample. Although you potentially could do this with any genomic sequence, in order to classify a sequence as belonging to a given organism, we need to use tools that are able compare that unknown sequence with known sequences present in databases. However, these databases are not comprehensive enough to contain all possible genes from every organism. **If the unknown sequence cannot be matched to a similar sequence in the database, then the assignment will fail. The unknown sequence will remain "unclassified" or "unassigned".** Therefore, databases tend to contain specific marker genes. These marker genes should be present in all organisms, being often called "universal". The sequence of these marker genes are often used as "barcodes" to identify a given organism. Often used marker genes are the 16S ribosomal RNA gene for prokaryotes, 18S ribosomal RNA gene for eukaryotes and ITS (internal transcribed spacer) for fungi and algae. However, plastidial (e.g., *rbcL*), and mitochondrial (e.g., *cox1*) marker genes are also used. 
 
 ### Accuracy of taxonomic assignment of metagenomic sequences
 For the most part, current pipelines used to classify taxonomically the biological origin of a given bacterial sequence are accepted as having a good accuracy. This is due to the fact that a large effort has been made by teams who wanted to study the human gut microbiota and its impact on our health. **Accuracy** is often measured by using DNA samples of a mock community with a known composition. If the sequencing retrieves a taxonomic composition similar enough to what is expected, then we can know the accuracy of the pipeline. 
@@ -76,19 +71,20 @@ However, if we want to solve this problem right now, we need to find alternative
 In spite of the inaccuracy found in the assignments made by Kraken2 using Nanopore reads, I could find that most sequences assigned to a specific (wrong) taxon, when validated by submitting them to the NCBI eukaryotic database using BLASTn, the correct taxon assignment was often the same (**but not always!**). Therefore, it seems as though Kraken2 can be used as an intermediate step to cluster the sequences into "bins" of closely related sequences. In a second step, several sequences of each bin can be blasted to confirm the assignment made, accelerating the process of validating the assignment using different tools and databases. If the assignment is correct, it should be internally and phylogenetically consistent. The same strategy can be used for other pipelines, such as using DADA2 to obtain denoised ASVs for Illumina reads and then validate them with BLASTn searches.
 
 
-## `blast_parser`: What it does
+## `blast-parser`: What it does
 
-`blast_parser` is a tool Catarina Alexandre and I started writing in Swift and C, which runs natively on MacOS, both Intel or Apple Silicon chips. A possible port to Linux might be considered. This tool does the following:
+`blast-parser` is a tool Catarina Alexandre and I started writing in Swift and C, which runs natively on MacOS and Linux, both Intel or Apple Silicon chips. Most likely, it can be run on Windows too using WSL. This tool does the following:
 
-1. It imports the new [taxonomy database](https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/) from NCBI containing the full lineages of each taxon from domain to species from the file `rankedlineage.dmp` into a CSV file using the `import` subcommand.
-2. It re-exports the *imported* CSV file into a PostGresSQL database using the lipq library using the `export` subcommand.
-This database can then be queried using the generated taxID from the BLASTn output in order to generate the full taxonomic lineage.
-3. It merges a Kraken 2 counts report with a BLASTn output table using the -outfmt option "6 qsedid pident length evalue bitscore score nident saccver stitle qcovs staxids sscinames sskingdoms" using the `merge` subcommand
-4. It merges a Qiime 2 output table containing the denoised ASVs table together with its assigned taxonomy with a BLASTn output table where `-outfmt` = "6 qsedid pident length evalue bitscore score nident saccver stitle qcovs staxids sscinames sskingdoms" by using the `merge-qiime` subcommand
-5. It generates a full taxonomic lineage from an NCBI taxonomic ID by querying the local PostGresSQL database, which can then be merged with Kraken2 or Qiime 2 DADA2 output tables.
-6. It merges output files generated by different classifiers, including a BLASTn output file, into a single read count file as long as these output files contain the same representative sequences. At the moment, the merge of more than one classifier is only implemented for the merge-qiime subcommand.
+1. It downloads and imports the new [taxonomy database](https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/) from NCBI containing the full lineages of each taxon from domain to species from the file `rankedlineage.dmp` into a CSV file using the `import` subcommand. This subcommand also indexes this local taxonomy database file for faster access.
+2. It parses and merges a Kraken 2 counts report with a BLASTn output table using the -outfmt option "6 qsedid pident length evalue bitscore score nident saccver stitle qcovs staxids sscinames sskingdoms" using the `parse-kraken` and  `merge-kraken` subcommands.
+3. It merges a Qiime 2 output table containing the denoised ASVs table together with its assigned taxonomy with a BLASTn output table where `-outfmt` = "6 qsedid pident length evalue bitscore score nident saccver stitle qcovs staxids sscinames sskingdoms" by using the `merge-qiime` subcommand
+4. It generates a full taxonomic lineage from an NCBI taxonomic ID by querying the local taxonomy database, which can then be merged with Kraken2 or Qiime 2 DADA2 output tables.
+5. It merges output files generated by different classifiers, including a BLASTn output file, into a single read count file as long as these output files contain the same representative sequences. At the moment, the merge of more than one classifier is only implemented for the merge-qiime subcommand.
 
-## `blast_parser`: New capibilities with version 0.6.1 and later
+## `blast-parser`: New capibilities with version 0.6.1 and later
 
-1. `blast_parser` using the subcommand `parse-minimap` is now able to use parse and join Nanopore long reads into bins with the same classification carried out by minimap2 and then generate a representative reads file in FASTA or FASTAQ format to be reclassified by minimap2 using different databases
-2. `blast_parser` using the subcommand `merge-minimap` is now able to merge the classification carried out by BLAST+ and NCBI core_nt database with the classification output of minimap2 using different databases. This allows for checking the congruency and accuracy of different classifiers according to their alignment scores and lengths.
+1. `blast-parser` using the subcommand `parse-minimap` is now able to use parse and join Nanopore long reads into bins with the same classification carried out by minimap2 and then generate a representative reads file in FASTA or FASTAQ format to be reclassified by minimap2 using different databases
+2. `blast-parser` using the subcommand `merge-minimap` is now able to merge the classification carried out by BLAST+ and NCBI core_nt database with the classification output of minimap2 using different databases. This allows for checking the congruency and accuracy of different classifiers according to their alignment scores and lengths.
+
+## `blast-parser`: New capibilities with version 0.8 and later
+Dependency from libpq was removed by the implementation of a local database that is downloaded from NCBI server and then parsed by the `import` command. The `export` command was removed as it is no longer necessary. Moreover, the Xcode project was transformed into a Swift Package for allowing building the exact same code base for MacOS and Linux.
