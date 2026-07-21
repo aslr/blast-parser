@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 enum ReportParserError: Error {
     case invalidRank(line: Int, taxon:String)
@@ -21,7 +22,7 @@ final class KrakenReportParser: FileParser {
         for line in readStream {
             let items = line.components(separatedBy: "\t")
             guard items.count == 6 else
-                { throw RuntimeError("Invalid Kraken2 report.") }
+                { throw ValidationError("Invalid Kraken2 report.") }
             var reportLine = KrakenReportLine()
             reportLine.lineNumber = i
             let percentageString = items[0].trimmingCharacters(in: .whitespaces)
@@ -54,20 +55,20 @@ final class KrakenReportParser: FileParser {
     private func parseRank(lineNumber:Int,
                            taxID:Int,
                            abbreviation:String,
-                           name:String) throws -> Rank  {
+                           name:String) throws -> KrakenRank  {
         // default rank is "U" or "Unclassified"
         switch abbreviation {
         case "U":
-            return Rank.unclassified()
+            return KrakenRank.unclassified()
         case "R":
-            return Rank.root()
+            return KrakenRank.root()
         case "D":
-            return Rank.domain(taxID: taxID,
+            return KrakenRank.domain(taxID: taxID,
                                name: name,
                                hierarchy: hierarchy)
         default:
             do {
-                return try Rank.rank(abbreviation: abbreviation,
+                return try KrakenRank.rank(abbreviation: abbreviation,
                                      name: name)
             }
             
@@ -83,7 +84,7 @@ final class KrakenReportParser: FileParser {
     ///     - line: the line being parsed of the Kraken2 report
     ///     - rank: the rank to be added to the Hierarchy object
     private func parseHierarchy(lineNumber:Int,
-                                rank:Rank) throws {
+                                rank:KrakenRank) throws {
         switch rank.abbreviation {
         case "U":
             break
