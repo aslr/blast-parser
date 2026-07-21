@@ -5,6 +5,7 @@
 //  Created by Catarina Alexandre on 29/05/2025.
 //
 import Foundation
+import ArgumentParser
 
 final class BlastQiimeOutputParser: BlastOutputParser {
 	let asvsParser: QiimeASVMultiFileParser
@@ -29,7 +30,7 @@ final class BlastQiimeOutputParser: BlastOutputParser {
     /// - Parameter path: path for the output file to be written to
 	func print(_ path:String) throws{
         guard let writer = FileWriter(path:path) else {
-            throw RuntimeError("Unable to print merged Qiime 2 and BLASTn output to file due to a malformed path.")
+            throw ValidationError("Unable to print merged Qiime 2 and BLASTn output to file due to a malformed path.")
         }
 		let dataWriter = try writer.makeDataWriter()
 		for blastASV in blastASVs {
@@ -40,22 +41,21 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 	
 	/// Merge Qiime 2 ASVs with BLASTn best hit(s) of each bin
 	/// depending upon the `hitsPerASV` instance variable
-	override func merge() throws {
+    override func merge(lineageDB path:String) throws {
 		Console.writeToStdOut("Merging Qiime 2 ASVs with BLASTn output...")
 		
 		guard hits.isEmpty == false else {
-			throw RuntimeError("Unable to merge BLAST hits with the ASVs table because no BLAST hits were found.")
+			throw ValidationError("Unable to merge BLAST hits with the ASVs table because no BLAST hits were found.")
 		}
 		
 		let asvs = try asvsParser.merge()
 		guard asvs.isEmpty == false else {
-			throw RuntimeError("Unable to merge BLAST hits with the ASVs table because no ASVs were found.")
+			throw ValidationError("Unable to merge BLAST hits with the ASVs table because no ASVs were found.")
 		}
 		// Initialize the object that will connect to the PostgresSQL
 		// database containing the whole NCBI taxonomic lineages
-        let taxonomyDatabase = SQLDatabase(database: .database,
-                                           table: .table)
-		taxonomyDatabase.connect()
+        let taxonomyDatabase = Database()
+		try taxonomyDatabase.load(csvPath: path)
 		
 		// We get the current index to make the search faster in the ASVs table
 		// and avoid searching the same hits all over again for each ASV as we
@@ -66,7 +66,7 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 			guard index < bins.endIndex else { break }
 			let bin = bins[index]
 			guard let queryID = bin.sequenceID else {
-				throw RuntimeError("Unable to merge BLAST hits with the ASVs table because at least one BLAST hit does not have a sequence ID.")
+				throw ValidationError("Unable to merge BLAST hits with the ASVs table because at least one BLAST hit does not have a sequence ID.")
 			}
 			
 			if queryID == asv.featureID {
@@ -87,7 +87,5 @@ final class BlastQiimeOutputParser: BlastOutputParser {
 				blastASVs.append(blastASV)
 			}
 		}
-		
-		taxonomyDatabase.disconnect()
 	}
 }

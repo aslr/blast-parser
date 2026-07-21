@@ -5,20 +5,23 @@
 //  Created by João Varela on 13/07/2025.
 //
 
+import ArgumentParser
+
 class BlastOutputParser: FileParser {
 	var hits = [BlastHit]()
 	var bins = [BlastHitBin]()
 	var hitsPerASV = 1
     
-    func parse(criterion:BlastHit.SortCriterion = .bitScore) throws {
+    func parse(lineageDBPath:String,
+               criterion:BlastHit.SortCriterion = .bitScore) throws {
         try parseBlastOutput()
         try parseBins(criterion: criterion)
-        try merge()
+        try merge(lineageDB: lineageDBPath)
     }
     
     /// Placeholder for a merging hits method
     /// Default implementation does nothing
-    func merge() throws {}
+    func merge(lineageDB path:String) throws {}
     
     private func parseBlastOutput() throws {
         Console.writeToStdOut("Parsing BLASTn output at \(path)")
@@ -44,7 +47,7 @@ class BlastOutputParser: FileParser {
                 if let previousBin = bins.last {
                     previousBin.append(hit: hit)
                 } else {
-                    throw RuntimeError("Unable to append BLAST hit to bin.")
+                    throw ValidationError("Unable to append BLAST hit to bin.")
                 }
             }
         }

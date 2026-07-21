@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 final class BlastKrakenOutputParser: BlastOutputParser {
     let asvsParser:KrakenParsedASVParser
@@ -56,7 +57,7 @@ final class BlastKrakenOutputParser: BlastOutputParser {
         }
         
         guard let writer = writer else {
-            throw RuntimeError("Unable to open file to write BLASTn and Kraken2 output due to a malformed path.")
+            throw ValidationError("Unable to open file to write BLASTn and Kraken2 output due to a malformed path.")
         }
         
         let dataWriter = try writer.makeDataWriter()
@@ -68,25 +69,24 @@ final class BlastKrakenOutputParser: BlastOutputParser {
     
     /// Merge Kraken ASVs with BLASTn best hit(s) of each bin
     /// depending upon the `hitsPerASV` instance variable
-    override func merge() throws {
+    override func merge(lineageDB path:String) throws {
         Console.writeToStdOut("Merging Kraken ASVs with BLASTn output...")
         
         guard hits.isEmpty == false else {
-            throw RuntimeError("Unable to merge BLAST hits with the ASVs table because no BLAST hits were found.")
+            throw ValidationError("Unable to merge BLAST hits with the ASVs table because no BLAST hits were found.")
         }
         
         let asvs = try asvsParser.parse()
         guard asvs.isEmpty == false else {
-            throw RuntimeError("Unable to merge BLAST hits with the ASVs table because no ASVs were found.")
+            throw ValidationError("Unable to merge BLAST hits with the ASVs table because no ASVs were found.")
         }
         
         try taxonomyParser?.parse()
         
-        // Initialize the object that will connect to the PostgresSQL
+        // Initialize the object that will load the lineage DB to memory
         // database containing the whole NCBI taxonomic lineages
-        let taxonomyDatabase = SQLDatabase(database: .database,
-                                           table: .table)
-        taxonomyDatabase.connect()
+        let taxonomyDatabase = Database()
+        try taxonomyDatabase.load(csvPath: path)
         
         // We get the current index to make the search faster in the ASVs table
         // and avoid searching the same hits all over again for each ASV as we
@@ -97,7 +97,7 @@ final class BlastKrakenOutputParser: BlastOutputParser {
             guard index < bins.endIndex else { break }
             let bin = bins[index]
             guard let queryID = bin.sequenceID else {
-                throw RuntimeError("Unable to merge BLAST hits with the ASVs table because at least one BLAST hit does not have a sequence ID.")
+                throw ValidationError("Unable to merge BLAST hits with the ASVs table because at least one BLAST hit does not have a sequence ID.")
             }
             
             if queryID == asv.sequenceID {
@@ -120,8 +120,6 @@ final class BlastKrakenOutputParser: BlastOutputParser {
                 blastASVs.append(blastASV)
             }
         }
-        
-        taxonomyDatabase.disconnect()
     }
 }
 

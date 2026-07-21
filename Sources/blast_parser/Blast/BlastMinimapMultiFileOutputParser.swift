@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
     let multiFileParser: MinimapHitMultiFileParser
@@ -39,7 +40,7 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
     /// unique taxonomy assignments for calculating the correct hit counts
     /// per taxon
     /// Used in `merge-minimap` subcommand, where `hitsPerASV` is always 1
-    func merge() throws {
+    func merge(lineageDB path:String) throws {
         Console.writeToStdOut("Merging minimap2 hits with BLASTn output...")
         
         // make local variables as self vars are computed
@@ -47,19 +48,18 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
         let bins = self.bins
         
         guard hits.isEmpty == false && bins.isEmpty == false else {
-            throw RuntimeError("Unable to merge BLAST hits with the minimap2 table because no BLAST hits or bins were found.")
+            throw ValidationError("Unable to merge BLAST hits with the minimap2 table because no BLAST hits or bins were found.")
         }
         
         try multiFileParser.merge()
         let mergedHits = multiFileParser.mergedHits
         
         guard mergedHits.isEmpty == false else {
-            throw RuntimeError("Unable to merge BLAST hits with minimap hit table because no BLAST hits were found.")
+            throw ValidationError("Unable to merge BLAST hits with minimap hit table because no BLAST hits were found.")
         }
         
-        let taxonomyDatabase = SQLDatabase(database: .database,
-                                           table: .table)
-        taxonomyDatabase.connect()
+        let taxonomyDatabase = Database()
+        try taxonomyDatabase.load(csvPath: path)
         
         for mergedHit in mergedHits {
             if let bin = bins.bin(for: mergedHit.queryID),
@@ -76,8 +76,6 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
                 mergedBlastHits.append(blastMergedHit)
             }
         }
-        
-        taxonomyDatabase.disconnect()
         
         Console.writeToStdOut("Merging hits into bins...")
         try mergeBins()
@@ -142,12 +140,12 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
         Console.writeToStdOut("Writing \(path) output file...")
         
         guard let writer = FileWriter(path:path) else {
-            throw RuntimeError("Unable to print the hits counts to file due to a malformed path.")
+            throw ValidationError("Unable to print the hits counts to file due to a malformed path.")
         }
         let dataWriter = try writer.makeDataWriter()
         
         guard let header = mergedBlastHitBins.first?.header else {
-            throw RuntimeError("Unable to print the hits counts to file as no merged hits were found.")
+            throw ValidationError("Unable to print the hits counts to file as no merged hits were found.")
         }
         dataWriter.write(line: header)
         
@@ -163,12 +161,12 @@ final class BlastMinimapMultiFileOutputParser: BlastMinimapMultiFileParser {
         Console.writeToStdOut("\n\nWriting \(path) merged hits file...")
         
         guard let writer = FileWriter(path:path) else {
-            throw RuntimeError("Unable to print merged minimap2 and BLASTn hits to file due to a malformed path.")
+            throw ValidationError("Unable to print merged minimap2 and BLASTn hits to file due to a malformed path.")
         }
         let dataWriter = try writer.makeDataWriter()
         
         guard let header = mergedBlastHits.first?.header else {
-            throw RuntimeError("Unable to print merged minimap2 and BLASTn hits to file as no merged hits were found.")
+            throw ValidationError("Unable to print merged minimap2 and BLASTn hits to file as no merged hits were found.")
         }
         
         dataWriter.write(line: header)

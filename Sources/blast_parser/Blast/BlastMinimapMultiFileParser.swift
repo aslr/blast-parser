@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 class BlastMinimapMultiFileParser {
     var parsers = [BlastOutputParser]()
@@ -20,20 +21,21 @@ class BlastMinimapMultiFileParser {
     
     init(path: String) throws {
         guard let paths = path.findFiles(suffix: .blast) else {
-            throw RuntimeError("No files with suffix \(FileSuffix.blast.rawValue) were found in \(path).")
+            throw ValidationError("No files with suffix \(FileSuffix.blast.rawValue) were found in \(path).")
         }
         
         for path in paths {
             guard let parser = BlastOutputParser(path: path) else {
-                throw RuntimeError("Unable to create BlastOutputParser for \(path).")
+                throw ValidationError("Unable to create BlastOutputParser for \(path).")
             }
             self.parsers.append(parser)
         }
     }
     
-    func parse(criterion:BlastHit.SortCriterion = .bitScore) throws {
+    func parse(lineageDBPath:String, criterion:BlastHit.SortCriterion = .bitScore) throws {
         for parser in parsers {
-            try parser.parse(criterion: criterion)
+            try parser.parse(lineageDBPath: lineageDBPath,
+                             criterion: criterion)
         }
     }
 }

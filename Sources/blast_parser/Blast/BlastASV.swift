@@ -8,7 +8,7 @@
 /// Base class to store taxonomy information to a BlastHit and to be used
 /// by derived classes to merge it with data from other classifiers and
 /// databases
-class BlastASV: CustomStringConvertible{
+class BlastASV: CustomStringConvertible {
     var hit: BlastHit
     var blastTaxonomy = Hierarchy()
     
@@ -29,14 +29,14 @@ class BlastASV: CustomStringConvertible{
     ///   - database: SQLDatabase object that handles all calls
     ///   to the PostgresSQL taxonomic database imported by the `import` and
     ///   `export` subcommands.
-    func setBlastTaxonomy(database:SQLDatabase) {
+    func setBlastTaxonomy(database:Database) {
         let taxID = self.hit.ncbiTaxID
         do {
-            if let lineage = NCBILineage(database: database, taxID: taxID) {
+            if let lineage = database.getRecord(for: taxID) {
                 blastTaxonomy = try Hierarchy(lineage: lineage)
                 
                 if lineage.species.isEmpty {
-                    let species = try Rank.rank(abbreviation: "S",
+                    let species = try KrakenRank.rank(abbreviation: "S",
                                                 name: hit.scientificName)
                     blastTaxonomy.dropLastRank()
                     blastTaxonomy.addRank(species)

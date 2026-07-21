@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 enum BlastASVError: Error {
     case invalidLineage
@@ -46,7 +47,7 @@ class BlastKrakenASV: BlastASV {
         let components = line.components(separatedBy: "\t")
         let count = components.count
         guard count == 11 || count == 12  else {
-            throw RuntimeError("Invalid BlastOutputParser line format")
+            throw ValidationError("Invalid BlastOutputParser line format")
         }
         
         var krakenLine = String()

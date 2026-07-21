@@ -9,57 +9,62 @@
 /* Begin PBXBuildFile section */
 		8420FA772CCCF86500C94FF7 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8420FA762CCCF86500C94FF7 /* ArgumentParser */; };
 		845466432F02D883002C8685 /* blast_parser in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8483F1502C4096410075794B /* blast_parser */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		845663E83010056C0055B6AF /* KrakenASVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C53010056C0055B6AF /* KrakenASVParser.swift */; };
-		845663E93010056C0055B6AF /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456639B3010056C0055B6AF /* Console.swift */; };
-		845663EA3010056C0055B6AF /* BlastQiimeASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663AF3010056C0055B6AF /* BlastQiimeASV.swift */; };
-		845663EB3010056C0055B6AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A13010056C0055B6AF /* String.swift */; };
-		845663EC3010056C0055B6AF /* libpq-bp.c in Sources */ = {isa = PBXBuildFile; fileRef = 845663D23010056C0055B6AF /* libpq-bp.c */; };
-		845663ED3010056C0055B6AF /* BlastMinimapHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663AA3010056C0055B6AF /* BlastMinimapHit.swift */; };
-		845663EE3010056C0055B6AF /* BlastHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A63010056C0055B6AF /* BlastHit.swift */; };
-		845663EF3010056C0055B6AF /* SQLDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663E13010056C0055B6AF /* SQLDatabase.swift */; };
-		845663F03010056C0055B6AF /* NCBILineage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663E03010056C0055B6AF /* NCBILineage.swift */; };
-		845663F13010056C0055B6AF /* BlastMinimapHitBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663AB3010056C0055B6AF /* BlastMinimapHitBin.swift */; };
-		845663F23010056C0055B6AF /* MinimapDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B33010056C0055B6AF /* MinimapDatabase.swift */; };
-		845663F33010056C0055B6AF /* KrakenASVBinArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C43010056C0055B6AF /* KrakenASVBinArray.swift */; };
-		845663F43010056C0055B6AF /* DataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663BE3010056C0055B6AF /* DataStream.swift */; };
-		845663F53010056C0055B6AF /* KrakenSequenceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663CA3010056C0055B6AF /* KrakenSequenceParser.swift */; };
-		845663F63010056C0055B6AF /* BlastMinimapMultiFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663AD3010056C0055B6AF /* BlastMinimapMultiFileParser.swift */; };
-		845663F73010056C0055B6AF /* Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456639F3010056C0055B6AF /* Hierarchy.swift */; };
-		845663F83010056C0055B6AF /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 845663D43010056C0055B6AF /* parser.c */; };
-		845663F93010056C0055B6AF /* QiimeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663BC3010056C0055B6AF /* QiimeParser.swift */; };
-		845663FA3010056C0055B6AF /* MinimapParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B93010056C0055B6AF /* MinimapParser.swift */; };
-		845663FB3010056C0055B6AF /* BlastKrakenASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A83010056C0055B6AF /* BlastKrakenASV.swift */; };
-		845663FC3010056C0055B6AF /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663DF3010056C0055B6AF /* Database.swift */; };
-		845663FD3010056C0055B6AF /* BlastKrakenOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A93010056C0055B6AF /* BlastKrakenOutputParser.swift */; };
-		845663FE3010056C0055B6AF /* MinimapHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B53010056C0055B6AF /* MinimapHit.swift */; };
-		845663FF3010056C0055B6AF /* BlastAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A33010056C0055B6AF /* BlastAnalyzer.swift */; };
-		845664003010056C0055B6AF /* KrakenASVTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C63010056C0055B6AF /* KrakenASVTaxonomy.swift */; };
-		845664013010056C0055B6AF /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456639D3010056C0055B6AF /* FileParser.swift */; };
-		845664023010056C0055B6AF /* FileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456639E3010056C0055B6AF /* FileWriter.swift */; };
-		845664033010056C0055B6AF /* QiimeASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663BA3010056C0055B6AF /* QiimeASV.swift */; };
-		845664043010056C0055B6AF /* MinimapFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B43010056C0055B6AF /* MinimapFileParser.swift */; };
-		845664053010056C0055B6AF /* MinimapMergedHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B83010056C0055B6AF /* MinimapMergedHit.swift */; };
-		845664063010056C0055B6AF /* QiimeASVMultiFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663BB3010056C0055B6AF /* QiimeASVMultiFileParser.swift */; };
-		845664073010056C0055B6AF /* MinimapHitBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B63010056C0055B6AF /* MinimapHitBin.swift */; };
-		845664083010056C0055B6AF /* BlastQiimeOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B03010056C0055B6AF /* BlastQiimeOutputParser.swift */; };
-		845664093010056C0055B6AF /* DataStreamWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C03010056C0055B6AF /* DataStreamWriter.swift */; };
-		8456640A3010056C0055B6AF /* KrakenASVBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C33010056C0055B6AF /* KrakenASVBin.swift */; };
-		8456640B3010056C0055B6AF /* BlastASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A53010056C0055B6AF /* BlastASV.swift */; };
-		8456640C3010056C0055B6AF /* KrakenReportLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C83010056C0055B6AF /* KrakenReportLine.swift */; };
-		8456640D3010056C0055B6AF /* FastqParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456639C3010056C0055B6AF /* FastqParser.swift */; };
-		8456640E3010056C0055B6AF /* MinimapHitMultiFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B73010056C0055B6AF /* MinimapHitMultiFileParser.swift */; };
-		8456640F3010056C0055B6AF /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A03010056C0055B6AF /* Rank.swift */; };
-		845664103010056C0055B6AF /* KrakenTaxonomyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B23010056C0055B6AF /* KrakenTaxonomyParser.swift */; };
-		845664113010056C0055B6AF /* KrakenASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C23010056C0055B6AF /* KrakenASV.swift */; };
-		845664123010056C0055B6AF /* BlastHitBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663A73010056C0055B6AF /* BlastHitBin.swift */; };
-		845664133010056C0055B6AF /* connect.c in Sources */ = {isa = PBXBuildFile; fileRef = 845663CD3010056C0055B6AF /* connect.c */; };
-		845664143010056C0055B6AF /* BlastMinimapMultiFileOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663AC3010056C0055B6AF /* BlastMinimapMultiFileOutputParser.swift */; };
-		845664153010056C0055B6AF /* KrakenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C73010056C0055B6AF /* KrakenParser.swift */; };
-		845664163010056C0055B6AF /* BlastOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663AE3010056C0055B6AF /* BlastOutputParser.swift */; };
-		845664173010056C0055B6AF /* KrakenReportParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663C93010056C0055B6AF /* KrakenReportParser.swift */; };
-		845664183010056C0055B6AF /* DataStreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663BF3010056C0055B6AF /* DataStreamReader.swift */; };
-		845664193010056C0055B6AF /* KrakenParsedASVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663B13010056C0055B6AF /* KrakenParsedASVParser.swift */; };
-		8456641A3010056C0055B6AF /* BlastParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845663E53010056C0055B6AF /* BlastParser.swift */; };
+		8484B7A83010102D00EA598E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B76B3010102D00EA598E /* Database.swift */; };
+		8484B7A93010102D00EA598E /* ParseKraken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7973010102D00EA598E /* ParseKraken.swift */; };
+		8484B7AA3010102D00EA598E /* MinimapHitMultiFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7823010102D00EA598E /* MinimapHitMultiFileParser.swift */; };
+		8484B7AB3010102D00EA598E /* MinimapHitBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7813010102D00EA598E /* MinimapHitBin.swift */; };
+		8484B7AC3010102D00EA598E /* BlastKrakenASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B75F3010102D00EA598E /* BlastKrakenASV.swift */; };
+		8484B7AD3010102D00EA598E /* BlastMinimapMultiFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7643010102D00EA598E /* BlastMinimapMultiFileParser.swift */; };
+		8484B7AE3010102D00EA598E /* MergeQiime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7963010102D00EA598E /* MergeQiime.swift */; };
+		8484B7AF3010102D00EA598E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7A03010102D00EA598E /* String.swift */; };
+		8484B7B03010102D00EA598E /* KrakenASVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7743010102D00EA598E /* KrakenASVParser.swift */; };
+		8484B7B13010102D00EA598E /* MinimapFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B77F3010102D00EA598E /* MinimapFileParser.swift */; };
+		8484B7B23010102D00EA598E /* KrakenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7773010102D00EA598E /* KrakenParser.swift */; };
+		8484B7B33010102D00EA598E /* QiimeASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B78F3010102D00EA598E /* QiimeASV.swift */; };
+		8484B7B43010102D00EA598E /* KrakenReportLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7793010102D00EA598E /* KrakenReportLine.swift */; };
+		8484B7B53010102D00EA598E /* FileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B79D3010102D00EA598E /* FileWriter.swift */; };
+		8484B7B63010102D00EA598E /* Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B79E3010102D00EA598E /* Hierarchy.swift */; };
+		8484B7B73010102D00EA598E /* DataStreamWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B76F3010102D00EA598E /* DataStreamWriter.swift */; };
+		8484B7B83010102D00EA598E /* MinimapMergedHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7833010102D00EA598E /* MinimapMergedHit.swift */; };
+		8484B7B93010102D00EA598E /* KrakenSequenceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B77B3010102D00EA598E /* KrakenSequenceParser.swift */; };
+		8484B7BA3010102D00EA598E /* NCBIDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B79F3010102D00EA598E /* NCBIDownloader.swift */; };
+		8484B7BB3010102D00EA598E /* BlastQiimeOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7673010102D00EA598E /* BlastQiimeOutputParser.swift */; };
+		8484B7BC3010102D00EA598E /* BlastOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7653010102D00EA598E /* BlastOutputParser.swift */; };
+		8484B7BD3010102D00EA598E /* MergeKraken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7943010102D00EA598E /* MergeKraken.swift */; };
+		8484B7BE3010102D00EA598E /* MergeMinimap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7953010102D00EA598E /* MergeMinimap.swift */; };
+		8484B7BF3010102D00EA598E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7A13010102D00EA598E /* Utilities.swift */; };
+		8484B7C03010102D00EA598E /* MinimapParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7843010102D00EA598E /* MinimapParser.swift */; };
+		8484B7C13010102D00EA598E /* BlastHitBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B75E3010102D00EA598E /* BlastHitBin.swift */; };
+		8484B7C23010102D00EA598E /* MinimapDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B77E3010102D00EA598E /* MinimapDatabase.swift */; };
+		8484B7C33010102D00EA598E /* KrakenTaxonomyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B77C3010102D00EA598E /* KrakenTaxonomyParser.swift */; };
+		8484B7C53010102D00EA598E /* ParseMinimap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7983010102D00EA598E /* ParseMinimap.swift */; };
+		8484B7C63010102D00EA598E /* BlastQiimeASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7663010102D00EA598E /* BlastQiimeASV.swift */; };
+		8484B7C73010102D00EA598E /* BlastMinimapHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7613010102D00EA598E /* BlastMinimapHit.swift */; };
+		8484B7C83010102D00EA598E /* KrakenASVBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7723010102D00EA598E /* KrakenASVBin.swift */; };
+		8484B7C93010102D00EA598E /* BlastMinimapMultiFileOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7633010102D00EA598E /* BlastMinimapMultiFileOutputParser.swift */; };
+		8484B7CA3010102D00EA598E /* DataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B76D3010102D00EA598E /* DataStream.swift */; };
+		8484B7CB3010102D00EA598E /* KrakenParsedASVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7763010102D00EA598E /* KrakenParsedASVParser.swift */; };
+		8484B7CC3010102D00EA598E /* FastqParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B79B3010102D00EA598E /* FastqParser.swift */; };
+		8484B7CD3010102D00EA598E /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B79A3010102D00EA598E /* Console.swift */; };
+		8484B7CE3010102D00EA598E /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B79C3010102D00EA598E /* FileParser.swift */; };
+		8484B7CF3010102D00EA598E /* BlastMinimapHitBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7623010102D00EA598E /* BlastMinimapHitBin.swift */; };
+		8484B7D13010102D00EA598E /* BlastHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B75D3010102D00EA598E /* BlastHit.swift */; };
+		8484B7D23010102D00EA598E /* KrakenRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7783010102D00EA598E /* KrakenRank.swift */; };
+		8484B7D33010102D00EA598E /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7933010102D00EA598E /* Import.swift */; };
+		8484B7D43010102D00EA598E /* KrakenASVBinArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7733010102D00EA598E /* KrakenASVBinArray.swift */; };
+		8484B7D53010102D00EA598E /* QiimeASVMultiFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7903010102D00EA598E /* QiimeASVMultiFileParser.swift */; };
+		8484B7D63010102D00EA598E /* BlastKrakenOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7603010102D00EA598E /* BlastKrakenOutputParser.swift */; };
+		8484B7D73010102D00EA598E /* BlastASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B75C3010102D00EA598E /* BlastASV.swift */; };
+		8484B7D83010102D00EA598E /* blast_parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7A43010102D00EA598E /* blast_parser.swift */; };
+		8484B7D93010102D00EA598E /* DataStreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B76E3010102D00EA598E /* DataStreamReader.swift */; };
+		8484B7DA3010102D00EA598E /* KrakenASV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7713010102D00EA598E /* KrakenASV.swift */; };
+		8484B7DB3010102D00EA598E /* KrakenReportParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B77A3010102D00EA598E /* KrakenReportParser.swift */; };
+		8484B7DC3010102D00EA598E /* MinimapHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7803010102D00EA598E /* MinimapHit.swift */; };
+		8484B7DD3010102D00EA598E /* KrakenASVTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7753010102D00EA598E /* KrakenASVTaxonomy.swift */; };
+		8484B7DE3010102D00EA598E /* QiimeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7913010102D00EA598E /* QiimeParser.swift */; };
+		8484B7E23010140300EA598E /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 8484B7E13010140300EA598E /* Crypto */; };
+		8484B7E43010140300EA598E /* CryptoExtras in Frameworks */ = {isa = PBXBuildFile; productRef = 8484B7E33010140300EA598E /* CryptoExtras */; };
+		8484B7E63010140300EA598E /* _CryptoExtras in Frameworks */ = {isa = PBXBuildFile; productRef = 8484B7E53010140300EA598E /* _CryptoExtras */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,73 +81,72 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		845663953010056C0055B6AF /* xcschememanagement.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = xcschememanagement.plist; sourceTree = "<group>"; };
-		8456639B3010056C0055B6AF /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
-		8456639C3010056C0055B6AF /* FastqParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastqParser.swift; sourceTree = "<group>"; };
-		8456639D3010056C0055B6AF /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
-		8456639E3010056C0055B6AF /* FileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriter.swift; sourceTree = "<group>"; };
-		8456639F3010056C0055B6AF /* Hierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hierarchy.swift; sourceTree = "<group>"; };
-		845663A03010056C0055B6AF /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
-		845663A13010056C0055B6AF /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		845663A33010056C0055B6AF /* BlastAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastAnalyzer.swift; sourceTree = "<group>"; };
-		845663A53010056C0055B6AF /* BlastASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastASV.swift; sourceTree = "<group>"; };
-		845663A63010056C0055B6AF /* BlastHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastHit.swift; sourceTree = "<group>"; };
-		845663A73010056C0055B6AF /* BlastHitBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastHitBin.swift; sourceTree = "<group>"; };
-		845663A83010056C0055B6AF /* BlastKrakenASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastKrakenASV.swift; sourceTree = "<group>"; };
-		845663A93010056C0055B6AF /* BlastKrakenOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastKrakenOutputParser.swift; sourceTree = "<group>"; };
-		845663AA3010056C0055B6AF /* BlastMinimapHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapHit.swift; sourceTree = "<group>"; };
-		845663AB3010056C0055B6AF /* BlastMinimapHitBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapHitBin.swift; sourceTree = "<group>"; };
-		845663AC3010056C0055B6AF /* BlastMinimapMultiFileOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapMultiFileOutputParser.swift; sourceTree = "<group>"; };
-		845663AD3010056C0055B6AF /* BlastMinimapMultiFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapMultiFileParser.swift; sourceTree = "<group>"; };
-		845663AE3010056C0055B6AF /* BlastOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastOutputParser.swift; sourceTree = "<group>"; };
-		845663AF3010056C0055B6AF /* BlastQiimeASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastQiimeASV.swift; sourceTree = "<group>"; };
-		845663B03010056C0055B6AF /* BlastQiimeOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastQiimeOutputParser.swift; sourceTree = "<group>"; };
-		845663B13010056C0055B6AF /* KrakenParsedASVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenParsedASVParser.swift; sourceTree = "<group>"; };
-		845663B23010056C0055B6AF /* KrakenTaxonomyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenTaxonomyParser.swift; sourceTree = "<group>"; };
-		845663B33010056C0055B6AF /* MinimapDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapDatabase.swift; sourceTree = "<group>"; };
-		845663B43010056C0055B6AF /* MinimapFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapFileParser.swift; sourceTree = "<group>"; };
-		845663B53010056C0055B6AF /* MinimapHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapHit.swift; sourceTree = "<group>"; };
-		845663B63010056C0055B6AF /* MinimapHitBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapHitBin.swift; sourceTree = "<group>"; };
-		845663B73010056C0055B6AF /* MinimapHitMultiFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapHitMultiFileParser.swift; sourceTree = "<group>"; };
-		845663B83010056C0055B6AF /* MinimapMergedHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapMergedHit.swift; sourceTree = "<group>"; };
-		845663B93010056C0055B6AF /* MinimapParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapParser.swift; sourceTree = "<group>"; };
-		845663BA3010056C0055B6AF /* QiimeASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiimeASV.swift; sourceTree = "<group>"; };
-		845663BB3010056C0055B6AF /* QiimeASVMultiFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiimeASVMultiFileParser.swift; sourceTree = "<group>"; };
-		845663BC3010056C0055B6AF /* QiimeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiimeParser.swift; sourceTree = "<group>"; };
-		845663BE3010056C0055B6AF /* DataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStream.swift; sourceTree = "<group>"; };
-		845663BF3010056C0055B6AF /* DataStreamReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStreamReader.swift; sourceTree = "<group>"; };
-		845663C03010056C0055B6AF /* DataStreamWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStreamWriter.swift; sourceTree = "<group>"; };
-		845663C23010056C0055B6AF /* KrakenASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASV.swift; sourceTree = "<group>"; };
-		845663C33010056C0055B6AF /* KrakenASVBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVBin.swift; sourceTree = "<group>"; };
-		845663C43010056C0055B6AF /* KrakenASVBinArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVBinArray.swift; sourceTree = "<group>"; };
-		845663C53010056C0055B6AF /* KrakenASVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVParser.swift; sourceTree = "<group>"; };
-		845663C63010056C0055B6AF /* KrakenASVTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVTaxonomy.swift; sourceTree = "<group>"; };
-		845663C73010056C0055B6AF /* KrakenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenParser.swift; sourceTree = "<group>"; };
-		845663C83010056C0055B6AF /* KrakenReportLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenReportLine.swift; sourceTree = "<group>"; };
-		845663C93010056C0055B6AF /* KrakenReportParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenReportParser.swift; sourceTree = "<group>"; };
-		845663CA3010056C0055B6AF /* KrakenSequenceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenSequenceParser.swift; sourceTree = "<group>"; };
-		845663CC3010056C0055B6AF /* connect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = connect.h; sourceTree = "<group>"; };
-		845663CD3010056C0055B6AF /* connect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = connect.c; sourceTree = "<group>"; };
-		845663CE3010056C0055B6AF /* globals-bp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "globals-bp.h"; sourceTree = "<group>"; };
-		845663CF3010056C0055B6AF /* include.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = include.zip; sourceTree = "<group>"; };
-		845663D03010056C0055B6AF /* lib.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = lib.zip; sourceTree = "<group>"; };
-		845663D13010056C0055B6AF /* libpq-bp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libpq-bp.h"; sourceTree = "<group>"; };
-		845663D23010056C0055B6AF /* libpq-bp.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "libpq-bp.c"; sourceTree = "<group>"; };
-		845663D33010056C0055B6AF /* parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
-		845663D43010056C0055B6AF /* parser.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parser.c; sourceTree = "<group>"; };
-		845663D63010056C0055B6AF /* arm64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
-		845663D83010056C0055B6AF /* arm64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
-		845663D93010056C0055B6AF /* arm64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
-		845663DA3010056C0055B6AF /* arm64-apple-macos.abi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "arm64-apple-macos.abi.json"; sourceTree = "<group>"; };
-		845663DC3010056C0055B6AF /* blast_parser */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = blast_parser; sourceTree = "<group>"; };
-		845663DF3010056C0055B6AF /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		845663E03010056C0055B6AF /* NCBILineage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCBILineage.swift; sourceTree = "<group>"; };
-		845663E13010056C0055B6AF /* SQLDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLDatabase.swift; sourceTree = "<group>"; };
-		845663E33010056C0055B6AF /* blast_parser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blast_parser.entitlements; sourceTree = "<group>"; };
-		845663E43010056C0055B6AF /* blast_parser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "blast_parser-Bridging-Header.h"; sourceTree = "<group>"; };
-		845663E53010056C0055B6AF /* BlastParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastParser.swift; sourceTree = "<group>"; };
-		845663E63010056C0055B6AF /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		8483F1502C4096410075794B /* blast_parser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blast_parser; sourceTree = BUILT_PRODUCTS_DIR; };
+		8484B74F30100FE600EA598E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
+		8484B75030100FF000EA598E /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		8484B75130100FFD00EA598E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		8484B7523010100E00EA598E /* tasks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tasks.json; sourceTree = "<group>"; };
+		8484B7533010102000EA598E /* blast_parserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blast_parserTests.swift; sourceTree = "<group>"; };
+		8484B7563010102D00EA598E /* xcschememanagement.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = xcschememanagement.plist; sourceTree = "<group>"; };
+		8484B75C3010102D00EA598E /* BlastASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastASV.swift; sourceTree = "<group>"; };
+		8484B75D3010102D00EA598E /* BlastHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastHit.swift; sourceTree = "<group>"; };
+		8484B75E3010102D00EA598E /* BlastHitBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastHitBin.swift; sourceTree = "<group>"; };
+		8484B75F3010102D00EA598E /* BlastKrakenASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastKrakenASV.swift; sourceTree = "<group>"; };
+		8484B7603010102D00EA598E /* BlastKrakenOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastKrakenOutputParser.swift; sourceTree = "<group>"; };
+		8484B7613010102D00EA598E /* BlastMinimapHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapHit.swift; sourceTree = "<group>"; };
+		8484B7623010102D00EA598E /* BlastMinimapHitBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapHitBin.swift; sourceTree = "<group>"; };
+		8484B7633010102D00EA598E /* BlastMinimapMultiFileOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapMultiFileOutputParser.swift; sourceTree = "<group>"; };
+		8484B7643010102D00EA598E /* BlastMinimapMultiFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastMinimapMultiFileParser.swift; sourceTree = "<group>"; };
+		8484B7653010102D00EA598E /* BlastOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastOutputParser.swift; sourceTree = "<group>"; };
+		8484B7663010102D00EA598E /* BlastQiimeASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastQiimeASV.swift; sourceTree = "<group>"; };
+		8484B7673010102D00EA598E /* BlastQiimeOutputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlastQiimeOutputParser.swift; sourceTree = "<group>"; };
+		8484B76B3010102D00EA598E /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		8484B76D3010102D00EA598E /* DataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStream.swift; sourceTree = "<group>"; };
+		8484B76E3010102D00EA598E /* DataStreamReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStreamReader.swift; sourceTree = "<group>"; };
+		8484B76F3010102D00EA598E /* DataStreamWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStreamWriter.swift; sourceTree = "<group>"; };
+		8484B7713010102D00EA598E /* KrakenASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASV.swift; sourceTree = "<group>"; };
+		8484B7723010102D00EA598E /* KrakenASVBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVBin.swift; sourceTree = "<group>"; };
+		8484B7733010102D00EA598E /* KrakenASVBinArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVBinArray.swift; sourceTree = "<group>"; };
+		8484B7743010102D00EA598E /* KrakenASVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVParser.swift; sourceTree = "<group>"; };
+		8484B7753010102D00EA598E /* KrakenASVTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenASVTaxonomy.swift; sourceTree = "<group>"; };
+		8484B7763010102D00EA598E /* KrakenParsedASVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenParsedASVParser.swift; sourceTree = "<group>"; };
+		8484B7773010102D00EA598E /* KrakenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenParser.swift; sourceTree = "<group>"; };
+		8484B7783010102D00EA598E /* KrakenRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenRank.swift; sourceTree = "<group>"; };
+		8484B7793010102D00EA598E /* KrakenReportLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenReportLine.swift; sourceTree = "<group>"; };
+		8484B77A3010102D00EA598E /* KrakenReportParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenReportParser.swift; sourceTree = "<group>"; };
+		8484B77B3010102D00EA598E /* KrakenSequenceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenSequenceParser.swift; sourceTree = "<group>"; };
+		8484B77C3010102D00EA598E /* KrakenTaxonomyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrakenTaxonomyParser.swift; sourceTree = "<group>"; };
+		8484B77E3010102D00EA598E /* MinimapDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapDatabase.swift; sourceTree = "<group>"; };
+		8484B77F3010102D00EA598E /* MinimapFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapFileParser.swift; sourceTree = "<group>"; };
+		8484B7803010102D00EA598E /* MinimapHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapHit.swift; sourceTree = "<group>"; };
+		8484B7813010102D00EA598E /* MinimapHitBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapHitBin.swift; sourceTree = "<group>"; };
+		8484B7823010102D00EA598E /* MinimapHitMultiFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapHitMultiFileParser.swift; sourceTree = "<group>"; };
+		8484B7833010102D00EA598E /* MinimapMergedHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapMergedHit.swift; sourceTree = "<group>"; };
+		8484B7843010102D00EA598E /* MinimapParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimapParser.swift; sourceTree = "<group>"; };
+		8484B7863010102D00EA598E /* arm64-apple-macos.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftsourceinfo"; sourceTree = "<group>"; };
+		8484B7883010102D00EA598E /* arm64-apple-macos.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftdoc"; sourceTree = "<group>"; };
+		8484B7893010102D00EA598E /* arm64-apple-macos.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-macos.swiftmodule"; sourceTree = "<group>"; };
+		8484B78A3010102D00EA598E /* arm64-apple-macos.abi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "arm64-apple-macos.abi.json"; sourceTree = "<group>"; };
+		8484B78C3010102D00EA598E /* blast_parser */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = blast_parser; sourceTree = "<group>"; };
+		8484B78F3010102D00EA598E /* QiimeASV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiimeASV.swift; sourceTree = "<group>"; };
+		8484B7903010102D00EA598E /* QiimeASVMultiFileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiimeASVMultiFileParser.swift; sourceTree = "<group>"; };
+		8484B7913010102D00EA598E /* QiimeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiimeParser.swift; sourceTree = "<group>"; };
+		8484B7933010102D00EA598E /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
+		8484B7943010102D00EA598E /* MergeKraken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeKraken.swift; sourceTree = "<group>"; };
+		8484B7953010102D00EA598E /* MergeMinimap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeMinimap.swift; sourceTree = "<group>"; };
+		8484B7963010102D00EA598E /* MergeQiime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeQiime.swift; sourceTree = "<group>"; };
+		8484B7973010102D00EA598E /* ParseKraken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseKraken.swift; sourceTree = "<group>"; };
+		8484B7983010102D00EA598E /* ParseMinimap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseMinimap.swift; sourceTree = "<group>"; };
+		8484B79A3010102D00EA598E /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		8484B79B3010102D00EA598E /* FastqParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastqParser.swift; sourceTree = "<group>"; };
+		8484B79C3010102D00EA598E /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
+		8484B79D3010102D00EA598E /* FileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriter.swift; sourceTree = "<group>"; };
+		8484B79E3010102D00EA598E /* Hierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hierarchy.swift; sourceTree = "<group>"; };
+		8484B79F3010102D00EA598E /* NCBIDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCBIDownloader.swift; sourceTree = "<group>"; };
+		8484B7A03010102D00EA598E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		8484B7A13010102D00EA598E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		8484B7A43010102D00EA598E /* blast_parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blast_parser.swift; sourceTree = "<group>"; };
+		8484B7DF3010126200EA598E /* blast_parser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blast_parser.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,220 +154,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8484B7E63010140300EA598E /* _CryptoExtras in Frameworks */,
 				8420FA772CCCF86500C94FF7 /* ArgumentParser in Frameworks */,
+				8484B7E23010140300EA598E /* Crypto in Frameworks */,
+				8484B7E43010140300EA598E /* CryptoExtras in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		845663963010056C0055B6AF /* xcschemes */ = {
-			isa = PBXGroup;
-			children = (
-				845663953010056C0055B6AF /* xcschememanagement.plist */,
-			);
-			path = xcschemes;
-			sourceTree = "<group>";
-		};
-		845663973010056C0055B6AF /* jcsvarela.xcuserdatad */ = {
-			isa = PBXGroup;
-			children = (
-				845663963010056C0055B6AF /* xcschemes */,
-			);
-			path = jcsvarela.xcuserdatad;
-			sourceTree = "<group>";
-		};
-		845663983010056C0055B6AF /* xcuserdata */ = {
-			isa = PBXGroup;
-			children = (
-				845663973010056C0055B6AF /* jcsvarela.xcuserdatad */,
-			);
-			path = xcuserdata;
-			sourceTree = "<group>";
-		};
-		845663993010056C0055B6AF /* xcode */ = {
-			isa = PBXGroup;
-			children = (
-				845663983010056C0055B6AF /* xcuserdata */,
-			);
-			path = xcode;
-			sourceTree = "<group>";
-		};
-		8456639A3010056C0055B6AF /* .swiftpm */ = {
-			isa = PBXGroup;
-			children = (
-				845663993010056C0055B6AF /* xcode */,
-			);
-			path = .swiftpm;
-			sourceTree = "<group>";
-		};
-		845663A23010056C0055B6AF /* Auxiliary */ = {
-			isa = PBXGroup;
-			children = (
-				8456639B3010056C0055B6AF /* Console.swift */,
-				8456639C3010056C0055B6AF /* FastqParser.swift */,
-				8456639D3010056C0055B6AF /* FileParser.swift */,
-				8456639E3010056C0055B6AF /* FileWriter.swift */,
-				8456639F3010056C0055B6AF /* Hierarchy.swift */,
-				845663A03010056C0055B6AF /* Rank.swift */,
-				845663A13010056C0055B6AF /* String.swift */,
-			);
-			path = Auxiliary;
-			sourceTree = "<group>";
-		};
-		845663A43010056C0055B6AF /* BlastAnalyzer */ = {
-			isa = PBXGroup;
-			children = (
-				845663A33010056C0055B6AF /* BlastAnalyzer.swift */,
-			);
-			path = BlastAnalyzer;
-			sourceTree = "<group>";
-		};
-		845663BD3010056C0055B6AF /* BlastOutputParser */ = {
-			isa = PBXGroup;
-			children = (
-				845663A53010056C0055B6AF /* BlastASV.swift */,
-				845663A63010056C0055B6AF /* BlastHit.swift */,
-				845663A73010056C0055B6AF /* BlastHitBin.swift */,
-				845663A83010056C0055B6AF /* BlastKrakenASV.swift */,
-				845663A93010056C0055B6AF /* BlastKrakenOutputParser.swift */,
-				845663AA3010056C0055B6AF /* BlastMinimapHit.swift */,
-				845663AB3010056C0055B6AF /* BlastMinimapHitBin.swift */,
-				845663AC3010056C0055B6AF /* BlastMinimapMultiFileOutputParser.swift */,
-				845663AD3010056C0055B6AF /* BlastMinimapMultiFileParser.swift */,
-				845663AE3010056C0055B6AF /* BlastOutputParser.swift */,
-				845663AF3010056C0055B6AF /* BlastQiimeASV.swift */,
-				845663B03010056C0055B6AF /* BlastQiimeOutputParser.swift */,
-				845663B13010056C0055B6AF /* KrakenParsedASVParser.swift */,
-				845663B23010056C0055B6AF /* KrakenTaxonomyParser.swift */,
-				845663B33010056C0055B6AF /* MinimapDatabase.swift */,
-				845663B43010056C0055B6AF /* MinimapFileParser.swift */,
-				845663B53010056C0055B6AF /* MinimapHit.swift */,
-				845663B63010056C0055B6AF /* MinimapHitBin.swift */,
-				845663B73010056C0055B6AF /* MinimapHitMultiFileParser.swift */,
-				845663B83010056C0055B6AF /* MinimapMergedHit.swift */,
-				845663B93010056C0055B6AF /* MinimapParser.swift */,
-				845663BA3010056C0055B6AF /* QiimeASV.swift */,
-				845663BB3010056C0055B6AF /* QiimeASVMultiFileParser.swift */,
-				845663BC3010056C0055B6AF /* QiimeParser.swift */,
-			);
-			path = BlastOutputParser;
-			sourceTree = "<group>";
-		};
-		845663C13010056C0055B6AF /* DataStream */ = {
-			isa = PBXGroup;
-			children = (
-				845663BE3010056C0055B6AF /* DataStream.swift */,
-				845663BF3010056C0055B6AF /* DataStreamReader.swift */,
-				845663C03010056C0055B6AF /* DataStreamWriter.swift */,
-			);
-			path = DataStream;
-			sourceTree = "<group>";
-		};
-		845663CB3010056C0055B6AF /* KrakenParser */ = {
-			isa = PBXGroup;
-			children = (
-				845663C23010056C0055B6AF /* KrakenASV.swift */,
-				845663C33010056C0055B6AF /* KrakenASVBin.swift */,
-				845663C43010056C0055B6AF /* KrakenASVBinArray.swift */,
-				845663C53010056C0055B6AF /* KrakenASVParser.swift */,
-				845663C63010056C0055B6AF /* KrakenASVTaxonomy.swift */,
-				845663C73010056C0055B6AF /* KrakenParser.swift */,
-				845663C83010056C0055B6AF /* KrakenReportLine.swift */,
-				845663C93010056C0055B6AF /* KrakenReportParser.swift */,
-				845663CA3010056C0055B6AF /* KrakenSequenceParser.swift */,
-			);
-			path = KrakenParser;
-			sourceTree = "<group>";
-		};
-		845663D53010056C0055B6AF /* libpq */ = {
-			isa = PBXGroup;
-			children = (
-				845663CC3010056C0055B6AF /* connect.h */,
-				845663CD3010056C0055B6AF /* connect.c */,
-				845663CE3010056C0055B6AF /* globals-bp.h */,
-				845663CF3010056C0055B6AF /* include.zip */,
-				845663D03010056C0055B6AF /* lib.zip */,
-				845663D13010056C0055B6AF /* libpq-bp.h */,
-				845663D23010056C0055B6AF /* libpq-bp.c */,
-				845663D33010056C0055B6AF /* parser.h */,
-				845663D43010056C0055B6AF /* parser.c */,
-			);
-			path = libpq;
-			sourceTree = "<group>";
-		};
-		845663D73010056C0055B6AF /* Project */ = {
-			isa = PBXGroup;
-			children = (
-				845663D63010056C0055B6AF /* arm64-apple-macos.swiftsourceinfo */,
-			);
-			path = Project;
-			sourceTree = "<group>";
-		};
-		845663DB3010056C0055B6AF /* blast_parser.swiftmodule */ = {
-			isa = PBXGroup;
-			children = (
-				845663D73010056C0055B6AF /* Project */,
-				845663D83010056C0055B6AF /* arm64-apple-macos.swiftdoc */,
-				845663D93010056C0055B6AF /* arm64-apple-macos.swiftmodule */,
-				845663DA3010056C0055B6AF /* arm64-apple-macos.abi.json */,
-			);
-			path = blast_parser.swiftmodule;
-			sourceTree = "<group>";
-		};
-		845663DD3010056C0055B6AF /* Debug */ = {
-			isa = PBXGroup;
-			children = (
-				845663DB3010056C0055B6AF /* blast_parser.swiftmodule */,
-				845663DC3010056C0055B6AF /* blast_parser */,
-			);
-			path = Debug;
-			sourceTree = "<group>";
-		};
-		845663DE3010056C0055B6AF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				845663DD3010056C0055B6AF /* Debug */,
-			);
-			path = Products;
-			sourceTree = "<group>";
-		};
-		845663E23010056C0055B6AF /* TaxonomyDB */ = {
-			isa = PBXGroup;
-			children = (
-				845663DF3010056C0055B6AF /* Database.swift */,
-				845663E03010056C0055B6AF /* NCBILineage.swift */,
-				845663E13010056C0055B6AF /* SQLDatabase.swift */,
-			);
-			path = TaxonomyDB;
-			sourceTree = "<group>";
-		};
-		845663E73010056C0055B6AF /* blast_parser */ = {
-			isa = PBXGroup;
-			children = (
-				8456639A3010056C0055B6AF /* .swiftpm */,
-				845663A23010056C0055B6AF /* Auxiliary */,
-				845663A43010056C0055B6AF /* BlastAnalyzer */,
-				845663BD3010056C0055B6AF /* BlastOutputParser */,
-				845663C13010056C0055B6AF /* DataStream */,
-				845663CB3010056C0055B6AF /* KrakenParser */,
-				845663D53010056C0055B6AF /* libpq */,
-				845663DE3010056C0055B6AF /* Products */,
-				845663E23010056C0055B6AF /* TaxonomyDB */,
-				845663E33010056C0055B6AF /* blast_parser.entitlements */,
-				845663E43010056C0055B6AF /* blast_parser-Bridging-Header.h */,
-				845663E53010056C0055B6AF /* BlastParser.swift */,
-				845663E63010056C0055B6AF /* Notes.md */,
-			);
-			path = blast_parser;
-			sourceTree = "<group>";
-		};
 		8483F1472C4096410075794B = {
 			isa = PBXGroup;
 			children = (
-				845663E73010056C0055B6AF /* blast_parser */,
 				8483F1512C4096410075794B /* Products */,
 				848FE54D2C86B17D003A0C05 /* Frameworks */,
+				8484B74F30100FE600EA598E /* Package.resolved */,
+				8484B75030100FF000EA598E /* readme.md */,
+				8484B7DF3010126200EA598E /* blast_parser.entitlements */,
+				8484B75130100FFD00EA598E /* Package.swift */,
+				8484B7523010100E00EA598E /* tasks.json */,
+				8484B7553010102000EA598E /* Tests */,
+				8484B7A73010102D00EA598E /* Sources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -373,6 +185,232 @@
 				8483F1502C4096410075794B /* blast_parser */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8484B7543010102000EA598E /* blast-parserTests */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7533010102000EA598E /* blast_parserTests.swift */,
+			);
+			path = "blast-parserTests";
+			sourceTree = "<group>";
+		};
+		8484B7553010102000EA598E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7543010102000EA598E /* blast-parserTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		8484B7573010102D00EA598E /* xcschemes */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7563010102D00EA598E /* xcschememanagement.plist */,
+			);
+			path = xcschemes;
+			sourceTree = "<group>";
+		};
+		8484B7583010102D00EA598E /* jcsvarela.xcuserdatad */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7573010102D00EA598E /* xcschemes */,
+			);
+			path = jcsvarela.xcuserdatad;
+			sourceTree = "<group>";
+		};
+		8484B7593010102D00EA598E /* xcuserdata */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7583010102D00EA598E /* jcsvarela.xcuserdatad */,
+			);
+			path = xcuserdata;
+			sourceTree = "<group>";
+		};
+		8484B75A3010102D00EA598E /* xcode */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7593010102D00EA598E /* xcuserdata */,
+			);
+			path = xcode;
+			sourceTree = "<group>";
+		};
+		8484B75B3010102D00EA598E /* .swiftpm */ = {
+			isa = PBXGroup;
+			children = (
+				8484B75A3010102D00EA598E /* xcode */,
+			);
+			path = .swiftpm;
+			sourceTree = "<group>";
+		};
+		8484B76A3010102D00EA598E /* Blast */ = {
+			isa = PBXGroup;
+			children = (
+				8484B75C3010102D00EA598E /* BlastASV.swift */,
+				8484B75D3010102D00EA598E /* BlastHit.swift */,
+				8484B75E3010102D00EA598E /* BlastHitBin.swift */,
+				8484B75F3010102D00EA598E /* BlastKrakenASV.swift */,
+				8484B7603010102D00EA598E /* BlastKrakenOutputParser.swift */,
+				8484B7613010102D00EA598E /* BlastMinimapHit.swift */,
+				8484B7623010102D00EA598E /* BlastMinimapHitBin.swift */,
+				8484B7633010102D00EA598E /* BlastMinimapMultiFileOutputParser.swift */,
+				8484B7643010102D00EA598E /* BlastMinimapMultiFileParser.swift */,
+				8484B7653010102D00EA598E /* BlastOutputParser.swift */,
+				8484B7663010102D00EA598E /* BlastQiimeASV.swift */,
+				8484B7673010102D00EA598E /* BlastQiimeOutputParser.swift */,
+			);
+			path = Blast;
+			sourceTree = "<group>";
+		};
+		8484B76C3010102D00EA598E /* Databases */ = {
+			isa = PBXGroup;
+			children = (
+				8484B76B3010102D00EA598E /* Database.swift */,
+			);
+			path = Databases;
+			sourceTree = "<group>";
+		};
+		8484B7703010102D00EA598E /* DataStream */ = {
+			isa = PBXGroup;
+			children = (
+				8484B76D3010102D00EA598E /* DataStream.swift */,
+				8484B76E3010102D00EA598E /* DataStreamReader.swift */,
+				8484B76F3010102D00EA598E /* DataStreamWriter.swift */,
+			);
+			path = DataStream;
+			sourceTree = "<group>";
+		};
+		8484B77D3010102D00EA598E /* KrakenParser */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7713010102D00EA598E /* KrakenASV.swift */,
+				8484B7723010102D00EA598E /* KrakenASVBin.swift */,
+				8484B7733010102D00EA598E /* KrakenASVBinArray.swift */,
+				8484B7743010102D00EA598E /* KrakenASVParser.swift */,
+				8484B7753010102D00EA598E /* KrakenASVTaxonomy.swift */,
+				8484B7763010102D00EA598E /* KrakenParsedASVParser.swift */,
+				8484B7773010102D00EA598E /* KrakenParser.swift */,
+				8484B7783010102D00EA598E /* KrakenRank.swift */,
+				8484B7793010102D00EA598E /* KrakenReportLine.swift */,
+				8484B77A3010102D00EA598E /* KrakenReportParser.swift */,
+				8484B77B3010102D00EA598E /* KrakenSequenceParser.swift */,
+				8484B77C3010102D00EA598E /* KrakenTaxonomyParser.swift */,
+			);
+			path = KrakenParser;
+			sourceTree = "<group>";
+		};
+		8484B7853010102D00EA598E /* Minimap */ = {
+			isa = PBXGroup;
+			children = (
+				8484B77E3010102D00EA598E /* MinimapDatabase.swift */,
+				8484B77F3010102D00EA598E /* MinimapFileParser.swift */,
+				8484B7803010102D00EA598E /* MinimapHit.swift */,
+				8484B7813010102D00EA598E /* MinimapHitBin.swift */,
+				8484B7823010102D00EA598E /* MinimapHitMultiFileParser.swift */,
+				8484B7833010102D00EA598E /* MinimapMergedHit.swift */,
+				8484B7843010102D00EA598E /* MinimapParser.swift */,
+			);
+			path = Minimap;
+			sourceTree = "<group>";
+		};
+		8484B7873010102D00EA598E /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7863010102D00EA598E /* arm64-apple-macos.swiftsourceinfo */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		8484B78B3010102D00EA598E /* blast_parser.swiftmodule */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7873010102D00EA598E /* Project */,
+				8484B7883010102D00EA598E /* arm64-apple-macos.swiftdoc */,
+				8484B7893010102D00EA598E /* arm64-apple-macos.swiftmodule */,
+				8484B78A3010102D00EA598E /* arm64-apple-macos.abi.json */,
+			);
+			path = blast_parser.swiftmodule;
+			sourceTree = "<group>";
+		};
+		8484B78D3010102D00EA598E /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				8484B78B3010102D00EA598E /* blast_parser.swiftmodule */,
+				8484B78C3010102D00EA598E /* blast_parser */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		8484B78E3010102D00EA598E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8484B78D3010102D00EA598E /* Debug */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		8484B7923010102D00EA598E /* Qiime */ = {
+			isa = PBXGroup;
+			children = (
+				8484B78F3010102D00EA598E /* QiimeASV.swift */,
+				8484B7903010102D00EA598E /* QiimeASVMultiFileParser.swift */,
+				8484B7913010102D00EA598E /* QiimeParser.swift */,
+			);
+			path = Qiime;
+			sourceTree = "<group>";
+		};
+		8484B7993010102D00EA598E /* Subcommands */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7933010102D00EA598E /* Import.swift */,
+				8484B7943010102D00EA598E /* MergeKraken.swift */,
+				8484B7953010102D00EA598E /* MergeMinimap.swift */,
+				8484B7963010102D00EA598E /* MergeQiime.swift */,
+				8484B7973010102D00EA598E /* ParseKraken.swift */,
+				8484B7983010102D00EA598E /* ParseMinimap.swift */,
+			);
+			path = Subcommands;
+			sourceTree = "<group>";
+		};
+		8484B7A23010102D00EA598E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8484B79A3010102D00EA598E /* Console.swift */,
+				8484B79B3010102D00EA598E /* FastqParser.swift */,
+				8484B79C3010102D00EA598E /* FileParser.swift */,
+				8484B79D3010102D00EA598E /* FileWriter.swift */,
+				8484B79E3010102D00EA598E /* Hierarchy.swift */,
+				8484B79F3010102D00EA598E /* NCBIDownloader.swift */,
+				8484B7A03010102D00EA598E /* String.swift */,
+				8484B7A13010102D00EA598E /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8484B7A63010102D00EA598E /* blast_parser */ = {
+			isa = PBXGroup;
+			children = (
+				8484B75B3010102D00EA598E /* .swiftpm */,
+				8484B76A3010102D00EA598E /* Blast */,
+				8484B76C3010102D00EA598E /* Databases */,
+				8484B7703010102D00EA598E /* DataStream */,
+				8484B77D3010102D00EA598E /* KrakenParser */,
+				8484B7853010102D00EA598E /* Minimap */,
+				8484B78E3010102D00EA598E /* Products */,
+				8484B7923010102D00EA598E /* Qiime */,
+				8484B7993010102D00EA598E /* Subcommands */,
+				8484B7A23010102D00EA598E /* Utilities */,
+				8484B7A43010102D00EA598E /* blast_parser.swift */,
+			);
+			path = blast_parser;
+			sourceTree = "<group>";
+		};
+		8484B7A73010102D00EA598E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8484B7A63010102D00EA598E /* blast_parser */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		848FE54D2C86B17D003A0C05 /* Frameworks */ = {
@@ -400,6 +438,9 @@
 			name = blast_parser;
 			packageProductDependencies = (
 				8420FA762CCCF86500C94FF7 /* ArgumentParser */,
+				8484B7E13010140300EA598E /* Crypto */,
+				8484B7E33010140300EA598E /* CryptoExtras */,
+				8484B7E53010140300EA598E /* _CryptoExtras */,
 			);
 			productName = blast_parser;
 			productReference = 8483F1502C4096410075794B /* blast_parser */;
@@ -432,6 +473,7 @@
 			mainGroup = 8483F1472C4096410075794B;
 			packageReferences = (
 				8420FA752CCCF86500C94FF7 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				8484B7E03010140300EA598E /* XCRemoteSwiftPackageReference "swift-crypto" */,
 			);
 			productRefGroup = 8483F1512C4096410075794B /* Products */;
 			projectDirPath = "";
@@ -447,57 +489,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845663E83010056C0055B6AF /* KrakenASVParser.swift in Sources */,
-				845663E93010056C0055B6AF /* Console.swift in Sources */,
-				845663EA3010056C0055B6AF /* BlastQiimeASV.swift in Sources */,
-				845663EB3010056C0055B6AF /* String.swift in Sources */,
-				845663EC3010056C0055B6AF /* libpq-bp.c in Sources */,
-				845663ED3010056C0055B6AF /* BlastMinimapHit.swift in Sources */,
-				845663EE3010056C0055B6AF /* BlastHit.swift in Sources */,
-				845663EF3010056C0055B6AF /* SQLDatabase.swift in Sources */,
-				845663F03010056C0055B6AF /* NCBILineage.swift in Sources */,
-				845663F13010056C0055B6AF /* BlastMinimapHitBin.swift in Sources */,
-				845663F23010056C0055B6AF /* MinimapDatabase.swift in Sources */,
-				845663F33010056C0055B6AF /* KrakenASVBinArray.swift in Sources */,
-				845663F43010056C0055B6AF /* DataStream.swift in Sources */,
-				845663F53010056C0055B6AF /* KrakenSequenceParser.swift in Sources */,
-				845663F63010056C0055B6AF /* BlastMinimapMultiFileParser.swift in Sources */,
-				845663F73010056C0055B6AF /* Hierarchy.swift in Sources */,
-				845663F83010056C0055B6AF /* parser.c in Sources */,
-				845663F93010056C0055B6AF /* QiimeParser.swift in Sources */,
-				845663FA3010056C0055B6AF /* MinimapParser.swift in Sources */,
-				845663FB3010056C0055B6AF /* BlastKrakenASV.swift in Sources */,
-				845663FC3010056C0055B6AF /* Database.swift in Sources */,
-				845663FD3010056C0055B6AF /* BlastKrakenOutputParser.swift in Sources */,
-				845663FE3010056C0055B6AF /* MinimapHit.swift in Sources */,
-				845663FF3010056C0055B6AF /* BlastAnalyzer.swift in Sources */,
-				845664003010056C0055B6AF /* KrakenASVTaxonomy.swift in Sources */,
-				845664013010056C0055B6AF /* FileParser.swift in Sources */,
-				845664023010056C0055B6AF /* FileWriter.swift in Sources */,
-				845664033010056C0055B6AF /* QiimeASV.swift in Sources */,
-				845664043010056C0055B6AF /* MinimapFileParser.swift in Sources */,
-				845664053010056C0055B6AF /* MinimapMergedHit.swift in Sources */,
-				845664063010056C0055B6AF /* QiimeASVMultiFileParser.swift in Sources */,
-				845664073010056C0055B6AF /* MinimapHitBin.swift in Sources */,
-				845664083010056C0055B6AF /* BlastQiimeOutputParser.swift in Sources */,
-				845664093010056C0055B6AF /* DataStreamWriter.swift in Sources */,
-				8456640A3010056C0055B6AF /* KrakenASVBin.swift in Sources */,
-				8456640B3010056C0055B6AF /* BlastASV.swift in Sources */,
-				8456640C3010056C0055B6AF /* KrakenReportLine.swift in Sources */,
-				8456640D3010056C0055B6AF /* FastqParser.swift in Sources */,
-				8456640E3010056C0055B6AF /* MinimapHitMultiFileParser.swift in Sources */,
-				8456640F3010056C0055B6AF /* Rank.swift in Sources */,
-				845664103010056C0055B6AF /* KrakenTaxonomyParser.swift in Sources */,
-				845664113010056C0055B6AF /* KrakenASV.swift in Sources */,
-				845664123010056C0055B6AF /* BlastHitBin.swift in Sources */,
-				845664133010056C0055B6AF /* connect.c in Sources */,
-				845664143010056C0055B6AF /* BlastMinimapMultiFileOutputParser.swift in Sources */,
-				845664153010056C0055B6AF /* KrakenParser.swift in Sources */,
-				845664163010056C0055B6AF /* BlastOutputParser.swift in Sources */,
-				845664173010056C0055B6AF /* KrakenReportParser.swift in Sources */,
-				845664183010056C0055B6AF /* DataStreamReader.swift in Sources */,
-				845664193010056C0055B6AF /* KrakenParsedASVParser.swift in Sources */,
-				8456641A3010056C0055B6AF /* BlastParser.swift in Sources */,
+				8484B7A83010102D00EA598E /* Database.swift in Sources */,
+				8484B7A93010102D00EA598E /* ParseKraken.swift in Sources */,
+				8484B7AA3010102D00EA598E /* MinimapHitMultiFileParser.swift in Sources */,
+				8484B7AB3010102D00EA598E /* MinimapHitBin.swift in Sources */,
+				8484B7AC3010102D00EA598E /* BlastKrakenASV.swift in Sources */,
+				8484B7AD3010102D00EA598E /* BlastMinimapMultiFileParser.swift in Sources */,
+				8484B7AE3010102D00EA598E /* MergeQiime.swift in Sources */,
+				8484B7AF3010102D00EA598E /* String.swift in Sources */,
+				8484B7B03010102D00EA598E /* KrakenASVParser.swift in Sources */,
+				8484B7B13010102D00EA598E /* MinimapFileParser.swift in Sources */,
+				8484B7B23010102D00EA598E /* KrakenParser.swift in Sources */,
+				8484B7B33010102D00EA598E /* QiimeASV.swift in Sources */,
+				8484B7B43010102D00EA598E /* KrakenReportLine.swift in Sources */,
+				8484B7B53010102D00EA598E /* FileWriter.swift in Sources */,
+				8484B7B63010102D00EA598E /* Hierarchy.swift in Sources */,
+				8484B7B73010102D00EA598E /* DataStreamWriter.swift in Sources */,
+				8484B7B83010102D00EA598E /* MinimapMergedHit.swift in Sources */,
+				8484B7B93010102D00EA598E /* KrakenSequenceParser.swift in Sources */,
+				8484B7BA3010102D00EA598E /* NCBIDownloader.swift in Sources */,
+				8484B7BB3010102D00EA598E /* BlastQiimeOutputParser.swift in Sources */,
+				8484B7BC3010102D00EA598E /* BlastOutputParser.swift in Sources */,
+				8484B7BD3010102D00EA598E /* MergeKraken.swift in Sources */,
+				8484B7BE3010102D00EA598E /* MergeMinimap.swift in Sources */,
+				8484B7BF3010102D00EA598E /* Utilities.swift in Sources */,
+				8484B7C03010102D00EA598E /* MinimapParser.swift in Sources */,
+				8484B7C13010102D00EA598E /* BlastHitBin.swift in Sources */,
+				8484B7C23010102D00EA598E /* MinimapDatabase.swift in Sources */,
+				8484B7C33010102D00EA598E /* KrakenTaxonomyParser.swift in Sources */,
+				8484B7C53010102D00EA598E /* ParseMinimap.swift in Sources */,
+				8484B7C63010102D00EA598E /* BlastQiimeASV.swift in Sources */,
+				8484B7C73010102D00EA598E /* BlastMinimapHit.swift in Sources */,
+				8484B7C83010102D00EA598E /* KrakenASVBin.swift in Sources */,
+				8484B7C93010102D00EA598E /* BlastMinimapMultiFileOutputParser.swift in Sources */,
+				8484B7CA3010102D00EA598E /* DataStream.swift in Sources */,
+				8484B7CB3010102D00EA598E /* KrakenParsedASVParser.swift in Sources */,
+				8484B7CC3010102D00EA598E /* FastqParser.swift in Sources */,
+				8484B7CD3010102D00EA598E /* Console.swift in Sources */,
+				8484B7CE3010102D00EA598E /* FileParser.swift in Sources */,
+				8484B7CF3010102D00EA598E /* BlastMinimapHitBin.swift in Sources */,
+				8484B7D13010102D00EA598E /* BlastHit.swift in Sources */,
+				8484B7D23010102D00EA598E /* KrakenRank.swift in Sources */,
+				8484B7D33010102D00EA598E /* Import.swift in Sources */,
+				8484B7D43010102D00EA598E /* KrakenASVBinArray.swift in Sources */,
+				8484B7D53010102D00EA598E /* QiimeASVMultiFileParser.swift in Sources */,
+				8484B7D63010102D00EA598E /* BlastKrakenOutputParser.swift in Sources */,
+				8484B7D73010102D00EA598E /* BlastASV.swift in Sources */,
+				8484B7D83010102D00EA598E /* blast_parser.swift in Sources */,
+				8484B7D93010102D00EA598E /* DataStreamReader.swift in Sources */,
+				8484B7DA3010102D00EA598E /* KrakenASV.swift in Sources */,
+				8484B7DB3010102D00EA598E /* KrakenReportParser.swift in Sources */,
+				8484B7DC3010102D00EA598E /* MinimapHit.swift in Sources */,
+				8484B7DD3010102D00EA598E /* KrakenASVTaxonomy.swift in Sources */,
+				8484B7DE3010102D00EA598E /* QiimeParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +674,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = blast_parser/blast_parser.entitlements;
+				CODE_SIGN_ENTITLEMENTS = blast_parser.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
@@ -638,14 +682,8 @@
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = U57H83X6M8;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/opt/homebrew/Cellar/libpq/17.5/include,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					/opt/homebrew/Cellar/libpq/17.5/lib,
-					"/opt/homebrew/Cellar/openssl@3/3.5.0/lib",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				OTHER_LDFLAGS = (
 					"-rpath",
@@ -654,8 +692,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "blast_parser/blast_parser-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -664,7 +704,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = blast_parser/blast_parser.entitlements;
+				CODE_SIGN_ENTITLEMENTS = blast_parser.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
@@ -672,14 +712,8 @@
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = U57H83X6M8;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/opt/homebrew/Cellar/libpq/17.5/include,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					/opt/homebrew/Cellar/libpq/17.5/lib,
-					"/opt/homebrew/Cellar/openssl@3/3.5.0/lib",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				OTHER_LDFLAGS = (
 					"-rpath",
@@ -688,7 +722,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "blast_parser/blast_parser-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -725,6 +761,14 @@
 				minimumVersion = 1.5.0;
 			};
 		};
+		8484B7E03010140300EA598E /* XCRemoteSwiftPackageReference "swift-crypto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-crypto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -732,6 +776,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8420FA752CCCF86500C94FF7 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
 			productName = ArgumentParser;
+		};
+		8484B7E13010140300EA598E /* Crypto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8484B7E03010140300EA598E /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = Crypto;
+		};
+		8484B7E33010140300EA598E /* CryptoExtras */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8484B7E03010140300EA598E /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = CryptoExtras;
+		};
+		8484B7E53010140300EA598E /* _CryptoExtras */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8484B7E03010140300EA598E /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = _CryptoExtras;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
