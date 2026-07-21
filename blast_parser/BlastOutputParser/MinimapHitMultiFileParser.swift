@@ -76,7 +76,7 @@ final class MinimapHitMultiFileParser {
         let queryIDCount = queryIDs.count
         
         for (i, queryID) in queryIDs.enumerated() {
-            Console.writeToStdOutInPlace("Merging hit with query ID \(queryID), \(i + 1) out of \(queryIDCount)...")
+            Console.writeToStdOutInPlace("\rMerging hit with query ID \(queryID), \(i + 1) out of \(queryIDCount)...")
             
             let bins = mainBins.bins(for: queryID)
             

@@ -70,6 +70,6 @@ final class DataStreamWriter: DataStream {
         totalCharacterCount += count;
         count = 0
         lines = [String]()
-        Console.writeToStdOutInPlace("Written \(totalCharacterCount) characters in \(numberOfLines) lines...")
+        Console.writeToStdOutInPlace("\rWritten \(totalCharacterCount) characters in \(numberOfLines) lines...")
     }
 }
