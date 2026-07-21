@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "swift",
+      "label": "Swift: Build Debug",
+      "detail": "Compiles the application with debug symbols (No Tests).",
+      "args": [
+        "build"
+      ],
+      "env": {},
+      "cwd": "${workspaceFolder}",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "swift",
+      "label": "Swift: Build Release",
+      "detail": "Compiles optimized binaries for release (No Tests).",
+      "args": [
+        "build",
+        "-c",
+        "release"
+      ],
+      "env": {},
+      "cwd": "${workspaceFolder}",
+      "group": "build"
+    }
+  ]
+}
