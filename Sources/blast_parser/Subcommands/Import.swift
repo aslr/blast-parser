@@ -17,7 +17,7 @@ import FoundationNetworking
 struct Import: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Downloads and imports the NCBI ranked taxonomy dump file into an indexed CSV file.",
-        usage: "blast_parser import <output-path>]",
+        usage: "blast-parser import <output-path>]",
         aliases: ["imp"]
     )
     

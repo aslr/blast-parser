@@ -11,7 +11,7 @@ import ArgumentParser
 struct MergeKraken: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Merges a Kraken2 counts report with the best hits of a BLAST search.",
-        usage: "blast_parser merge --asvs <asvs> --blasthits <blasthits> --lineage-db <lineage-db>  [--parsed-taxonomy <parsed-taxonomy>] [--output <output>] [--hits-per-asv <hits-per-asv>] [--sort <sort>]",
+        usage: "blast-parser merge --asvs <asvs> --blasthits <blasthits> --lineage-db <lineage-db>  [--parsed-taxonomy <parsed-taxonomy>] [--output <output>] [--hits-per-asv <hits-per-asv>] [--sort <sort>]",
         aliases: ["mrgk"]
     )
     

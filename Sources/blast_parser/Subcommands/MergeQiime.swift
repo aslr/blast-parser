@@ -11,7 +11,7 @@ import ArgumentParser
 struct MergeQiime: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Merges one or more tab-separated Qiime2 ASV read count files with the best hits of a BLAST search.",
-        usage: "blast_parser merge-qiime --asvs <asvs> --blasthits <blasthits> --lineage-db <lineage-db>  [--prefixes <prefixes>] [--output <output>] [--hits-per-asv <hits-per-asv>] [--sort <sort>]",
+        usage: "blast-parser merge-qiime --asvs <asvs> --blasthits <blasthits> --lineage-db <lineage-db>  [--prefixes <prefixes>] [--output <output>] [--hits-per-asv <hits-per-asv>] [--sort <sort>]",
         aliases: ["mrgq"] )
     
     @Option(name: [.short, .customLong("asvs")],

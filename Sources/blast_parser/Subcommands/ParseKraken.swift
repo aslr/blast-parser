@@ -11,7 +11,7 @@ import ArgumentParser
 struct ParseKraken: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Parses a Kraken2 counts report to determine which sequences should be validated by BLASTN.",
-        usage: "blast_parser parse --report <report> --classification <classification> --sequences <sequences> [--output <output>] [--asvformart <asvformat>] [--max-sequences-per-bin <max-sequences-per-bin>]",
+        usage: "blast-parser parse --report <report> --classification <classification> --sequences <sequences> [--output <output>] [--asvformart <asvformat>] [--max-sequences-per-bin <max-sequences-per-bin>]",
         aliases: ["prsk"]
     )
     

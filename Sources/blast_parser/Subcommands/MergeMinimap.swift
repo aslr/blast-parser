@@ -10,7 +10,7 @@ import ArgumentParser
 struct MergeMinimap: ParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Merges minimap2 output tsv files containing a header row with the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy with the best hits of a BLAST search. ",
-        usage: "blast_parser merge-minimap --main-hits <main-hits> --blasthits <blasthits> --reads <fasta-file> --lineageDB <lineageDB> [--rep-hits <representative-hits>] [--o-merged <merged-file>] [--o-hitcounts <hitcounts-file>] [--sort <sort>]",
+        usage: "blast-parser merge-minimap --main-hits <main-hits> --blasthits <blasthits> --reads <fasta-file> --lineageDB <lineageDB> [--rep-hits <representative-hits>] [--o-merged <merged-file>] [--o-hitcounts <hitcounts-file>] [--sort <sort>]",
         aliases: ["mrgm"] )
     
     @Option(name: [.short, .customLong("main-hits")],

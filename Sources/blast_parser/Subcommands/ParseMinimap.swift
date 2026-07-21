@@ -10,7 +10,7 @@ import ArgumentParser
 struct ParseMinimap: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "Parses a minimap2 output tsv file containing a header row with the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy and then outputs files containing selected sequences in fastq and/or fasta format to be remapped by minimap2 with other databases or in fasta format to be the input to BLASTN and/or a read count stats file per taxon found. Warning: an error will be generated if no output file is specified.",
-        usage: "blast_parser parse-minimap --input <input> --reads <fastq-file> [--output <fastq-output>] [--fastaOutput <fasta-output>] [--stats-output <stats-output>] [--hits-per-bin <hits-per-bin>]",
+        usage: "blast-parser parse-minimap --input <input> --reads <fastq-file> [--output <fastq-output>] [--fastaOutput <fasta-output>] [--stats-output <stats-output>] [--hits-per-bin <hits-per-bin>]",
         aliases: ["prsm"] )
     
     @Option(name: [.short, .customLong("input")],
