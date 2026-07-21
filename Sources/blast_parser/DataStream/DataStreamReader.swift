@@ -20,6 +20,18 @@ final class DataStreamReader : DataStream {
     var isEOF = false
     let encoding:String.Encoding
     
+    /// Returns the exact file offset corresponding to the START of the next line to be read.
+    /// This accounts for data already sitting inside your internal `buffer`.
+    var currentLineOffset: UInt64 {
+        do {
+            let currentFileOffset = try filehandle.offset()
+            // The filehandle position minus whatever data we pre-fetched into the buffer
+            return currentFileOffset - UInt64(buffer.count)
+        } catch {
+            return 0
+        }
+    }
+    
     /// Must be paired with a call to close()
     init(url:URL, delimiter:String = "\n",
           blockSize:Int = 4096,
@@ -73,6 +85,13 @@ final class DataStreamReader : DataStream {
     func rewind() -> Void {
         filehandle.seek(toFileOffset: 0)
         buffer.count = 0
+        isEOF = false
+    }
+    
+    /// Seeks the file handle to a specific position and clears out the old buffer
+    func seek(toOffset offset: UInt64) throws {
+        try filehandle.seek(toOffset: offset)
+        buffer.removeAll(keepingCapacity: true)
         isEOF = false
     }
 }

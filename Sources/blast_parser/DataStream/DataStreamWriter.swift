@@ -1,9 +1,10 @@
 //
 //  DataStreamWriter.swift
-//  blast_parser
+//  blast-parser
 //
-//  Created by João Varela on 31/08/2024.
+//  Created by João Varela on 29/05/2026.
 //
+
 
 import Foundation
 

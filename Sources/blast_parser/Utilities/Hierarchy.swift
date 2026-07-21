@@ -8,13 +8,13 @@
 import Foundation
 
 struct Hierarchy: CustomStringConvertible {
-    private var ranks = [Rank]()
+    private var ranks = [KrakenRank]()
     
-    var firstRank:Rank? {
+    var firstRank:KrakenRank? {
         return ranks.first
     }
     
-    var lastRank:Rank? {
+    var lastRank:KrakenRank? {
         return ranks.last
     }
     
@@ -36,7 +36,7 @@ struct Hierarchy: CustomStringConvertible {
     
     /// Default initializer with an Unclassified rank
     init() {
-        if let rank = Rank(rawValue: 0) {
+        if let rank = KrakenRank(rawValue: 0) {
             ranks.append(rank)
         }
     }
@@ -46,37 +46,37 @@ struct Hierarchy: CustomStringConvertible {
     ///   - lineage: NCBI taxonomic lineage obtained from the
     ///    PostgresSQL database obtained by the `import` and `export`
     ///    subcommands.
-    init(lineage:NCBILineage) throws {
-        let domain = try Rank.rank(abbreviation: "D",
-                                   name: lineage.superkingdom)
+    init(lineage:TaxonRecord) throws {
+        let domain = try KrakenRank.rank(abbreviation: "D",
+                                         name: lineage.superkingdom)
         ranks.append(domain)
         
-        let kingdom = try Rank.rank(abbreviation: "K",
-                                    name: lineage.kingdom)
+        let kingdom = try KrakenRank.rank(abbreviation: "K",
+                                          name: lineage.kingdom)
         ranks.append(kingdom)
         
-        let phylum = try Rank.rank(abbreviation: "P",
-                                   name: lineage.phylum)
+        let phylum = try KrakenRank.rank(abbreviation: "P",
+                                         name: lineage.phylum)
         ranks.append(phylum)
         
-        let `class` = try Rank.rank(abbreviation: "C",
-                                   name: lineage.class)
+        let `class` = try KrakenRank.rank(abbreviation: "C",
+                                          name: lineage.class)
         ranks.append(`class`)
         
-        let order = try Rank.rank(abbreviation: "O",
-                                  name: lineage.order)
+        let order = try KrakenRank.rank(abbreviation: "O",
+                                        name: lineage.order)
         ranks.append(order)
         
-        let family = try Rank.rank(abbreviation: "F",
-                                   name: lineage.family)
+        let family = try KrakenRank.rank(abbreviation: "F",
+                                         name: lineage.family)
         ranks.append(family)
         
-        let genus = try Rank.rank(abbreviation: "G",
-                                  name: lineage.genus)
+        let genus = try KrakenRank.rank(abbreviation: "G",
+                                        name: lineage.genus)
         ranks.append(genus)
         
-        let species = try Rank.rank(abbreviation: "S",
-                                    name: lineage.species)
+        let species = try KrakenRank.rank(abbreviation: "S",
+                                          name: lineage.species)
         ranks.append(species)
     }
     
@@ -88,17 +88,17 @@ struct Hierarchy: CustomStringConvertible {
         for component in components {
             let rankComponents = component.split(separator: ":")
             if rankComponents.count == 2 {
-                let rank = try Rank.rank(abbreviation: String(rankComponents[0]),
+                let rank = try KrakenRank.rank(abbreviation: String(rankComponents[0]),
                                          name: String(rankComponents[1]))
                 ranks.append(rank)
             } else {
-                ranks.append(Rank.unclassified())
+                ranks.append(KrakenRank.unclassified())
                 break
             }
         }
     }
     
-    mutating func addRank(_ rank:Rank) {
+    mutating func addRank(_ rank:KrakenRank) {
         ranks.append(rank)
     }
     
@@ -106,11 +106,11 @@ struct Hierarchy: CustomStringConvertible {
         ranks = ranks.dropLast(1)
     }
     
-    mutating func equalizeWithParent(of rank:Rank) {
+    mutating func equalizeWithParent(of rank:KrakenRank) {
         ranks.removeAll { $0 < rank || $0 == rank }
     }
     
-    func getRank(index:Int) -> Rank? {
+    func getRank(index:Int) -> KrakenRank? {
         if index >= 0 && index < ranks.count {
             return ranks[index]
         }
@@ -118,6 +118,6 @@ struct Hierarchy: CustomStringConvertible {
     }
     
     mutating func reset() {
-        self.ranks = [Rank]()
+        self.ranks = [KrakenRank]()
     }
 }
