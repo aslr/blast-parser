@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 enum ASVFormat {
     case standard
@@ -62,9 +63,9 @@ struct KrakenASV: CustomStringConvertible {
     /// Lowest Common Ancestor)
     private static func parseASVStandard(line:String) throws -> KrakenASV  {
         let items = line.components(separatedBy: "\t")
-        guard items.count == 5 else { throw RuntimeError("Invalid ASV file")}
+        guard items.count == 5 else { throw ValidationError("Invalid ASV file")}
         guard let taxonomy = KrakenASVTaxonomy(classification: items[2])
-            else { throw RuntimeError("ASV with invalid taxonomy")}
+            else { throw ValidationError("ASV with invalid taxonomy")}
         let size = Int(items[3].trimmingCharacters(in: .whitespaces)) ?? 0
         let asv = KrakenASV(sequenceID: items[1],
                             length: size,
@@ -77,7 +78,7 @@ struct KrakenASV: CustomStringConvertible {
     /// U/C sequenceID taxID length LCA lineage
     private static func parseEpi2Me(line:String) throws -> KrakenASV  {
         let items = line.components(separatedBy: "\t")
-        guard items.count == 6 else { throw RuntimeError("Invalid ASV file")}
+        guard items.count == 6 else { throw ValidationError("Invalid ASV file")}
         let taxID = Int(items[2].trimmingCharacters(in: .whitespaces)) ?? 0
         let size = Int(items[3].trimmingCharacters(in: .whitespaces)) ?? 0
         let taxonomy = KrakenASVTaxonomy(taxID:taxID,
@@ -97,7 +98,7 @@ struct KrakenASV: CustomStringConvertible {
     private static func parseParsedASV(line:String) throws -> KrakenASV  {
         let items = line.split(separator: "\t")
         guard items.count == 5
-            else { throw RuntimeError("Invalid ASV line") }
+            else { throw ValidationError("Invalid ASV line") }
         let sequenceID = items[0].trimmingCharacters(in: .whitespaces)
         let length = Int(items[1].trimmingCharacters(in: .whitespaces)) ?? 0
         let reads = Int(items[2].trimmingCharacters(in: .whitespaces)) ?? 0

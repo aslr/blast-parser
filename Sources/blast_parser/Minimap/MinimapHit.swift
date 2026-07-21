@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 /// Class for storing a minimap2 hit
 final class MinimapHit: CustomStringConvertible {
@@ -61,7 +62,7 @@ final class MinimapHit: CustomStringConvertible {
         guard components.count == 5,
               let alignmentScore = Int(components[2]),
               let alignmentLength = Int(components[3]) else {
-            throw RuntimeError("Invalid Minimap hit: \(line)")
+            throw ValidationError("Invalid Minimap hit: \(line)")
         }
         
         self.queryID = components[0]

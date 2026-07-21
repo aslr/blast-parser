@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 final class MinimapParser: MinimapFileParser {
     let readsPath: String
@@ -47,14 +48,14 @@ final class MinimapParser: MinimapFileParser {
         }
         
         guard outputDirectory != nil else {
-            throw RuntimeError("ERROR: No output file was specified")
+            throw ValidationError("ERROR: No output file was specified")
         }
         
         Console.writeToStdOut("Generating output files to \(outputDirectory!.path)")
         
         if let path = fastqOutputPath {
             guard let writer = FileWriter(path: path) else {
-                throw RuntimeError("Unable to write to file at \(path) due to a malformed path.")
+                throw ValidationError("Unable to write to file at \(path) due to a malformed path.")
             }
             let fastqWriter = try writer.makeDataWriter()
             
@@ -67,7 +68,7 @@ final class MinimapParser: MinimapFileParser {
         
         if let path = fastaOutputPath {
             guard let writer = FileWriter(path: path) else {
-                throw RuntimeError("Unable to write to file at \(path) due to a malformed path.")
+                throw ValidationError("Unable to write to file at \(path) due to a malformed path.")
             }
             let fastaWriter = try writer.makeDataWriter()
             
@@ -80,7 +81,7 @@ final class MinimapParser: MinimapFileParser {
         
         if let path = statsOutputPath {
             guard let writer = FileWriter(path: path) else {
-                throw RuntimeError("Unable to write to file at \(path) due to a malformed path.")
+                throw ValidationError("Unable to write to file at \(path) due to a malformed path.")
             }
             let statsWriter = try writer.makeDataWriter()
             bins.sort { $0.hitCount > $1.hitCount }
@@ -102,14 +103,14 @@ final class MinimapParser: MinimapFileParser {
         let hits = self.selectedHits()
         
         guard let fastqParser = FastqParser(path: readsPath) else {
-            throw RuntimeError("Failed to parse .fastq file as a valid reads file could not be found at \(path)")
+            throw ValidationError("Failed to parse .fastq file as a valid reads file could not be found at \(path)")
         }
     
         try fastqParser.parse()
         
         for hit in hits {
             guard let sequence = fastqParser.sequence(queryID: hit.queryID) else {
-                throw RuntimeError("Failed to retrieve sequence with ID \(hit.queryID) in file at \(path)")
+                throw ValidationError("Failed to retrieve sequence with ID \(hit.queryID) in file at \(path)")
             }
             sequences.append(sequence)
         }

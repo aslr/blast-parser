@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 struct MinimapDatabase {
     let directoryPath: String
@@ -22,7 +23,7 @@ struct MinimapDatabase {
     init(path: String, isMain:Bool = false) throws {
         self.directoryPath = path
         guard let isDirectory = path.isDirectory, isDirectory else {
-            throw RuntimeError("\(path) is not a directory or does not exist")
+            throw ValidationError("\(path) is not a directory or does not exist")
         }
         self.isMainDatabase = isMain
         self.prefix = URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
@@ -34,7 +35,7 @@ struct MinimapDatabase {
         let suffix: FileSuffix = isMainDatabase ? .main : .representative
         
         guard let paths = directoryPath.findFiles(suffix: suffix) else {
-            throw RuntimeError("No minimap2 hit files were found in \(directoryPath)")
+            throw ValidationError("No minimap2 hit files were found in \(directoryPath)")
         }
         
         let parsers = paths.compactMap{ path in MinimapFileParser(path: path) }

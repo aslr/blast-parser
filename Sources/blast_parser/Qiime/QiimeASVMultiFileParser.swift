@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 fileprivate struct QiimeASVFile {
     let path: String
@@ -39,7 +40,7 @@ fileprivate struct QiimeASVFile {
         guard headerPrefix.isEmpty == false else { return }
         let header = asvs.first?.description
         guard let header = header
-            else { throw RuntimeError("Parsing of a Qiime file header failed: " + "No valid header was found to be parsed.") }
+            else { throw ValidationError("Parsing of a Qiime file header failed: " + "No valid header was found to be parsed.") }
         let headers = header.components(separatedBy: "\t")
         let taxonPrefixedHeaders = headers.map
             { $0.replacingOccurrences(of: "Taxon",
@@ -52,7 +53,7 @@ fileprivate struct QiimeASVFile {
         let taxonIndex = prefixedHeaders.firstIndex(of: "\(headerPrefix)-Taxon")
         guard let prefixedHeader = QiimeASV(components: prefixedHeaders,
                                             taxonIndex: taxonIndex) else {
-            throw RuntimeError("Parsing of a Qiime file header failed: " + "Unable to find a taxon header")
+            throw ValidationError("Parsing of a Qiime file header failed: " + "Unable to find a taxon header")
         }
         asvs.removeFirst()
         asvs.insert(prefixedHeader, at: 0)
@@ -99,14 +100,14 @@ final class QiimeASVMultiFileParser {
         }
         
         guard files.isEmpty == false else {
-            throw RuntimeError("Merging of Qiime files failed: no files found.")
+            throw ValidationError("Merging of Qiime files failed: no files found.")
         }
         
         // check if the files can be merged
         let count = files[0].asvs.count
         for file in files[1...] {
             guard count == file.asvs.count else {
-                throw RuntimeError("Merging of Qiime files failed: " +
+                throw ValidationError("Merging of Qiime files failed: " +
                                    "files have different number of ASVs.")
             }
         }
@@ -117,7 +118,7 @@ final class QiimeASVMultiFileParser {
         for file in files[1...] {
             for (i, asv) in file.asvs.enumerated() {
                 guard mergedASVs[i].featureID == asv.featureID else {
-                    throw RuntimeError("Merging of Qiime files failed: " +
+                    throw ValidationError("Merging of Qiime files failed: " +
                                        "ASV IDs do not match.")
                 }
                 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 class MinimapFileParser: FileParser {
     var hits = [MinimapHit]()
@@ -61,10 +62,10 @@ class MinimapFileParser: FileParser {
                 
                 let header = line.split(separator: "\t")
                 guard header.count == 5 else {
-                    throw RuntimeError("Invalid header line for minimap2 classification file")
+                    throw ValidationError("Invalid header line for minimap2 classification file")
                 }
                 guard header.contains("Query_ID"), header.contains("Reference_ID"), header.contains("Alignment_Score"), header.contains("Alignment_Length"), header.contains("Taxonomy") else {
-                    throw RuntimeError("Invalid header: It should contain the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy")
+                    throw ValidationError("Invalid header: It should contain the following columns: Query_ID, Reference_ID, Alignment_Score, Alignment_Length, Taxonomy")
                 }
                 index += 1
             } else if index > 0 {

@@ -5,6 +5,7 @@
 //  Created by Catarina Alexandre on 29/05/2025.
 //
 import Foundation
+import ArgumentParser
 
 final class QiimeParser: FileParser {
     /// Parses a Qiime2 ASV read counts table with the following columns:
@@ -21,7 +22,7 @@ final class QiimeParser: FileParser {
                 let header = cleanLine.replacingOccurrences(of: "-", with: "CN").components(separatedBy: "\t")
                 guard header.contains("id"), header.contains("Taxon"),
                       header.contains("Confidence") else
-                    { throw RuntimeError("Invalid Qiime 2 ASV read counts file") }
+                    { throw ValidationError("Invalid Qiime 2 ASV read counts file") }
                 
                 let asv = getASV(line: header, count: header.count)
                 lines.append(asv)

@@ -12,7 +12,7 @@ struct KrakenReportLine {
     var percentage = 0.0
     var reads = 0
     var assignedReads = 0
-    var rank:Rank!
+    var rank:KrakenRank!
     var hierarchy:Hierarchy!
     var taxID = 0
     

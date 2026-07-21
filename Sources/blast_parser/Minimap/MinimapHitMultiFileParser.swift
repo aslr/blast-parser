@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ArgumentParser
 
 final class MinimapHitMultiFileParser {
     var databases = [MinimapDatabase]()
@@ -81,15 +82,15 @@ final class MinimapHitMultiFileParser {
             let bins = mainBins.bins(for: queryID)
             
             guard bins.count < 2 else {
-                throw RuntimeError("Found multiple bins for query ID: \(queryID)")
+                throw ValidationError("Found multiple bins for query ID: \(queryID)")
             }
             
             guard let bin = bins.first else {
-                throw RuntimeError("No bin was found for query ID: \(queryID)")
+                throw ValidationError("No bin was found for query ID: \(queryID)")
             }
             
             guard let mainhit = bin.hit(queryID: queryID) else {
-                throw RuntimeError("No main hit was found for query ID: \(queryID).")
+                throw ValidationError("No main hit was found for query ID: \(queryID).")
             }
             
             let mergedHit = MinimapMergedHit(prefixes: prefixes,
@@ -100,7 +101,7 @@ final class MinimapHitMultiFileParser {
             for representativePrefix in representativePrefixes {
                 let hits = databases.hits(for: representativePrefix, queryID: queryID)
                 guard hits.count < 2 else {
-                    throw RuntimeError("More than one hit was found for database \(representativePrefix) with queryID \(queryID), making it impossible to merge files with ambiguous hits.")
+                    throw ValidationError("More than one hit was found for database \(representativePrefix) with queryID \(queryID), making it impossible to merge files with ambiguous hits.")
                 }
                 
                 if hits.count == 1, let hit = hits.first {

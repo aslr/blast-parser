@@ -5,6 +5,8 @@
 //  Created by João Varela on 28/12/2025.
 //
 
+import ArgumentParser
+
 struct FastqSequence: CustomStringConvertible {
     let id:String
     let sequence:String
@@ -46,25 +48,25 @@ final class FastqParser: FileParser {
             switch lineNumber % 4 {
             case 1:
                 guard cleanLine.hasPrefix("@")
-                    else { throw RuntimeError("Invalid FastQ file at \(path)") }
+                    else { throw ValidationError("Invalid FastQ file at \(path)") }
                 guard let readID = cleanLine.split(separator: " ").map(String.init).first
-                    else { throw RuntimeError("Invalid FastQ file at \(path)") }
+                    else { throw ValidationError("Invalid FastQ file at \(path)") }
                 sequenceID = readID
                 sequenceID!.removeFirst()
             case 2:
                 guard isValidNucleotideSequence(cleanLine) else
-                    { throw RuntimeError("Invalid sequence \(sequenceID!) in file at \(path)") }
+                    { throw ValidationError("Invalid sequence \(sequenceID!) in file at \(path)") }
                 sequence = cleanLine
                 sequenceLength = cleanLine.count
             case 3:
                 guard cleanLine == "+"
-                    else { throw RuntimeError("Invalid FastQ file at \(path)") }
+                    else { throw ValidationError("Invalid FastQ file at \(path)") }
             case 0:
                 guard isValidQualityString(cleanLine)
-                    else { throw RuntimeError("Invalid quality score in sequence \(sequenceID!) in file at \(path)") }
+                    else { throw ValidationError("Invalid quality score in sequence \(sequenceID!) in file at \(path)") }
                 quality = cleanLine
                 guard cleanLine.count == sequenceLength
-                    else { throw RuntimeError("Quality string length does not match nucleotide sequence length in sequence \(sequenceID!) in file at \(path)") }
+                    else { throw ValidationError("Quality string length does not match nucleotide sequence length in sequence \(sequenceID!) in file at \(path)") }
                 
                 let fastqSequence = FastqSequence(id: sequenceID!, sequence: sequence!, quality: quality!)
                 sequences.append(fastqSequence)

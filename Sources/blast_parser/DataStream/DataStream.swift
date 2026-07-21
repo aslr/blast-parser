@@ -1,11 +1,12 @@
 //
-//  DataStream.swift
-//  blast_parser
+//  File.swift
+//  blast-parser
 //
-//  Created by João Varela on 31/08/2024.
+//  Created by João Varela on 29/05/2026.
 //
 
 import Foundation
+import ArgumentParser
 
 class DataStream {
     let url:URL
@@ -14,7 +15,7 @@ class DataStream {
     
     init(url:URL, blockSize:Int = 4096) throws {
         guard let resolvedURL = url.path.resolvedFileURL() else {
-            throw RuntimeError("DataStream Error: Unable to resolve path: \(url.path)")
+            throw ValidationError("DataStream Error: Unable to find file at path: \(url.path)")
         }
         self.url = resolvedURL
         self.bufferSize = blockSize
@@ -34,4 +35,3 @@ class DataStream {
         }
     }
 }
-
