@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8420FA772CCCF86500C94FF7 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8420FA762CCCF86500C94FF7 /* ArgumentParser */; };
-		845466432F02D883002C8685 /* blast_parser in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8483F1502C4096410075794B /* blast_parser */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		845466432F02D883002C8685 /* blast-parser in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8483F1502C4096410075794B /* blast-parser */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8484B7A83010102D00EA598E /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B76B3010102D00EA598E /* Database.swift */; };
 		8484B7A93010102D00EA598E /* ParseKraken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7973010102D00EA598E /* ParseKraken.swift */; };
 		8484B7AA3010102D00EA598E /* MinimapHitMultiFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B7823010102D00EA598E /* MinimapHitMultiFileParser.swift */; };
@@ -74,14 +74,14 @@
 			dstPath = /Users/admin/.local/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				845466432F02D883002C8685 /* blast_parser in CopyFiles */,
+				845466432F02D883002C8685 /* blast-parser in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8483F1502C4096410075794B /* blast_parser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blast_parser; sourceTree = BUILT_PRODUCTS_DIR; };
+		8483F1502C4096410075794B /* blast-parser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "blast-parser"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8484B74F30100FE600EA598E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Package.resolved; sourceTree = "<group>"; };
 		8484B75030100FF000EA598E /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		8484B75130100FFD00EA598E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		8484B7A03010102D00EA598E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		8484B7A13010102D00EA598E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		8484B7A43010102D00EA598E /* blast_parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blast_parser.swift; sourceTree = "<group>"; };
-		8484B7DF3010126200EA598E /* blast_parser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blast_parser.entitlements; sourceTree = "<group>"; };
+		8484B7DF3010126200EA598E /* blast-parser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "blast-parser.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +171,7 @@
 				848FE54D2C86B17D003A0C05 /* Frameworks */,
 				8484B74F30100FE600EA598E /* Package.resolved */,
 				8484B75030100FF000EA598E /* readme.md */,
-				8484B7DF3010126200EA598E /* blast_parser.entitlements */,
+				8484B7DF3010126200EA598E /* blast-parser.entitlements */,
 				8484B75130100FFD00EA598E /* Package.swift */,
 				8484B7523010100E00EA598E /* tasks.json */,
 				8484B7553010102000EA598E /* Tests */,
@@ -182,7 +182,7 @@
 		8483F1512C4096410075794B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8483F1502C4096410075794B /* blast_parser */,
+				8483F1502C4096410075794B /* blast-parser */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		8484B7A63010102D00EA598E /* blast_parser */ = {
+		8484B7A63010102D00EA598E /* blast-parser */ = {
 			isa = PBXGroup;
 			children = (
 				8484B75B3010102D00EA598E /* .swiftpm */,
@@ -402,13 +402,13 @@
 				8484B7A23010102D00EA598E /* Utilities */,
 				8484B7A43010102D00EA598E /* blast_parser.swift */,
 			);
-			path = blast_parser;
+			path = "blast-parser";
 			sourceTree = "<group>";
 		};
 		8484B7A73010102D00EA598E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8484B7A63010102D00EA598E /* blast_parser */,
+				8484B7A63010102D00EA598E /* blast-parser */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -423,9 +423,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8483F14F2C4096410075794B /* blast_parser */ = {
+		8483F14F2C4096410075794B /* blast-parser */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8483F1572C4096410075794B /* Build configuration list for PBXNativeTarget "blast_parser" */;
+			buildConfigurationList = 8483F1572C4096410075794B /* Build configuration list for PBXNativeTarget "blast-parser" */;
 			buildPhases = (
 				8483F14C2C4096410075794B /* Sources */,
 				8483F14D2C4096410075794B /* Frameworks */,
@@ -435,7 +435,7 @@
 			);
 			dependencies = (
 			);
-			name = blast_parser;
+			name = "blast-parser";
 			packageProductDependencies = (
 				8420FA762CCCF86500C94FF7 /* ArgumentParser */,
 				8484B7E13010140300EA598E /* Crypto */,
@@ -443,7 +443,7 @@
 				8484B7E53010140300EA598E /* _CryptoExtras */,
 			);
 			productName = blast_parser;
-			productReference = 8483F1502C4096410075794B /* blast_parser */;
+			productReference = 8483F1502C4096410075794B /* blast-parser */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -462,7 +462,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8483F14B2C4096410075794B /* Build configuration list for PBXProject "blast_parser" */;
+			buildConfigurationList = 8483F14B2C4096410075794B /* Build configuration list for PBXProject "blast-parser" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -479,7 +479,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8483F14F2C4096410075794B /* blast_parser */,
+				8483F14F2C4096410075794B /* blast-parser */,
 			);
 		};
 /* End PBXProject section */
@@ -674,7 +674,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = blast_parser.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "blast-parser.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
@@ -704,7 +704,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = blast_parser.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "blast-parser.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
@@ -732,7 +732,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8483F14B2C4096410075794B /* Build configuration list for PBXProject "blast_parser" */ = {
+		8483F14B2C4096410075794B /* Build configuration list for PBXProject "blast-parser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8483F1552C4096410075794B /* Debug */,
@@ -741,7 +741,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8483F1572C4096410075794B /* Build configuration list for PBXNativeTarget "blast_parser" */ = {
+		8483F1572C4096410075794B /* Build configuration list for PBXNativeTarget "blast-parser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8483F1582C4096410075794B /* Debug */,

@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8483F14F2C4096410075794B"
-               BuildableName = "blast_parser"
+               BuildableName = "blast-parser"
                BlueprintName = "blast_parser"
-               ReferencedContainer = "container:blast_parser.xcodeproj">
+               ReferencedContainer = "container:blast-parser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,29 +31,26 @@
       shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      launchStyle = "1"
+      launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       viewDebuggingEnabled = "No">
-      <PathRunnable
-         runnableDebuggingMode = "0"
-         FilePath = "/Users/admin/.local/bin/blast_parser">
-      </PathRunnable>
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8483F14F2C4096410075794B"
-            BuildableName = "blast_parser"
+            BuildableName = "blast-parser"
             BlueprintName = "blast_parser"
-            ReferencedContainer = "container:blast_parser.xcodeproj">
+            ReferencedContainer = "container:blast-parser.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -66,9 +63,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8483F14F2C4096410075794B"
-            BuildableName = "blast_parser"
+            BuildableName = "blast-parser"
             BlueprintName = "blast_parser"
-            ReferencedContainer = "container:blast_parser.xcodeproj">
+            ReferencedContainer = "container:blast-parser.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
